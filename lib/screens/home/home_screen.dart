@@ -10,76 +10,65 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.of(context).background,
-      appBar: AppBar(
-        title: Text(
-          'Design System Test',
-          style: AppTypography.of(context).heading3,
-        ),
-        backgroundColor: AppColors.primary,
-        elevation: AppDesign.appBarElevation,
-      ),
-      body: SingleChildScrollView(
-        padding: AppDesign.paddingXL,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Typography Section
-            _buildSectionTitle('Typography'),
-            const SizedBox(height: AppDesign.lg),
+    return SingleChildScrollView(
+      padding: AppDesign.paddingXL,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Typography Section
+          _buildSectionTitle('Typography'),
+          const SizedBox(height: AppDesign.lg),
 
-            _buildTypographyCard(
-              context,
-              'Heading 1',
-              AppTypography.of(context).heading1,
-            ),
-            const SizedBox(height: AppDesign.md),
+          _buildTypographyCard(
+            context,
+            'Heading 1',
+            AppTypography.of(context).heading1,
+          ),
+          const SizedBox(height: AppDesign.md),
 
-            _buildTypographyCard(
-              context,
-              'Heading 2',
-              AppTypography.of(context).heading2,
-            ),
-            const SizedBox(height: AppDesign.md),
+          _buildTypographyCard(
+            context,
+            'Heading 2',
+            AppTypography.of(context).heading2,
+          ),
+          const SizedBox(height: AppDesign.md),
 
-            _buildTypographyCard(
-              context,
-              'Heading 3',
-              AppTypography.of(context).heading3,
-            ),
-            const SizedBox(height: AppDesign.md),
+          _buildTypographyCard(
+            context,
+            'Heading 3',
+            AppTypography.of(context).heading3,
+          ),
+          const SizedBox(height: AppDesign.md),
 
-            _buildTypographyCard(
-              context,
-              'Body Text',
-              AppTypography.of(context).body,
-            ),
-            const SizedBox(height: AppDesign.md),
+          _buildTypographyCard(
+            context,
+            'Body Text',
+            AppTypography.of(context).body,
+          ),
+          const SizedBox(height: AppDesign.md),
 
-            _buildTypographyCard(
-              context,
-              'Body Secondary',
-              AppTypography.of(context).bodySecondary,
-            ),
-            const SizedBox(height: AppDesign.md),
+          _buildTypographyCard(
+            context,
+            'Body Secondary',
+            AppTypography.of(context).bodySecondary,
+          ),
+          const SizedBox(height: AppDesign.md),
 
-            _buildTypographyCard(
-              context,
-              'Caption',
-              AppTypography.of(context).caption,
-            ),
-            const SizedBox(height: AppDesign.md),
+          _buildTypographyCard(
+            context,
+            'Caption',
+            AppTypography.of(context).caption,
+          ),
+          const SizedBox(height: AppDesign.md),
 
-            _buildTypographyCard(
-              context,
-              'Small Text',
-              AppTypography.of(context).small,
-            ),
+          _buildTypographyCard(
+            context,
+            'Small Text',
+            AppTypography.of(context).small,
+          ),
 
-            const SizedBox(height: AppDesign.bottomMenuSpacing),
-          ],
-        ),
+          const SizedBox(height: AppDesign.bottomMenuSpacing),
+        ],
       ),
     );
   }

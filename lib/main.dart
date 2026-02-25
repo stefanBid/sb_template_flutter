@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'helpers/theme/app_theme.dart';
 
 // Project - Screens
+import 'package:sb_template_flutter/layouts/app/app_layout.dart';
 import 'screens/home/home_screen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const HomeScreen(),
+      home: const AppLayout(body: HomeScreen()),
     );
   }
 }

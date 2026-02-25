@@ -16,6 +16,8 @@ class AppColors {
   static const Color secondary = Color(0xFF0A599C);
 
   // Adaptive colors for background/surface
+  Color get appBarBackground =>
+      isDark ? const Color(0xFF0A599C) : const Color(0xFF60C9F8);
   Color get background =>
       isDark ? const Color(0xFF0D1B2A) : const Color(0xFFF5FBFF);
   Color get surface =>
