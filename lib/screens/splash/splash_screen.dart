@@ -39,29 +39,30 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.of(context).background,
       body: Center(
         child: Container(
+          width: 300,
           padding: AppDesign.paddingXXL,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: AppDesign.borderRadiusXL,
             boxShadow: AppDesign.shadowMedium,
           ),
-          child: const Column(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // TODO: Sostituisci con la tua immagine del logo
-              // Image.asset(
-              //   'assets/images/logo.png',
-              //   width: 120,
-              //   height: 120,
-              // ),
-              Icon(Icons.flutter_dash, size: 120, color: AppColors.primary),
-              SizedBox(height: AppDesign.xl),
+              Image.asset(
+                'assets/sb-template-flutter-logo.png',
+                width: 120,
+                height: 120,
+              ),
+              const SizedBox(height: AppDesign.xl),
               SizedBox(
                 width: 40,
                 height: 40,
                 child: CircularProgressIndicator(
                   strokeWidth: 3,
-                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    AppColors.of(context).appBarBackground,
+                  ),
                 ),
               ),
             ],
