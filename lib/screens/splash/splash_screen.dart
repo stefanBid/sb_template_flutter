@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:sb_template_flutter/router/router_extensions.dart';
 
 // Project - Helpers
 import '../../helpers/theme/app_colors.dart';
 import '../../helpers/theme/app_design.dart';
-import '../../models/app_route.dart';
+import '../../helpers/router/app_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Naviga alla home dopo l'inizializzazione
     if (mounted) {
-      context.go(AppRoutePath.home.value);
+      context.goTo(AppRouter.homeRoute);
     }
   }
 
