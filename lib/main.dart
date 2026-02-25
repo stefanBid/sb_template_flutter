@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 // Project - Helpers
 import 'helpers/theme/app_theme.dart';
 
-// Project - Screens
-import 'package:sb_template_flutter/layouts/app/app_layout.dart';
-import 'screens/home/home_screen.dart';
+// Project - Router
+import 'router/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,15 +13,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'SB-Template-Flutter',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const AppLayout(body: HomeScreen()),
+      routerConfig: createRouter(),
     );
   }
 }

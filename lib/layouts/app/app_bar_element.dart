@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 // Project - Helpers
-import 'package:sb_template_flutter/helpers/theme/app_colors.dart';
-import 'package:sb_template_flutter/helpers/theme/app_typography.dart';
-import 'package:sb_template_flutter/helpers/theme/app_design.dart';
+import '../../helpers/theme/app_colors.dart';
+import '../../helpers/theme/app_typography.dart';
+import '../../helpers/theme/app_design.dart';
 
 class AppBarElement extends StatelessWidget implements PreferredSizeWidget {
   const AppBarElement({super.key, required this.title});
