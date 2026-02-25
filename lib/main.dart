@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+// Project - Helpers
+import 'helpers/theme/app_theme.dart';
+
+// Project - Screens
+import 'screens/home/home_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,9 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const Center(child: Text('Prova')),
+      title: 'SB-Template-Flutter',
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      home: const HomeScreen(),
     );
   }
 }
