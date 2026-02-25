@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // Project - Helpers
 import 'helpers/theme/app_theme.dart';
-import 'helpers/theme/app_colors.dart';
 
 // Project - Screens
 import 'screens/home/home_screen.dart';

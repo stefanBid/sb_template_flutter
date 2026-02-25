@@ -27,49 +27,49 @@ class HomeScreen extends StatelessWidget {
           children: [
             // Typography Section
             _buildSectionTitle('Typography'),
-            SizedBox(height: AppDesign.lg),
+            const SizedBox(height: AppDesign.lg),
 
             _buildTypographyCard(
               context,
               'Heading 1',
               AppTypography.of(context).heading1,
             ),
-            SizedBox(height: AppDesign.md),
+            const SizedBox(height: AppDesign.md),
 
             _buildTypographyCard(
               context,
               'Heading 2',
               AppTypography.of(context).heading2,
             ),
-            SizedBox(height: AppDesign.md),
+            const SizedBox(height: AppDesign.md),
 
             _buildTypographyCard(
               context,
               'Heading 3',
               AppTypography.of(context).heading3,
             ),
-            SizedBox(height: AppDesign.md),
+            const SizedBox(height: AppDesign.md),
 
             _buildTypographyCard(
               context,
               'Body Text',
               AppTypography.of(context).body,
             ),
-            SizedBox(height: AppDesign.md),
+            const SizedBox(height: AppDesign.md),
 
             _buildTypographyCard(
               context,
               'Body Secondary',
               AppTypography.of(context).bodySecondary,
             ),
-            SizedBox(height: AppDesign.md),
+            const SizedBox(height: AppDesign.md),
 
             _buildTypographyCard(
               context,
               'Caption',
               AppTypography.of(context).caption,
             ),
-            SizedBox(height: AppDesign.md),
+            const SizedBox(height: AppDesign.md),
 
             _buildTypographyCard(
               context,
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
               AppTypography.of(context).small,
             ),
 
-            SizedBox(height: AppDesign.bottomMenuSpacing),
+            const SizedBox(height: AppDesign.bottomMenuSpacing),
           ],
         ),
       ),
@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: AppTypography.of(context).caption),
-          SizedBox(height: AppDesign.sm),
+          const SizedBox(height: AppDesign.sm),
           Text('The quick brown fox jumps over the lazy dog', style: style),
         ],
       ),
