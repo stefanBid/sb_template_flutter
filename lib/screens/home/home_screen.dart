@@ -7,6 +7,7 @@ import '../../helpers/theme/app_design.dart';
 import 'widgets/sections/typography_section.dart';
 import 'widgets/sections/inputs_section.dart';
 import 'widgets/sections/buttons_section.dart';
+import 'widgets/sections/date_pickers_section.dart';
 import 'widgets/sections/form_section.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,6 +35,10 @@ class HomeScreen extends StatelessWidget {
 
           // Buttons Section
           ButtonsSection(),
+          SizedBox(height: AppDesign.xxl),
+
+          // Date Pickers Section
+          DatePickersSection(),
           SizedBox(height: AppDesign.xxl),
 
           // Form Section (with validation)
