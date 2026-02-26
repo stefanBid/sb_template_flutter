@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 enum AppRoutePath {
   splash('/'),
-  home('/home');
+  home('/home'),
+  typography('/typography'),
+  inputs('/inputs'),
+  buttons('/buttons'),
+  forms('/forms');
 
   const AppRoutePath(this.value);
   final String value;

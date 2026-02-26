@@ -7,14 +7,35 @@ class AppRouter {
 
   static List<AppRoute> get routes => [
     const AppRoute(
-      label: 'Home',
-      path: AppRoutePath.home,
-      screenTitle: 'Welcome to SB Template Flutter',
-      icon: Icons.home,
+      label: 'Typography',
+      path: AppRoutePath.typography,
+      screenTitle: 'Typography',
+      icon: Icons.text_fields,
+    ),
+    const AppRoute(
+      label: 'Inputs',
+      path: AppRoutePath.inputs,
+      screenTitle: 'Inputs & Date Pickers',
+      icon: Icons.edit_outlined,
+    ),
+    const AppRoute(
+      label: 'Buttons',
+      path: AppRoutePath.buttons,
+      screenTitle: 'Buttons',
+      icon: Icons.touch_app,
+    ),
+    const AppRoute(
+      label: 'Forms',
+      path: AppRoutePath.forms,
+      screenTitle: 'Forms',
+      icon: Icons.assignment,
     ),
   ];
 
   static String get initialRoute => AppRoutePath.splash.value;
-  static String get homeRoute => AppRoutePath.home.value;
   static String get splashRoute => AppRoutePath.splash.value;
+  static String get typographyRoute => AppRoutePath.typography.value;
+  static String get inputsRoute => AppRoutePath.inputs.value;
+  static String get buttonsRoute => AppRoutePath.buttons.value;
+  static String get formsRoute => AppRoutePath.forms.value;
 }

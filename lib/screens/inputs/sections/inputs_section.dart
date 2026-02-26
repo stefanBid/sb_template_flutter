@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 // Project - Helpers
-import '../../../../helpers/theme/app_design.dart';
-import '../../../../helpers/theme/app_colors.dart';
-import '../../../../helpers/theme/app_typography.dart';
+import '../../../helpers/theme/app_design.dart';
+import '../../../helpers/theme/app_colors.dart';
+import '../../../helpers/theme/app_typography.dart';
 
 // Project - Widgets
-import '../../../../widgets/app/simple-input/app_simple_input.dart';
+import '../../../widgets/app/simple-input/app_simple_input.dart';
 
 class InputsSection extends StatefulWidget {
   const InputsSection({super.key});

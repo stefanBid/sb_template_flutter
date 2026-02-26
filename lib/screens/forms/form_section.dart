@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Project - Helpers
-import '../../../../helpers/theme/app_design.dart';
-import '../../../../helpers/theme/app_colors.dart';
-import '../../../../helpers/theme/app_typography.dart';
+import '../../helpers/theme/app_design.dart';
+import '../../helpers/theme/app_colors.dart';
+import '../../helpers/theme/app_typography.dart';
 
 // Project - Widgets
-import '../../../../widgets/app/form-field-input/app_form_field_input.dart';
-import '../../../../widgets/app/button/app_button.dart';
+import '../../widgets/app/form-field-input/app_form_field_input.dart';
+import '../../widgets/app/button/app_button.dart';
 
 class FormSection extends StatefulWidget {
   const FormSection({super.key});
@@ -19,13 +19,14 @@ class FormSection extends StatefulWidget {
 
 class _FormSectionState extends State<FormSection> {
   final _formKey = GlobalKey<FormState>();
-  
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool _showPassword = false;
   bool _showConfirmPassword = false;
@@ -117,9 +118,7 @@ class _FormSectionState extends State<FormSection> {
         SnackBar(
           content: Text(
             'Form submitted successfully!',
-            style: AppTypography.of(context).body.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTypography.of(context).body.copyWith(color: Colors.white),
           ),
           backgroundColor: AppColors.success,
         ),
@@ -129,9 +128,7 @@ class _FormSectionState extends State<FormSection> {
         SnackBar(
           content: Text(
             'Please fix the errors in the form',
-            style: AppTypography.of(context).body.copyWith(
-              color: Colors.white,
-            ),
+            style: AppTypography.of(context).body.copyWith(color: Colors.white),
           ),
           backgroundColor: AppColors.error,
         ),
@@ -244,7 +241,8 @@ class _FormSectionState extends State<FormSection> {
                   icon: Icon(
                     _showPassword ? Icons.visibility_off : Icons.visibility,
                   ),
-                  onPressed: () => setState(() => _showPassword = !_showPassword),
+                  onPressed: () =>
+                      setState(() => _showPassword = !_showPassword),
                 ),
                 validator: _validatePassword,
                 textInputAction: TextInputAction.next,
@@ -261,9 +259,13 @@ class _FormSectionState extends State<FormSection> {
                 obscureText: !_showConfirmPassword,
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _showConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                    _showConfirmPassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
                   ),
-                  onPressed: () => setState(() => _showConfirmPassword = !_showConfirmPassword),
+                  onPressed: () => setState(
+                    () => _showConfirmPassword = !_showConfirmPassword,
+                  ),
                 ),
                 validator: _validateConfirmPassword,
                 textInputAction: TextInputAction.done,
@@ -284,10 +286,7 @@ class _FormSectionState extends State<FormSection> {
                   ),
                   const SizedBox(width: AppDesign.md),
                   Expanded(
-                    child: AppButton(
-                      text: 'Submit',
-                      onPressed: _submitForm,
-                    ),
+                    child: AppButton(text: 'Submit', onPressed: _submitForm),
                   ),
                 ],
               ),

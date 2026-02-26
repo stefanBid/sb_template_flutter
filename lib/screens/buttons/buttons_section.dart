@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 // Project - Helpers
-import '../../../../helpers/theme/app_design.dart';
-import '../../../../helpers/theme/app_colors.dart';
-import '../../../../helpers/theme/app_typography.dart';
+import '../../helpers/theme/app_design.dart';
+import '../../helpers/theme/app_colors.dart';
+import '../../helpers/theme/app_typography.dart';
 
 // Project - Widgets
-import '../../../../widgets/app/button/app_button.dart';
+import '../../widgets/app/button/app_button.dart';
 
 class ButtonsSection extends StatefulWidget {
   const ButtonsSection({super.key});

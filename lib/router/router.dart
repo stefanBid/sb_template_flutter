@@ -4,7 +4,10 @@ import 'package:go_router/go_router.dart';
 
 // Project - Screens
 import '../screens/splash/splash_screen.dart';
-import '../screens/home/home_screen.dart';
+import '../screens/typography/typography_screen.dart';
+import '../screens/inputs/inputs_screen.dart';
+import '../screens/buttons/buttons_screen.dart';
+import '../screens/forms/forms_screen.dart';
 
 // Project - Layouts
 import '../layouts/app/app_layout.dart';
@@ -46,11 +49,47 @@ GoRouter createRouter() {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: AppRouter.homeRoute,
+                path: AppRouter.typographyRoute,
                 pageBuilder: (context, state) => RouterTransitions.build(
                   context: context,
                   state: state,
-                  child: const HomeScreen(),
+                  child: const TypographyScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRouter.inputsRoute,
+                pageBuilder: (context, state) => RouterTransitions.build(
+                  context: context,
+                  state: state,
+                  child: const InputsScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRouter.buttonsRoute,
+                pageBuilder: (context, state) => RouterTransitions.build(
+                  context: context,
+                  state: state,
+                  child: const ButtonsScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRouter.formsRoute,
+                pageBuilder: (context, state) => RouterTransitions.build(
+                  context: context,
+                  state: state,
+                  child: const FormsScreen(),
                 ),
               ),
             ],

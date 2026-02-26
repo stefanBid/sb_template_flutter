@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 // Project - Helpers
-import '../../../../helpers/theme/app_colors.dart';
-import '../../../../helpers/theme/app_typography.dart';
-import '../../../../helpers/theme/app_design.dart';
+import '../../helpers/theme/app_colors.dart';
+import '../../helpers/theme/app_typography.dart';
+import '../../helpers/theme/app_design.dart';
 
 class TypographySection extends StatelessWidget {
   const TypographySection({super.key});

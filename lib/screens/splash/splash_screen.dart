@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
       child: BlocConsumer<FakeLoaderBloc, FakeLoaderState>(
         listener: (context, state) => {
           if (state is FakeLoaderCompletedState)
-            context.goTo(AppRouter.homeRoute),
+            context.goTo(AppRouter.typographyRoute),
         },
         builder: (context, state) => Scaffold(
           backgroundColor: AppColors.of(context).background,
