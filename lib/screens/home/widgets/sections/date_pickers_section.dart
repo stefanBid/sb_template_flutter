@@ -17,11 +17,11 @@ class DatePickersSection extends StatefulWidget {
 }
 
 class _DatePickersSectionState extends State<DatePickersSection> {
-  DateTime? _customFormatDate;
   DateTime? _basicDate;
-  DateTime? _birthdateDate;
+  DateTime? _dateTime;
   DateTime? _startDate;
   DateTime? _endDate;
+  DateTime? _birthDate;
 
   String? _validateBirthdate(DateTime? value) {
     if (value == null) {
@@ -36,7 +36,7 @@ class _DatePickersSectionState extends State<DatePickersSection> {
 
   @override
   Widget build(BuildContext context) {
-    final errorMessage = _validateBirthdate(_birthdateDate);
+    final errorMessage = _validateBirthdate(_birthDate);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,51 +50,53 @@ class _DatePickersSectionState extends State<DatePickersSection> {
         ),
         const SizedBox(height: AppDesign.sm),
         Text(
-          'Date picker component styled consistently with input fields',
+          'Date and DateTime picker components',
           style: AppTypography.of(context).caption,
         ),
         const SizedBox(height: AppDesign.xl),
 
         // Basic Date Picker
         _buildDatePickerExample(
-          'Basic Date Picker',
-          'Simple date picker with default format (dd/MM/yyyy)',
+          'Date Picker',
+          'Simple date picker (dd/MM/yyyy)',
           AppDatePicker(
             selectedDate: _basicDate,
             onDateSelected: (date) => setState(() => _basicDate = date),
+            labelText: 'Date',
             hintText: 'Select a date',
           ),
           _basicDate,
+          showTime: false,
         ),
 
-        // Date Picker with Custom Format
-        _buildDatePickerExample(
-          'Custom Format Date Picker',
-          'Date picker with custom date format (EEEE, d MMMM yyyy)',
-          AppDatePicker(
-            selectedDate: _customFormatDate,
-            onDateSelected: (date) => setState(() => _customFormatDate = date),
-            labelText: 'Appointment',
-            hintText: 'Select appointment date',
-            dateFormat: DateFormat('EEEE, d MMMM yyyy'),
-          ),
-          _customFormatDate,
-        ),
-
-        // Date Picker with Error
         _buildDatePickerExample(
           'Date Picker with Validation',
           'Date picker showing validation error (must be 18+)',
           AppDatePicker(
-            selectedDate: _birthdateDate,
-            onDateSelected: (date) => setState(() => _birthdateDate = date),
+            selectedDate: _birthDate,
+            onDateSelected: (date) => setState(() => _birthDate = date),
             labelText: 'Birthdate',
             hintText: 'Select your birthdate',
             errorText: errorMessage,
             mandatory: true,
             lastDate: DateTime.now(),
           ),
-          _birthdateDate,
+          _birthDate,
+        ),
+
+        // DateTime Picker
+        _buildDatePickerExample(
+          'DateTime Picker',
+          'Date and time picker (dd/MM/yyyy HH:mm)',
+          AppDatePicker(
+            type: DatePickerType.dateTime,
+            selectedDate: _dateTime,
+            onDateSelected: (date) => setState(() => _dateTime = date),
+            labelText: 'Appointment',
+            hintText: 'Select date and time',
+          ),
+          _dateTime,
+          showTime: true,
         ),
 
         // Date Range Example
@@ -123,6 +125,7 @@ class _DatePickersSectionState extends State<DatePickersSection> {
                 onDateSelected: (date) => setState(() => _endDate = date),
                 labelText: 'To',
                 hintText: 'End date',
+                firstDate: _startDate,
               ),
             ),
           ],
@@ -157,8 +160,9 @@ class _DatePickersSectionState extends State<DatePickersSection> {
     String title,
     String description,
     Widget datePicker,
-    DateTime? selectedDate,
-  ) {
+    DateTime? selectedDate, {
+    bool showTime = false,
+  }) {
     return Builder(
       builder: (context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +180,7 @@ class _DatePickersSectionState extends State<DatePickersSection> {
           if (selectedDate != null) ...[
             const SizedBox(height: AppDesign.xs),
             Text(
-              'Selected: ${DateFormat('dd/MM/yyyy').format(selectedDate)}',
+              'Selected: ${showTime ? DateFormat('dd/MM/yyyy HH:mm').format(selectedDate) : DateFormat('dd/MM/yyyy').format(selectedDate)}',
               style: AppTypography.of(
                 context,
               ).small.copyWith(color: AppColors.of(context).textTertiary),
