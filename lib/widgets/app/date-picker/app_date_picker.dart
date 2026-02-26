@@ -127,16 +127,19 @@ class AppDatePicker extends StatelessWidget {
 
                 // Clear Button
                 if (selectedDate != null && enabled)
-                  InkWell(
-                    onTap: () => onDateSelected(null),
-                    borderRadius: BorderRadius.circular(20),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Icon(
+                  SizedBox(
+                    width: AppDesign.iconS,
+                    height: AppDesign.iconS,
+                    child: IconButton(
+                      onPressed: () => onDateSelected(null),
+                      icon: Icon(
                         Icons.clear,
                         size: AppDesign.iconS,
                         color: AppColors.of(context).textSecondary,
                       ),
+                      padding: EdgeInsets.zero,
+
+                      constraints: const BoxConstraints(),
                     ),
                   ),
               ],
