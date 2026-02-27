@@ -24,11 +24,11 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTab = tabs[navigationShell.currentIndex];
+    final keyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 
     return Scaffold(
       backgroundColor: AppColors.of(context).background,
       extendBody: true,
-      resizeToAvoidBottomInset: false,
       appBar: AppBarElement(title: currentTab.screenTitle ?? currentTab.label),
       body: GestureDetector(
         onTap: () {
@@ -45,10 +45,15 @@ class AppLayout extends StatelessWidget {
               left: 0,
               right: 0,
               bottom: 0,
-              child: BottomBarElement(
-                currentIndex: navigationShell.currentIndex,
-                onTap: (index) => navigationShell.goBranch(index),
-                tabs: tabs,
+              child: AnimatedSlide(
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOut,
+                offset: keyboardVisible ? const Offset(0, 1) : Offset.zero,
+                child: BottomBarElement(
+                  currentIndex: navigationShell.currentIndex,
+                  onTap: (index) => navigationShell.goBranch(index),
+                  tabs: tabs,
+                ),
               ),
             ),
           ],
