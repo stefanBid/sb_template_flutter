@@ -94,7 +94,7 @@ class AppButton extends StatelessWidget {
             text,
             style: AppTypography.of(
               context,
-            ).body.copyWith(fontWeight: FontWeight.w600),
+            ).bodyMedium.copyWith(fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ),
         ),

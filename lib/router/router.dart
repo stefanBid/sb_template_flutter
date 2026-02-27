@@ -8,6 +8,7 @@ import '../screens/typography/typography_screen.dart';
 import '../screens/inputs/inputs_screen.dart';
 import '../screens/buttons/buttons_screen.dart';
 import '../screens/forms/forms_screen.dart';
+import '../screens/components/components_screen.dart';
 
 // Project - Layouts
 import '../layouts/app/app_layout.dart';
@@ -90,6 +91,18 @@ GoRouter createRouter() {
                   context: context,
                   state: state,
                   child: const FormsScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRouter.componentsRoute,
+                pageBuilder: (context, state) => RouterTransitions.build(
+                  context: context,
+                  state: state,
+                  child: const ComponentsScreen(),
                 ),
               ),
             ],

@@ -6,7 +6,8 @@ enum AppRoutePath {
   typography('/typography'),
   inputs('/inputs'),
   buttons('/buttons'),
-  forms('/forms');
+  forms('/forms'),
+  components('/components');
 
   const AppRoutePath(this.value);
   final String value;

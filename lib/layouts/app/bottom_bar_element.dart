@@ -31,7 +31,7 @@ class BottomBarElement extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.of(context).surface,
         borderRadius: AppDesign.borderRadiusL,
-        border: Border.all(color: AppColors.of(context).onSurface, width: 1),
+        border: Border.all(color: AppColors.of(context).onSurface, width: 1.5),
         boxShadow: AppDesign.shadowStrong,
       ),
       child: LayoutBuilder(
@@ -61,7 +61,7 @@ class BottomBarElement extends StatelessWidget {
                             color: isSelected
                                 ? AppColors.primary
                                 : AppColors.of(context).textSecondary,
-                            size: AppDesign.iconL,
+                            size: AppDesign.iconM,
                           ),
                           const SizedBox(height: AppDesign.xs),
                           Text(

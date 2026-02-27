@@ -70,7 +70,7 @@ class AppDatePicker extends StatelessWidget {
               mandatory ? '$labelText *' : labelText!,
               style: AppTypography.of(
                 context,
-              ).caption.copyWith(color: labelColor),
+              ).bodyMedium.copyWith(color: labelColor),
             ),
           ),
 
@@ -112,12 +112,12 @@ class AppDatePicker extends StatelessWidget {
                     displayText,
                     overflow: TextOverflow.ellipsis,
                     style: selectedDate != null
-                        ? AppTypography.of(context).body.copyWith(
+                        ? AppTypography.of(context).bodyMedium.copyWith(
                             color: enabled
                                 ? AppColors.of(context).textPrimary
                                 : AppColors.of(context).textDisabled,
                           )
-                        : AppTypography.of(context).bodySecondary.copyWith(
+                        : AppTypography.of(context).bodyMedium.copyWith(
                             color: enabled
                                 ? AppColors.of(context).textSecondary
                                 : AppColors.of(context).textDisabled,

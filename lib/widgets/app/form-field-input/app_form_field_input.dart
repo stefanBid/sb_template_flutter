@@ -96,17 +96,19 @@ class AppFormFieldInput extends StatelessWidget {
       focusNode: focusNode,
       minLines: minLines,
       maxLines: maxLines,
-      style: AppTypography.of(context).body,
+      style: AppTypography.of(context).bodyMedium,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: AppTypography.of(context).bodySecondary,
+        hintStyle: AppTypography.of(
+          context,
+        ).bodyMedium.copyWith(color: AppColors.of(context).textSecondary),
         labelText: labelText != null && mandatory ? '$labelText *' : labelText,
         labelStyle: AppTypography.of(
           context,
-        ).caption.copyWith(color: labelColor),
+        ).bodyMedium.copyWith(color: labelColor),
         floatingLabelStyle: AppTypography.of(
           context,
-        ).caption.copyWith(color: labelColor),
+        ).bodyMedium.copyWith(color: labelColor),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         errorStyle: AppTypography.of(
           context,

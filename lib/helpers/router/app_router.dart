@@ -30,6 +30,12 @@ class AppRouter {
       screenTitle: 'Forms',
       icon: Icons.assignment,
     ),
+    const AppRoute(
+      label: 'Components',
+      path: AppRoutePath.components,
+      screenTitle: 'UI Components',
+      icon: Icons.widgets_outlined,
+    ),
   ];
 
   static String get initialRoute => AppRoutePath.splash.value;
@@ -38,4 +44,5 @@ class AppRouter {
   static String get inputsRoute => AppRoutePath.inputs.value;
   static String get buttonsRoute => AppRoutePath.buttons.value;
   static String get formsRoute => AppRoutePath.forms.value;
+  static String get componentsRoute => AppRoutePath.components.value;
 }
