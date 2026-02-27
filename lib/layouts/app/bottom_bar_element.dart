@@ -46,8 +46,9 @@ class BottomBarElement extends StatelessWidget {
                   final tab = tabs[index];
                   final isSelected = index == currentIndex;
 
-                  return InkWell(
+                  return GestureDetector(
                     onTap: () => onTap(index),
+                    behavior: HitTestBehavior.opaque,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: AppDesign.md,

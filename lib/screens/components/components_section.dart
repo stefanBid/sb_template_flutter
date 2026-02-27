@@ -74,28 +74,28 @@ class ComponentsSection extends StatelessWidget {
         const SizedBox(height: AppDesign.sm),
         _buildDescription(
           context,
-          'Contenitori versatili per raggruppare informazioni correlate',
+          'Versatile containers for grouping related information',
         ),
         const SizedBox(height: AppDesign.xl),
 
         _buildExampleCard(
           context: context,
-          title: 'Card Base (non cliccabile)',
-          description: 'Card con titolo e descrizione senza onTap',
+          title: 'Basic Card (non-tappable)',
+          description: 'Card with title and description without onTap',
           widget: AppCard(
-            title: 'Titolo della Card',
+            title: 'Card Title',
             description:
-                'Questa card non ha l\'onTap definito, quindi non è cliccabile.',
+                'This card has no onTap defined, so it\'s not tappable.',
           ),
         ),
 
         _buildExampleCard(
           context: context,
-          title: 'Card con Prefix Icon (cliccabile)',
-          description: 'Card con icona a sinistra e effetto ripple al tap',
+          title: 'Card with Prefix Icon (tappable)',
+          description: 'Card with icon on the left and ripple effect on tap',
           widget: AppCard(
-            title: 'Notifica',
-            description: 'Hai un nuovo messaggio da leggere',
+            title: 'Notification',
+            description: 'You have a new message to read',
             prefixContent: Container(
               padding: const EdgeInsets.all(AppDesign.md),
               decoration: BoxDecoration(
@@ -108,29 +108,29 @@ class ComponentsSection extends StatelessWidget {
                 size: AppDesign.iconXL,
               ),
             ),
-            onTap: (id) => _handleCardTap(context, id, 'Card con Prefix'),
+            onTap: (id) => _handleCardTap(context, id, 'Prefix Card'),
           ),
         ),
 
         _buildExampleCard(
           context: context,
-          title: 'Card con Suffix Icon (cliccabile)',
-          description: 'Card con icona a destra e effetto ripple al tap',
+          title: 'Card with Suffix Icon (tappable)',
+          description: 'Card with icon on the right and ripple effect on tap',
           widget: AppCard(
-            title: 'Impostazioni',
-            description: 'Configura le preferenze dell\'applicazione',
+            title: 'Settings',
+            description: 'Configure application preferences',
             suffixContent: const Icon(
               Icons.arrow_forward_ios,
               size: AppDesign.iconM,
             ),
-            onTap: (id) => _handleCardTap(context, id, 'Card con Suffix'),
+            onTap: (id) => _handleCardTap(context, id, 'Suffix Card'),
           ),
         ),
 
         _buildExampleCard(
           context: context,
-          title: 'Card con Contenuto Personalizzato (non cliccabile)',
-          description: 'Card con bodyContent personalizzato senza onTap',
+          title: 'Card with Custom Content (non-tappable)',
+          description: 'Card with custom bodyContent without onTap',
           widget: AppCard(
             bodyContent: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +145,7 @@ class ComponentsSection extends StatelessWidget {
                     const SizedBox(width: AppDesign.sm),
                     Expanded(
                       child: Text(
-                        'Contenuto Personalizzato',
+                        'Custom Content',
                         style: AppTypography.of(context).heading3,
                       ),
                     ),
@@ -153,7 +153,7 @@ class ComponentsSection extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDesign.md),
                 Text(
-                  'Puoi inserire qualsiasi widget nel bodyContent per personalizzare completamente l\'aspetto della card.',
+                  'You can insert any widget in bodyContent to fully customize the card appearance.',
                   style: AppTypography.of(context).bodySecondary,
                 ),
                 const SizedBox(height: AppDesign.md),
@@ -172,14 +172,13 @@ class ComponentsSection extends StatelessWidget {
 
         _buildExampleCard(
           context: context,
-          title: 'Confronto: Cliccabile vs Non Cliccabile',
-          description:
-              'Le card con onTap mostrano l\'effetto ripple, le altre no',
+          title: 'Comparison: Tappable vs Non-Tappable',
+          description: 'Cards with onTap show ripple effect, others don\'t',
           widget: Column(
             children: [
               AppCard(
-                title: 'Card Cliccabile',
-                description: 'Tocca per vedere l\'effetto ripple',
+                title: 'Tappable Card',
+                description: 'Tap to see ripple effect',
                 prefixContent: Container(
                   padding: const EdgeInsets.all(AppDesign.sm),
                   decoration: BoxDecoration(
@@ -192,12 +191,12 @@ class ComponentsSection extends StatelessWidget {
                     size: AppDesign.iconL,
                   ),
                 ),
-                onTap: (id) => _handleCardTap(context, id, 'Card Cliccabile'),
+                onTap: (id) => _handleCardTap(context, id, 'Tappable Card'),
               ),
               const SizedBox(height: AppDesign.md),
               AppCard(
-                title: 'Card Non Cliccabile',
-                description: 'Nessun effetto al tocco',
+                title: 'Non-Tappable Card',
+                description: 'No tap effect',
                 prefixContent: Container(
                   padding: const EdgeInsets.all(AppDesign.sm),
                   decoration: BoxDecoration(
@@ -220,14 +219,14 @@ class ComponentsSection extends StatelessWidget {
         const SizedBox(height: AppDesign.sm),
         _buildDescription(
           context,
-          'Etichette compatte per stati, categorie e metadati',
+          'Compact labels for states, categories, and metadata',
         ),
         const SizedBox(height: AppDesign.xl),
 
         _buildExampleCard(
           context: context,
-          title: 'Badge Varianti',
-          description: 'Diverse varianti di colore per diversi scopi',
+          title: 'Badge Variants',
+          description: 'Different color variants for different purposes',
           widget: Wrap(
             spacing: AppDesign.md,
             runSpacing: AppDesign.md,
@@ -243,29 +242,29 @@ class ComponentsSection extends StatelessWidget {
 
         _buildExampleCard(
           context: context,
-          title: 'Badge con Icone',
-          description: 'Badge con icone per maggiore chiarezza visiva',
+          title: 'Badges with Icons',
+          description: 'Badges with icons for better visual clarity',
           widget: Wrap(
             spacing: AppDesign.md,
             runSpacing: AppDesign.md,
             children: const [
               AppBadge(
-                text: 'Nuovo',
+                text: 'New',
                 icon: Icons.star,
                 variant: BadgeVariant.primary,
               ),
               AppBadge(
-                text: 'Completato',
+                text: 'Completed',
                 icon: Icons.check_circle,
                 variant: BadgeVariant.success,
               ),
               AppBadge(
-                text: 'In attesa',
+                text: 'Pending',
                 icon: Icons.access_time,
                 variant: BadgeVariant.warning,
               ),
               AppBadge(
-                text: 'Errore',
+                text: 'Error',
                 icon: Icons.error,
                 variant: BadgeVariant.error,
               ),
@@ -275,13 +274,13 @@ class ComponentsSection extends StatelessWidget {
 
         _buildExampleCard(
           context: context,
-          title: 'Badge in uso reale',
-          description: 'Esempi di utilizzo dei badge nelle card',
+          title: 'Real-world Badge Usage',
+          description: 'Examples of badge usage in cards',
           widget: Column(
             children: [
               AppCard(
-                title: 'Progetto A',
-                description: 'Sviluppo della nuova funzionalità',
+                title: 'Project A',
+                description: 'New feature development',
                 prefixContent: Container(
                   padding: const EdgeInsets.all(AppDesign.md),
                   decoration: BoxDecoration(
@@ -295,16 +294,16 @@ class ComponentsSection extends StatelessWidget {
                   ),
                 ),
                 suffixContent: const AppBadge(
-                  text: 'Attivo',
+                  text: 'Active',
                   icon: Icons.play_arrow,
                   variant: BadgeVariant.success,
                 ),
-                onTap: (id) => _handleCardTap(context, id, 'Progetto A'),
+                onTap: (id) => _handleCardTap(context, id, 'Project A'),
               ),
               const SizedBox(height: AppDesign.md),
               AppCard(
-                title: 'Progetto B',
-                description: 'Correzione bug critici',
+                title: 'Project B',
+                description: 'Critical bug fixes',
                 prefixContent: Container(
                   padding: const EdgeInsets.all(AppDesign.md),
                   decoration: BoxDecoration(
@@ -318,11 +317,11 @@ class ComponentsSection extends StatelessWidget {
                   ),
                 ),
                 suffixContent: const AppBadge(
-                  text: 'Urgente',
+                  text: 'Urgent',
                   icon: Icons.priority_high,
                   variant: BadgeVariant.error,
                 ),
-                onTap: (id) => _handleCardTap(context, id, 'Progetto B'),
+                onTap: (id) => _handleCardTap(context, id, 'Project B'),
               ),
             ],
           ),

@@ -35,8 +35,20 @@ class TypographySection extends StatelessWidget {
         const SizedBox(height: AppDesign.md),
         _buildTypographyCard(
           context,
+          'Heading 4',
+          AppTypography.of(context).heading4,
+        ),
+        const SizedBox(height: AppDesign.md),
+        _buildTypographyCard(
+          context,
           'Body Text',
           AppTypography.of(context).body,
+        ),
+        const SizedBox(height: AppDesign.md),
+        _buildTypographyCard(
+          context,
+          'Body Medium',
+          AppTypography.of(context).bodyMedium,
         ),
         const SizedBox(height: AppDesign.md),
         _buildTypographyCard(

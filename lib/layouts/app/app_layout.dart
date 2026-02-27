@@ -28,21 +28,31 @@ class AppLayout extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.of(context).background,
       extendBody: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBarElement(title: currentTab.screenTitle ?? currentTab.label),
-      body: Stack(
-        children: [
-          SafeArea(bottom: false, child: navigationShell),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: BottomBarElement(
-              currentIndex: navigationShell.currentIndex,
-              onTap: (index) => navigationShell.goBranch(index),
-              tabs: tabs,
+      body: GestureDetector(
+        onTap: () {
+          final currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus && currentFocus.hasFocus) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        },
+        behavior: HitTestBehavior.opaque,
+        child: Stack(
+          children: [
+            SafeArea(bottom: false, child: navigationShell),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: BottomBarElement(
+                currentIndex: navigationShell.currentIndex,
+                onTap: (index) => navigationShell.goBranch(index),
+                tabs: tabs,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
