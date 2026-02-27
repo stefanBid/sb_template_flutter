@@ -6,6 +6,9 @@ import '../../helpers/theme/app_design.dart';
 import '../../helpers/theme/app_colors.dart';
 import '../../helpers/theme/app_typography.dart';
 
+// Project - Services
+import '../../services/ui/alert_service.dart';
+
 // Project - Widgets
 import '../../widgets/app/form-field-input/app_form_field_input.dart';
 import '../../widgets/app/button/app_button.dart';
@@ -114,24 +117,18 @@ class _FormSectionState extends State<FormSection> {
     });
 
     if (_formKey.currentState?.validate() ?? false) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Form submitted successfully!',
-            style: AppTypography.of(context).body.copyWith(color: Colors.white),
-          ),
-          backgroundColor: AppColors.success,
-        ),
+      AlertService.showAppSnackBar(
+        context,
+        'Form submitted successfully!',
+        icon: Icons.check_circle,
+        type: AlertType.success,
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Please fix the errors in the form',
-            style: AppTypography.of(context).body.copyWith(color: Colors.white),
-          ),
-          backgroundColor: AppColors.error,
-        ),
+      AlertService.showAppSnackBar(
+        context,
+        'Please fix the errors in the form',
+        icon: Icons.error,
+        type: AlertType.error,
       );
     }
   }

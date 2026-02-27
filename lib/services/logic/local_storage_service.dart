@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // Project - Models
-import '../models/abstracts/json_serializable.dart';
+import '../../models/abstracts/json_serializable.dart';
 
 class LocalStorageService {
   LocalStorageService._();

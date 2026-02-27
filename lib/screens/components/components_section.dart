@@ -5,6 +5,9 @@ import '../../helpers/theme/app_design.dart';
 import '../../helpers/theme/app_colors.dart';
 import '../../helpers/theme/app_typography.dart';
 
+// Project - Services
+import '../../services/ui/alert_service.dart';
+
 // Project - Widgets
 import '../../widgets/app/card/app_card.dart';
 import '../../widgets/app/badge/app_badge.dart';
@@ -13,15 +16,11 @@ class ComponentsSection extends StatelessWidget {
   const ComponentsSection({super.key});
 
   void _handleCardTap(BuildContext context, String id, String cardName) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '$cardName tapped! ID: $id',
-          style: AppTypography.of(context).body.copyWith(color: Colors.white),
-        ),
-        duration: const Duration(seconds: 1),
-        backgroundColor: AppColors.of(context).appBarBackground,
-      ),
+    AlertService.showAppSnackBar(
+      context,
+      '$cardName tapped! ID: $id',
+      type: AlertType.info,
+      duration: const Duration(seconds: 1),
     );
   }
 

@@ -5,6 +5,9 @@ import '../../helpers/theme/app_design.dart';
 import '../../helpers/theme/app_colors.dart';
 import '../../helpers/theme/app_typography.dart';
 
+// Project - Services
+import '../../services/ui/alert_service.dart';
+
 // Project - Widgets
 import '../../widgets/app/button/app_button.dart';
 
@@ -20,15 +23,11 @@ class _ButtonsSectionState extends State<ButtonsSection> {
   bool _isLoading2 = false;
 
   void _handlePress(String buttonName) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '$buttonName pressed!',
-          style: AppTypography.of(context).body.copyWith(color: Colors.white),
-        ),
-        duration: const Duration(seconds: 1),
-        backgroundColor: AppColors.of(context).appBarBackground,
-      ),
+    AlertService.showAppSnackBar(
+      context,
+      '$buttonName pressed!',
+      type: AlertType.info,
+      duration: const Duration(seconds: 1),
     );
   }
 
