@@ -13,6 +13,9 @@ import '../../helpers/theme/app_colors.dart';
 import '../../helpers/theme/app_design.dart';
 import '../../helpers/router/app_router.dart';
 
+// Project - Widgets
+import 'widgets/version_badge.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -29,40 +32,51 @@ class SplashScreen extends StatelessWidget {
         },
         builder: (context, state) => Scaffold(
           backgroundColor: AppColors.of(context).background,
-          body: Center(
-            child: Container(
-              width: 300,
-              padding: AppDesign.paddingXXL,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: AppDesign.borderRadiusXL,
-                boxShadow: AppDesign.shadowMedium,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'assets/sb-template-flutter-logo.png',
-                    width: 120,
-                    height: 120,
+          body: Stack(
+            children: [
+              Center(
+                child: Container(
+                  width: 300,
+                  padding: AppDesign.paddingXXL,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: AppDesign.borderRadiusXL,
+                    boxShadow: AppDesign.shadowMedium,
                   ),
-                  const SizedBox(height: AppDesign.xl),
-                  if (state is FakeLoaderLoadingState)
-                    SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          AppColors.of(context).appBarBackground,
-                        ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(
+                        'assets/sb-template-flutter-logo.png',
+                        width: 120,
+                        height: 120,
                       ),
-                    )
-                  else
-                    const SizedBox(width: 40, height: 40),
-                ],
+
+                      const SizedBox(height: AppDesign.xl),
+                      if (state is FakeLoaderLoadingState)
+                        SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 3,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              AppColors.of(context).appBarBackground,
+                            ),
+                          ),
+                        )
+                      else
+                        const SizedBox(width: 40, height: 40),
+                    ],
+                  ),
+                ),
               ),
-            ),
+              const Positioned(
+                bottom: AppDesign.xl,
+                left: 0,
+                right: 0,
+                child: Center(child: VersionBadge()),
+              ),
+            ],
           ),
         ),
       ),

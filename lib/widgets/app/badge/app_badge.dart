@@ -5,18 +5,20 @@ import '../../../helpers/theme/app_colors.dart';
 import '../../../helpers/theme/app_design.dart';
 import '../../../helpers/theme/app_typography.dart';
 
-enum BadgeVariant { primary, secondary, success, warning, error }
+enum BadgeVariant { primary, secondary, success, warning, error, custom }
 
 class AppBadge extends StatelessWidget {
   const AppBadge({
     super.key,
     required this.text,
     this.variant = BadgeVariant.primary,
+    this.customColor,
     this.icon,
   });
 
   final String text;
-  final BadgeVariant variant;
+  final BadgeVariant? variant;
+  final Color? customColor;
   final IconData? icon;
 
   @override
@@ -64,6 +66,8 @@ class AppBadge extends StatelessWidget {
         return AppColors.warning;
       case BadgeVariant.error:
         return AppColors.error;
+      default:
+        return customColor ?? Colors.black;
     }
   }
 }
