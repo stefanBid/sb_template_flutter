@@ -16,11 +16,10 @@ class ComponentsSection extends StatelessWidget {
   const ComponentsSection({super.key});
 
   void _handleCardTap(BuildContext context, String id, String cardName) {
-    AlertService.showAppSnackBar(
-      context,
-      '$cardName tapped! ID: $id',
-      type: AlertType.info,
-      duration: const Duration(seconds: 1),
+    AlertService.showAppDialog(
+      context: context,
+      title: cardName,
+      message: 'You tapped on $cardName with ID: $id',
     );
   }
 
