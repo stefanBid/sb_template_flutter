@@ -225,10 +225,10 @@ class ComponentsSection extends StatelessWidget {
           context: context,
           title: 'Badge Variants',
           description: 'Different color variants for different purposes',
-          widget: Wrap(
+          widget: const Wrap(
             spacing: AppDesign.md,
             runSpacing: AppDesign.md,
-            children: const [
+            children: [
               AppBadge(text: 'Primary', variant: BadgeVariant.primary),
               AppBadge(text: 'Secondary', variant: BadgeVariant.secondary),
               AppBadge(text: 'Success', variant: BadgeVariant.success),
@@ -242,10 +242,10 @@ class ComponentsSection extends StatelessWidget {
           context: context,
           title: 'Badges with Icons',
           description: 'Badges with icons for better visual clarity',
-          widget: Wrap(
+          widget: const Wrap(
             spacing: AppDesign.md,
             runSpacing: AppDesign.md,
-            children: const [
+            children: [
               AppBadge(
                 text: 'New',
                 icon: Icons.star,
