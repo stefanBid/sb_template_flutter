@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 // Layouts
 import 'layouts/app_layout.dart';
@@ -7,6 +8,15 @@ import 'screens/home/home_screen.dart';
 import 'screens/form/form_screen.dart';
 import 'screens/profile/profile_screen.dart';
 import 'screens/details/details_screen.dart';
+
+Widget _customTransitionBuilder(
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
+  return FadeTransition(opacity: animation, child: child);
+}
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/home',
@@ -18,11 +28,20 @@ final GoRouter appRouter = GoRouter(
     ShellRoute(
       builder: (context, state, child) => AppLayout(child: child),
       routes: [
-        GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
-        GoRoute(path: '/form', builder: (context, state) => const FormScreen()),
+        GoRoute(
+          path: '/home',
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: HomeScreen()),
+        ),
+        GoRoute(
+          path: '/form',
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: FormScreen()),
+        ),
         GoRoute(
           path: '/profile',
-          builder: (context, state) => const ProfileScreen(),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: ProfileScreen()),
         ),
       ],
     ),
@@ -32,9 +51,14 @@ final GoRouter appRouter = GoRouter(
       routes: [
         GoRoute(
           path: '/details/:detailId',
-          builder: (context, state) {
+          pageBuilder: (context, state) {
             final detailId = state.pathParameters['detailId']!;
-            return DetailsScreen(detailId: detailId);
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: DetailsScreen(detailId: detailId),
+              transitionsBuilder: _customTransitionBuilder,
+              transitionDuration: const Duration(milliseconds: 150),
+            );
           },
         ),
       ],
