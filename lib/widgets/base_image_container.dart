@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 // Projects Helpers
 import '../helpers/app_design.dart';
@@ -50,15 +50,14 @@ class BaseImageContainer extends StatelessWidget {
   Widget _buildImage(BuildContext context) {
     switch (type) {
       case ImageType.network:
-        return FadeInImage.memoryNetwork(
+        return CachedNetworkImage(
+          imageUrl: imageUrl,
           fit: _boxFit,
           width: width,
           height: height,
           fadeInDuration: fadeDuration,
-          fadeOutDuration: fadeDuration,
-          placeholder: kTransparentImage,
-          image: imageUrl,
-          imageErrorBuilder: (context, error, stackTrace) => Container(
+          placeholder: (context, url) => const SizedBox.shrink(),
+          errorWidget: (context, url, error) => Container(
             color: AppColors.of(context).muted,
             child: Icon(
               Icons.broken_image,
