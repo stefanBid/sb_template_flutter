@@ -1,5 +1,5 @@
 name: sb_template_flutter
-description: "A new Flutter project."
+description: "A New Flutter template project for starting new projects with a clean architecture and best practices."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.1.1
 
 environment:
-  sdk: ^3.11.0
+  sdk: ^3.11.3
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^8.0.2
   go_router: ^17.1.0
   uuid: ^4.5.2
+  phosphor_flutter: ^2.1.0
   flutter_secure_storage: ^10.0.0
   image_picker: ^1.2.1
   package_info_plus: ^9.0.0
