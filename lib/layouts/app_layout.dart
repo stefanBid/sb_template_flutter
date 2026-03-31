@@ -75,7 +75,7 @@ class AppLayout extends StatelessWidget {
                 bottom: MediaQuery.of(context).padding.bottom,
               ),
               decoration: BoxDecoration(
-                color: AppColors.of(context).surface,
+                color: AppColors.of(context).bottomBar,
                 border: Border(
                   top: BorderSide(
                     color: AppColors.of(context).muted.withAlpha(30),

@@ -25,11 +25,14 @@ class AppColors {
 
   // Dark: elevated dark gray / Light: dirty white
   Color get surface =>
-      isDark ? const Color(0xFF132840) : const Color(0xFFE8F3FB);
+      isDark ? const Color(0xFF163350) : const Color(0xFFDAECF8);
 
   // Dark: white / Light: near black
   Color get text => isDark ? const Color(0xFFE8F3FB) : const Color(0xFF0D2137);
 
   // Dark: medium gray / Light: medium gray
   Color get muted => isDark ? const Color(0xFF4D7A9E) : const Color(0xFF6B8DA8);
+
+  Color get bottomBar =>
+      isDark ? const Color(0xFF0E2840) : const Color(0xFFEAF4FC);
 }
