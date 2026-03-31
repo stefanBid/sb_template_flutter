@@ -64,7 +64,7 @@ class AppRouter {
   const AppRouter._();
 
   static const home = AppTypedRoute<NoParams>('/home');
-  static const forms = AppTypedRoute<NoParams>('/forms');
+  static const forms = AppTypedRoute<NoParams>('/form');
   static const profile = AppTypedRoute<NoParams>('/profile');
   static const details = AppTypedRoute<DetailParams>('/details/:detailId');
 

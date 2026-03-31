@@ -10,6 +10,10 @@ import 'screens/details/details_screen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/home',
+  redirect: (context, state) {
+    if (state.uri.path == '/') return '/home';
+    return null;
+  },
   routes: [
     ShellRoute(
       builder: (context, state, child) => AppLayout(child: child),

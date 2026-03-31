@@ -69,8 +69,11 @@ class AppLayout extends StatelessWidget {
       ),
       bottomNavigationBar: withBottomNav
           ? Container(
-              height: 64,
-              padding: const EdgeInsets.only(top: AppDesign.gapItemXs),
+              height: 48 + MediaQuery.of(context).padding.bottom,
+              padding: EdgeInsets.only(
+                top: AppDesign.gapItemXs,
+                bottom: MediaQuery.of(context).padding.bottom,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.of(context).surface,
                 border: Border(
@@ -81,8 +84,7 @@ class AppLayout extends StatelessWidget {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: AppDesign.gapSectionLg,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: _tabs.asMap().entries.map((entry) {
                   final index = entry.key;
                   final tab = entry.value;
@@ -92,7 +94,7 @@ class AppLayout extends StatelessWidget {
                       onTap: () => AppRouter.goTo(context, tab.route),
                       behavior: HitTestBehavior.opaque,
                       child: Align(
-                        alignment: Alignment.topCenter,
+                        alignment: Alignment.center,
                         child: Container(
                           padding: AppDesign.paddingSm,
                           decoration: BoxDecoration(
