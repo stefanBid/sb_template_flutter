@@ -124,9 +124,12 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'You can customize this page as you like, it\'s just a template',
-            style: AppTypography.of(context).body,
+          Padding(
+            padding: AppDesign.paddingHorizontalLg,
+            child: Text(
+              'You can customize this page as you like, it\'s just a template',
+              style: AppTypography.of(context).body,
+            ),
           ),
           const SizedBox(height: AppDesign.gapSectionLg),
           Expanded(
