@@ -25,94 +25,165 @@ class FormSection extends StatefulWidget {
 class _FormSectionState extends State<FormSection> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController surnameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  late final TextEditingController nameController;
+  late final TextEditingController surnameController;
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+  late final TextEditingController confirmPasswordController;
+
+  bool _isSubmitting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+    surnameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    surnameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _clearForm() {
+    nameController.clear();
+    surnameController.clear();
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+  }
+
+  void _submit() {
+    if (_formKey.currentState!.validate()) {
+      // Process form submission create a delayed for simulate loading
+      setState(() => _isSubmitting = true);
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() => _isSubmitting = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Form submitted successfully!')),
+        );
+        _clearForm();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // — Personal Information
-          Text(
-            'Personal Information',
-            style: AppTypography.of(context).heading3,
-          ),
-          const SizedBox(height: AppDesign.gapItemSm),
-          Row(
-            children: [
-              Expanded(
-                child: BaseFormField(
-                  fillColor: AppColors.of(context).surface,
-                  controller: nameController,
-                  label: 'Name',
-                  prefixIcon: PhosphorIconsRegular.user,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // — Personal Information
+            Text(
+              'Personal Information',
+              style: AppTypography.of(context).heading3,
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: BaseFormField(
+                    fillColor: AppColors.of(context).surface,
+                    controller: nameController,
+                    label: 'Name',
+                    prefixIcon: PhosphorIconsRegular.user,
+                    validator: (value) => AppValidation.notEmpty(
+                      value,
+                      message: 'Name is required',
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(width: AppDesign.gapInlineSm),
-              Expanded(
-                child: BaseFormField(
-                  controller: surnameController,
-                  fillColor: AppColors.of(context).surface,
-                  label: 'Surname',
-                  prefixIcon: PhosphorIconsRegular.user,
+                const SizedBox(width: AppDesign.gapInlineSm),
+                Expanded(
+                  child: BaseFormField(
+                    controller: surnameController,
+                    fillColor: AppColors.of(context).surface,
+                    label: 'Surname',
+                    prefixIcon: PhosphorIconsRegular.user,
+                    validator: (value) => AppValidation.notEmpty(
+                      value,
+                      message: 'Surname is required',
+                    ),
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(height: AppDesign.gapSectionMd),
+
+            // — Account Information
+            Text(
+              'Account Information',
+              style: AppTypography.of(context).heading3,
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseFormField(
+              controller: emailController,
+              fillColor: AppColors.of(context).surface,
+              label: 'Email',
+              prefixIcon: PhosphorIconsRegular.envelope,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              validator: (value) =>
+                  AppValidation.notEmpty(value, message: 'Email is required') ??
+                  AppValidation.email(value),
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseFormField(
+              controller: passwordController,
+              fillColor: AppColors.of(context).surface,
+              label: 'Password',
+              prefixIcon: PhosphorIconsRegular.lock,
+              obscureText: true,
+              textInputAction: TextInputAction.next,
+              validator: (value) =>
+                  AppValidation.notEmpty(
+                    value,
+                    message: 'Password is required',
+                  ) ??
+                  AppValidation.minLength(
+                    value,
+                    6,
+                    message: 'Minimum 6 characters',
+                  ) ??
+                  AppValidation.strongPassword(value),
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseFormField(
+              controller: confirmPasswordController,
+              fillColor: AppColors.of(context).surface,
+              label: 'Confirm Password',
+              prefixIcon: PhosphorIconsRegular.lockKey,
+              obscureText: true,
+              textInputAction: TextInputAction.done,
+              validator: (value) => AppValidation.match(
+                value,
+                passwordController.text,
+                message: 'Passwords do not match',
               ),
-            ],
-          ),
-          const SizedBox(height: AppDesign.gapSectionMd),
+            ),
+            const SizedBox(height: AppDesign.gapSectionLg),
 
-          // — Account Information
-          Text(
-            'Account Information',
-            style: AppTypography.of(context).heading3,
-          ),
-          const SizedBox(height: AppDesign.gapItemSm),
-          BaseFormField(
-            controller: emailController,
-            fillColor: AppColors.of(context).surface,
-            label: 'Email',
-            prefixIcon: PhosphorIconsRegular.envelope,
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-          ),
-          const SizedBox(height: AppDesign.gapItemSm),
-          BaseFormField(
-            controller: passwordController,
-            fillColor: AppColors.of(context).surface,
-            label: 'Password',
-            prefixIcon: PhosphorIconsRegular.lock,
-            obscureText: true,
-            textInputAction: TextInputAction.next,
-          ),
-          const SizedBox(height: AppDesign.gapItemSm),
-          BaseFormField(
-            controller: confirmPasswordController,
-            fillColor: AppColors.of(context).surface,
-            label: 'Confirm Password',
-            prefixIcon: PhosphorIconsRegular.lockKey,
-            obscureText: true,
-            textInputAction: TextInputAction.done,
-          ),
-          const SizedBox(height: AppDesign.gapSectionLg),
-
-          // — Submit
-          BaseButton(
-            fullWidth: true,
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                print(_formKey.currentState!);
-              }
-            },
-            label: 'Submit',
-          ),
-        ],
+            // — Submit
+            BaseButton(
+              fullWidth: true,
+              onPressed: _isSubmitting ? null : _submit,
+              label: 'Submit',
+              icon: PhosphorIconsBold.cactus,
+              isLoading: _isSubmitting,
+            ),
+          ],
+        ),
       ),
     );
   }

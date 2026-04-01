@@ -43,8 +43,8 @@ class BaseButton extends StatelessWidget {
 
     Widget content = isLoading
         ? SizedBox(
-            width: 18,
-            height: 18,
+            width: 20,
+            height: 20,
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(resolvedContentColor),
@@ -95,9 +95,11 @@ class BaseButton extends StatelessWidget {
       ),
     );
 
-    final sized = fullWidth
-        ? SizedBox(width: double.infinity, child: button)
-        : button;
+    final sized = SizedBox(
+      width: fullWidth ? double.infinity : null,
+      height: 48,
+      child: button,
+    );
 
     if (tooltip != null) {
       return Tooltip(message: tooltip!, child: sized);

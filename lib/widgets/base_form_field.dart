@@ -101,6 +101,7 @@ class BaseFormField extends StatelessWidget {
             errorStyle: AppTypography.of(
               context,
             ).caption.copyWith(color: AppColors.error),
+            errorMaxLines: 3,
           ),
         ),
       ],
