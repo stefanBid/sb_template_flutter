@@ -144,6 +144,32 @@ GcGridView(
 
 ---
 
+## BaseBadge
+
+Inline label with semantic colour. Uses `borderRadiusXXs` and `small`/`caption` typography via `BadgeStyle`.
+
+```dart
+BaseBadge(
+  label: 'New',
+  icon: PhosphorIconsRegular.star, // optional
+  style: BadgeStyle(
+    color: AppColors.success,
+    foregroundColor: Colors.white,       // optional — text and icon colour
+    size: BadgeSize.normal,              // normal (caption) | small
+    variant: BadgeVariant.filled,        // filled | outlined
+    borderRadius: AppDesign.borderRadiusXXs, // optional override
+  ),
+)
+```
+
+**Colour logic:**
+- `color` controls both fill and border colour in both variants
+- `filled` → coloured background + matching border
+- `outlined` → transparent background + border in `color` colour
+- `foregroundColor` → text and icon only (independent from border)
+
+---
+
 ## BaseScaffoldMessenger
 
 Static utility for showing styled snack bars. Never use `ScaffoldMessenger.of(context).showSnackBar` directly.
