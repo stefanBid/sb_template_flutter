@@ -35,7 +35,7 @@ class BaseImageContainer extends StatelessWidget {
 
   Color? get _overlayColor {
     return switch (filter) {
-      ImageFilter.darken => Colors.black.withAlpha(40),
+      ImageFilter.darken => Colors.black.withAlpha(80),
       ImageFilter.none => null,
     };
   }

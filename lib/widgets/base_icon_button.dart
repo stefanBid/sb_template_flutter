@@ -37,7 +37,8 @@ class BaseIconButton extends StatelessWidget {
           padding: AppDesign.paddingSm,
           decoration: BoxDecoration(
             color: type == IconButtonType.outlined
-                ? color ?? AppColors.of(context).text.withAlpha(80)
+                ? color?.withAlpha(80) ??
+                      AppColors.of(context).text.withAlpha(80)
                 : color ?? AppColors.of(context).surface,
             borderRadius: AppDesign.borderRadiusXs,
             border: type == IconButtonType.outlined

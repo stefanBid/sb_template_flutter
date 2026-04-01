@@ -67,6 +67,7 @@ class HeroPageLayout extends StatelessWidget {
           right: 0,
           child: TransparentAppBar(
             leading: BaseIconButton(
+              color: Colors.white,
               type: IconButtonType.outlined,
               icon: PhosphorIconsRegular.arrowBendUpLeft,
               onPressed: onBack ?? () => AppRouter.goBack(context),

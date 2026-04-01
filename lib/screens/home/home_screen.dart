@@ -4,11 +4,12 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 // Project Helpers
 import '../../helpers/app_colors.dart';
 import '../../helpers/app_design.dart';
+import '../../helpers/app_router.dart';
 import '../../helpers/app_typography.dart';
 
 // Project Layouts
 import '../../layouts/app_bars/classic_app_bar.dart';
-import '../../layouts/app_bars/standard_page_layout.dart';
+import '../../layouts/body/standard_page_layout.dart';
 
 // Project Widgets
 import '../../widgets/group-container/gc_list_view.dart';
@@ -80,7 +81,7 @@ class HomeScreen extends StatelessWidget {
     return List.generate(
       count,
       (index) => TestItmes(
-        id: 'item_${index + idSeed}',
+        id: '${index + idSeed}',
         title: 'Item ${index + idSeed}',
         description: 'Description for item ${index + idSeed}',
         imageUrl: 'https://picsum.photos/id/${index + idSeed}/200/300',
@@ -105,7 +106,11 @@ class HomeScreen extends StatelessWidget {
       padding: AppDesign.paddingHorizontalLg.copyWith(
         left: isFirstItem ? AppDesign.paddingHorizontalLg.left : 0,
       ),
-      onTap: () {},
+      onTap: () => AppRouter.goDeep(
+        context,
+        AppRouter.details,
+        params: DetailParams(detailId: item.id),
+      ),
     );
   }
 

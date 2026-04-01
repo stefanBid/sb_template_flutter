@@ -9,7 +9,7 @@ import '../../helpers/app_validation.dart';
 
 // Project Layouts
 import '../../layouts/app_bars/classic_app_bar.dart';
-import '../../layouts/app_bars/standard_page_layout.dart';
+import '../../layouts/body/standard_page_layout.dart';
 
 // Project Widgets
 import '../../widgets/base_button.dart';

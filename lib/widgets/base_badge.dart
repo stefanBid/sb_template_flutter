@@ -19,7 +19,7 @@ class BadgeStyle {
   const BadgeStyle({
     this.color,
     this.foregroundColor,
-    this.size = BadgeSize.normal,
+    this.size = BadgeSize.small,
     this.variant = BadgeVariant.filled,
     this.borderRadius = AppDesign.borderRadiusXXs,
   });
