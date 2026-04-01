@@ -32,6 +32,9 @@ jobs:
       - name: Pub get
         run: flutter pub get
 
+      - name: Dart fix (check)
+        run: dart fix --dry-run
+
       - name: Dart format (check)
         run: dart format --output=none --set-exit-if-changed .
 
@@ -41,8 +44,7 @@ jobs:
   build_android:
     name: Build Android (debug)
     runs-on: ubuntu-latest
-    # Skip if the PR is draft
-    if: github.event.pull_request.draft == false || github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,8 +75,7 @@ jobs:
   build_ios:
     name: Build iOS (no codesign)
     runs-on: macos-latest
-    # Skip if the PR is draft
-    if: github.event.pull_request.draft == false || github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - name: Checkout
         uses: actions/checkout@v4

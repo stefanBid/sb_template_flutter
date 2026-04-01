@@ -28,6 +28,10 @@ class AppDesign {
   );
 
   // Border Radius - Top only
+  static const BorderRadius borderRadiusTopXs = BorderRadius.only(
+    topLeft: Radius.circular(_radiusXs),
+    topRight: Radius.circular(_radiusXs),
+  );
   static const BorderRadius borderRadiusTopSm = BorderRadius.only(
     topLeft: Radius.circular(_radiusSm),
     topRight: Radius.circular(_radiusSm),

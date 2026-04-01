@@ -12,8 +12,9 @@ import '../../layouts/app_bars/classic_app_bar.dart';
 import '../../layouts/app_bars/standard_page_layout.dart';
 
 // Project Widgets
-import '../../widgets/base_form_field.dart';
 import '../../widgets/base_button.dart';
+import '../../widgets/base_form_field.dart';
+import '../../widgets/base_scaffold_messenger.dart';
 
 class FormSection extends StatefulWidget {
   const FormSection({super.key});
@@ -32,6 +33,8 @@ class _FormSectionState extends State<FormSection> {
   late final TextEditingController confirmPasswordController;
 
   bool _isSubmitting = false;
+  bool _showPassword = false;
+  bool _showConfirmPassword = false;
 
   @override
   void initState() {
@@ -59,19 +62,24 @@ class _FormSectionState extends State<FormSection> {
     emailController.clear();
     passwordController.clear();
     confirmPasswordController.clear();
+
+    if (_showPassword) setState(() => _showPassword = false);
+    if (_showConfirmPassword) setState(() => _showConfirmPassword = false);
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
-      // Process form submission create a delayed for simulate loading
       setState(() => _isSubmitting = true);
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() => _isSubmitting = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Form submitted successfully!')),
-        );
-        _clearForm();
-      });
+      await Future.delayed(const Duration(seconds: 2));
+      if (!mounted) return;
+      setState(() => _isSubmitting = false);
+      BaseScaffoldMessenger.show(
+        context,
+        message: 'Form submitted successfully!',
+        type: SnackBarType.success,
+      );
+      _clearForm();
+      FocusScope.of(context).unfocus();
     }
   }
 
@@ -144,7 +152,16 @@ class _FormSectionState extends State<FormSection> {
               fillColor: AppColors.of(context).surface,
               label: 'Password',
               prefixIcon: PhosphorIconsRegular.lock,
-              obscureText: true,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showPassword
+                      ? PhosphorIconsRegular.eye
+                      : PhosphorIconsRegular.eyeSlash,
+                  size: 20,
+                ),
+                onPressed: () => setState(() => _showPassword = !_showPassword),
+              ),
+              obscureText: !_showPassword,
               textInputAction: TextInputAction.next,
               validator: (value) =>
                   AppValidation.notEmpty(
@@ -164,7 +181,18 @@ class _FormSectionState extends State<FormSection> {
               fillColor: AppColors.of(context).surface,
               label: 'Confirm Password',
               prefixIcon: PhosphorIconsRegular.lockKey,
-              obscureText: true,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showConfirmPassword
+                      ? PhosphorIconsRegular.eye
+                      : PhosphorIconsRegular.eyeSlash,
+                  size: 20,
+                ),
+                onPressed: () => setState(
+                  () => _showConfirmPassword = !_showConfirmPassword,
+                ),
+              ),
+              obscureText: !_showConfirmPassword,
               textInputAction: TextInputAction.done,
               validator: (value) => AppValidation.match(
                 value,
