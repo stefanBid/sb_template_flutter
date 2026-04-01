@@ -144,6 +144,29 @@ GcGridView(
 
 ---
 
+## BaseScaffoldMessenger
+
+Static utility for showing styled snack bars. Never use `ScaffoldMessenger.of(context).showSnackBar` directly.
+
+```dart
+BaseScaffoldMessenger.show(
+  context,
+  message: 'Saved successfully!',
+  type: SnackBarType.success, // success | error | warning | info (default)
+);
+```
+
+| `SnackBarType` | Colour | Icon |
+|---|---|---|
+| `success` | `AppColors.success` | `checkCircle` |
+| `error` | `AppColors.error` | `xCircle` |
+| `warning` | `AppColors.warning` | `warningCircle` |
+| `info` | `primary` / `secondary` (adaptive) | `info` |
+
+Clears previous snack bars automatically before showing the new one. Uses `borderRadiusTopXs` (top corners only).
+
+---
+
 ## Design system
 
 All colours, spacing and typography must come from helpers — never hardcode values. Full reference in `design-system.instructions.md`.
