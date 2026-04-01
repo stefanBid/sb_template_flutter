@@ -144,6 +144,19 @@ GcGridView(
 
 ---
 
+## BaseValueCard
+
+Card that displays a value and a label. Use for stats, KPIs, counts, or any labeled numeric/text value.
+
+```dart
+BaseValueCard(
+  value: '4.2K',
+  label: 'Followers',
+)
+```
+
+---
+
 ## BaseBadge
 
 Inline label with semantic colour. Uses `borderRadiusXXs` and `small`/`caption` typography via `BadgeStyle`.

@@ -56,6 +56,8 @@ lib/
 
 **Never** use camelCase or PascalCase for file or directory names.
 
+**Widget naming — be generic**: the name must describe **what the widget is**, not where it is used. Bad: `base_name_input`, `base_stat_card`. Good: `base_input`, `base_value_card`. If a name only makes sense in one specific context, it is too specific — generalise it.
+
 ---
 
 ## Global code conventions
@@ -71,7 +73,7 @@ lib/
   import '../../helpers/app_colors.dart';
 
   // Project Layouts
-  import '../../layouts/app_bars/standard_page_layout.dart';
+  import '../../layouts/body/standard_page_layout.dart';
 
   // Project Models
   import '../../models/recipe.dart';
@@ -86,7 +88,7 @@ lib/
   import '../../widgets/base_button.dart';
   ```
   Omit groups that are not needed. Never use absolute `package:` paths for project-internal files.
-- `const` wherever possible to optimise rebuilds
+- `const` wherever possible to optimise rebuilds. A constructor call **must** be `const` when: (1) the widget has a `const` constructor, and (2) all arguments are compile-time values (string/number literals, `static const` tokens, other `const` constructors). When the parent is already `const`, children drop the keyword — move `const` to the outermost eligible ancestor instead
 - `StatelessWidget` preferred where there is no local state
 - Never use hardcoded colours, font sizes, spacing or border radius — always use design system helpers
 - Network images: always use `BaseImageContainer`

@@ -4,9 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'layouts/app_layout.dart';
 
 // Screens
-import 'screens/home/home_screen.dart';
-import 'screens/form/form_screen.dart';
 import 'screens/details/details_screen.dart';
+import 'screens/form/form_screen.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/profile/profile_screen.dart';
 
 Widget _customTransitionBuilder(
   BuildContext context,
@@ -36,6 +37,11 @@ final GoRouter appRouter = GoRouter(
           path: '/form',
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: FormScreen()),
+        ),
+        GoRoute(
+          path: '/profile',
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: ProfileScreen()),
         ),
       ],
     ),

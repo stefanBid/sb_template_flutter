@@ -66,7 +66,7 @@ Create `lib/screens/<route-name>/<route_name>_screen.dart`:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:sb_template_flutter/layouts/app_bars/standard_page_layout.dart';
+import '../../layouts/body/standard_page_layout.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
   const RecipeDetailScreen({super.key});

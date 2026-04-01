@@ -40,6 +40,12 @@ class AppLayout extends StatelessWidget {
       icon: PhosphorIconsBold.fileText,
       activeIcon: PhosphorIconsFill.fileText,
     ),
+    const _TabItem(
+      route: AppRouter.profile,
+      label: 'Profile',
+      icon: PhosphorIconsBold.user,
+      activeIcon: PhosphorIconsFill.user,
+    ),
   ];
 
   int _currentIndex(BuildContext context) {

@@ -27,7 +27,7 @@ screens/
 
 ### `StandardPageLayout`
 
-Standard scrollable page with optional app bar. Import from `layouts/app_bars/standard_page_layout.dart`.
+Standard scrollable page with optional app bar. Import from `layouts/body/standard_page_layout.dart`.
 
 ```dart
 StandardPageLayout(
