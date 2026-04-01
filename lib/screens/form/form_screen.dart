@@ -207,7 +207,7 @@ class _FormSectionState extends State<FormSection> {
               fullWidth: true,
               onPressed: _isSubmitting ? null : _submit,
               label: 'Submit',
-              icon: PhosphorIconsBold.cactus,
+              icon: PhosphorIconsBold.paperPlaneRight,
               isLoading: _isSubmitting,
             ),
           ],
@@ -224,7 +224,7 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const StandardPageLayout(
       appBar: ClassicAppBar(
-        leading: Icon(PhosphorIconsRegular.fileText),
+        leading: Icon(PhosphorIconsBold.fileText),
         title: 'Build Professional Forms',
       ),
       body: FormSection(),
