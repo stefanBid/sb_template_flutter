@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 // Project Helpers
-import '../helpers/app_colors.dart';
-import '../helpers/app_design.dart';
+import '../../helpers/app_colors.dart';
+import '../../helpers/app_design.dart';
 
 class StandardPageLayout extends StatelessWidget {
   final Widget? appBar;

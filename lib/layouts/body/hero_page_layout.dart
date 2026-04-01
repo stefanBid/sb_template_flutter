@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
-import '../../helpers/app_colors.dart';
-import '../../helpers/app_design.dart';
-import '../../helpers/app_router.dart';
+import '../../../helpers/app_colors.dart';
+import '../../../helpers/app_design.dart';
+import '../../../helpers/app_router.dart';
 
 // Project Widgets
-import '../../widgets/base_image_container.dart';
-import '../../widgets/base_icon_button.dart';
+import '../../../widgets/base_image_container.dart';
+import '../../../widgets/base_icon_button.dart';
 
 // Project Layouts
-import '../../layouts/app_bars/transparent_app_bar.dart';
+import '../../../layouts/app_bars/transparent_app_bar.dart';
 
 class HeroPageLayout extends StatelessWidget {
   final String imageUrl;

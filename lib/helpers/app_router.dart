@@ -65,7 +65,6 @@ class AppRouter {
 
   static const home = AppTypedRoute<NoParams>('/home');
   static const forms = AppTypedRoute<NoParams>('/form');
-  static const profile = AppTypedRoute<NoParams>('/profile');
   static const details = AppTypedRoute<DetailParams>('/details/:detailId');
 
   static void goTo<P extends GenericRouteParams>(

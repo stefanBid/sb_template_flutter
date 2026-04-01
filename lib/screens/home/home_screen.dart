@@ -8,7 +8,7 @@ import '../../helpers/app_typography.dart';
 
 // Project Layouts
 import '../../layouts/app_bars/classic_app_bar.dart';
-import '../../layouts/standard_page_layout.dart';
+import '../../layouts/app_bars/standard_page_layout.dart';
 
 // Project Widgets
 import '../../widgets/group-container/gc_list_view.dart';

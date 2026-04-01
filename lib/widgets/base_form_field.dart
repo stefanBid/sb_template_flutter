@@ -9,7 +9,7 @@ class BaseFormField extends StatelessWidget {
   final TextEditingController controller;
   final String? label;
   final String? hint;
-  final Widget? prefixIcon;
+  final IconData? prefixIcon;
   final Widget? suffixIcon;
   final Color? fillColor;
   final bool obscureText;
@@ -65,7 +65,9 @@ class BaseFormField extends StatelessWidget {
             hintStyle: AppTypography.of(
               context,
             ).body.copyWith(color: AppColors.of(context).muted),
-            prefixIcon: prefixIcon,
+            prefixIcon: prefixIcon != null
+                ? Icon(prefixIcon, color: AppColors.of(context).muted, size: 20)
+                : null,
             suffixIcon: suffixIcon,
             filled: true,
             fillColor: fillColor ?? AppColors.of(context).background,
