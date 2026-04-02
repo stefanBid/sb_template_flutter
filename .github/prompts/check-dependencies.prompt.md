@@ -48,9 +48,11 @@ Criteria: the **resolvable** or **latest** version has a **different major versi
 
 ## Step 4 — Apply safe updates
 
-For each package in the "safe" category:
-1. Update the version constraint in `pubspec.yaml` to allow the new version (e.g. `^2.1.0` → `^2.3.0`)
-2. Run `flutter pub get` once after all constraints have been updated
+For each **direct** dependency in the "safe" category:
+1. Edit `pubspec.yaml` directly — update the version constraint to match the new resolvable version (e.g. `^2.1.0` → `^2.3.0`). This is **mandatory**: do not skip it.
+2. After updating all constraints in `pubspec.yaml`, run `flutter pub get` once to resolve and lock the new versions.
+
+> **Important**: do NOT use `flutter pub upgrade` as a substitute for editing `pubspec.yaml`. The upgrade command only updates `pubspec.lock` without changing the declared constraints. Always update `pubspec.yaml` first.
 
 ---
 

@@ -37,6 +37,7 @@
   - [Components](#-using-built-in-components)
   - [Services](#-services-reference)
 - [Deployment](#-deployment)
+- [AI Tooling — Prompts & Instructions](#-ai-tooling--prompts--instructions)
 - [Version Management](#-version-management)
 
 ---
@@ -876,7 +877,27 @@ Text(AppLocalizations.of(context)!.welcome);
 
 ## 📦 Deployment
 
-### iOS (App Store)
+### iOS
+
+#### Test distribution (TestFlight)
+
+**1. Bump version/build** using the `bump-version` prompt (see [AI Tooling](#-ai-tooling--prompts--instructions)).
+
+**2. Build the release IPA:**
+```bash
+flutter build ipa --release
+```
+
+**3. Upload via Xcode Organizer:**
+- Open `build/ios/archive/Runner.xcarchive` in Xcode
+- Product → Archive → Distribute App → App Store Connect
+- Select **TestFlight Internal Testing** or **External Testing**
+
+**4. Invite testers** from [App Store Connect](https://appstoreconnect.apple.com) → TestFlight tab.
+
+---
+
+#### Production release (App Store)
 
 **1. Configure app identity:**
 
@@ -889,18 +910,43 @@ Edit `ios/Runner/Info.plist`:
 - Place in `ios/Runner/Assets.xcassets/AppIcon.appiconset/`
 
 **3. Build release:**
-
 ```bash
 flutter build ipa --release
 ```
 
 **4. Upload to App Store Connect:**
 - Open `build/ios/archive/Runner.xcarchive` in Xcode
-- Product → Archive → Distribute App
+- Product → Archive → Distribute App → App Store Connect
+- Complete metadata, screenshots and review information
+- Submit for review
 
 ---
 
-### Android (Google Play)
+### Android
+
+#### Test distribution (Internal Testing / Firebase App Distribution)
+
+**1. Bump version/build** using the `bump-version` prompt.
+
+**2. Build the release bundle:**
+```bash
+flutter build appbundle --release
+```
+
+**3a. Google Play — Internal Testing:**
+- Go to [Google Play Console](https://play.google.com/console)
+- Create the app → Internal Testing track → Upload `.aab`
+- Add tester email addresses or Google Groups
+
+**3b. Firebase App Distribution (alternative):**
+```bash
+flutter build apk --release
+```
+- Upload the `.apk` to Firebase App Distribution and invite testers.
+
+---
+
+#### Production release (Google Play)
 
 **1. Configure app:**
 
@@ -918,7 +964,6 @@ android {
 ```
 
 **2. Create keystore:**
-
 ```bash
 keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA \
   -keysize 2048 -validity 10000 -alias upload
