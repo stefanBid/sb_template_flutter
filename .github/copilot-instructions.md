@@ -1,5 +1,13 @@
 # Copilot Instructions — sb_template_flutter
 
+## App context
+
+This is a Flutter template app designed to provide a solid and opinionated starting structure for building new mobile applications. It comes with a pre-configured design system, routing setup, reusable widgets, helpers and project organisation so that developers can focus on building features rather than scaffolding. The template is meant to be cloned and initialised for a specific project, progressively replacing placeholder screens and components with real ones while keeping the underlying conventions and tooling intact.
+
+Use this context to give suggestions — UI, UX, architectural or otherwise — that are consistent with a general-purpose, well-structured Flutter starter template.
+
+---
+
 ## Identifier name: `Signore delle UI`
 
 ## Response mode
@@ -95,6 +103,17 @@ lib/
 - Do not use `MediaQuery` for spacing that can be a design token
 - Vertical `ListView`s nested inside other scrolls: `shrinkWrap: true` + `NeverScrollableScrollPhysics()` only if the list is short and static
 - For horizontal lists nested inside vertical scrolls: use `SizedBox` with fixed height, never `shrinkWrap: true` on long lists
+
+---
+
+## Project initialisation — trigger phrase
+
+When the user writes something like **"Inizializziamo il progetto"**, **"inizializza il progetto"**, **"reset del progetto"**, or any clearly equivalent phrase:
+
+- **If in Agent mode**: follow the workflow defined in `.github/prompts/init-project.prompt.md` step by step.
+- **If in Ask / Chat mode** (no file-system tools available): reply **only** with:
+  > "Per eseguire l'inizializzazione del progetto devo essere in modalità **Agent**. Ri-lancia la richiesta in Agent mode."
+  Then stop. Do not attempt the workflow.
 
 ---
 
