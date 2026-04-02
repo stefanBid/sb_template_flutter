@@ -1,3 +1,16 @@
+// * ════════════════════════════════════════════════════════════════════════════
+// *  APP ROUTER
+// * ════════════════════════════════════════════════════════════════════════════
+// *
+// *  Type-safe navigation layer on top of go_router. Consuming code must never
+// *  call context.go() directly — always use AppRouter.
+// *
+// *  AppRouter.goTo(context, AppRouter.home)
+// *  AppRouter.goDeep(context, AppRouter.details, params: DetailParams(...))
+// *  AppRouter.goBack(context)
+// *
+// * ════════════════════════════════════════════════════════════════════════════
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

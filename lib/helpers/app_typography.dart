@@ -1,3 +1,15 @@
+// * ════════════════════════════════════════════════════════════════════════════
+// *  APP TYPOGRAPHY
+// * ════════════════════════════════════════════════════════════════════════════
+// *
+// *  Text style scale. Instantiate with AppTypography.of(context) to get
+// *  styles that inherit the adaptive text colour from AppColors.
+// *
+// *  Scale: heading1 (28px) › heading2 (22px) › heading3 (18px) › heading4 (16px)
+// *         body (16px) › bodyMedium (14px) › caption (12px) › small (11px)
+// *
+// * ════════════════════════════════════════════════════════════════════════════
+
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 

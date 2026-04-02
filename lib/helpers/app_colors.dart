@@ -1,3 +1,15 @@
+// * ════════════════════════════════════════════════════════════════════════════
+// *  APP COLORS
+// * ════════════════════════════════════════════════════════════════════════════
+// *
+// *  Adaptive colour palette. Instantiate with AppColors.of(context) to get
+// *  colours that automatically switch between light and dark mode.
+// *
+// *  Adaptive tokens:  AppColors.of(context).background / surface / text / ...
+// *  Static constants: AppColors.primary / secondary / error / success / warning
+// *
+// * ════════════════════════════════════════════════════════════════════════════
+
 import 'package:flutter/material.dart';
 
 class AppColors {

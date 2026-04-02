@@ -118,7 +118,8 @@ lib/
 │   ├── app_router.dart              # Type-safe navigation layer (AppRouter)
 │   ├── app_theme.dart               # ThemeData configuration
 │   ├── app_typography.dart          # Text style scale
-│   └── app_validation.dart          # Static form validators
+│   ├── app_validation.dart          # Static form validators
+│   └── app_logger.dart              # Debug-only logger (stripped in release)
 │
 ├── layouts/                         # Reusable page-level layout scaffolds
 │   ├── app_layout.dart              # Shell with bottom navigation bar
@@ -612,6 +613,24 @@ validator: (v) => AppValidation.notEmpty(v) ?? AppValidation.email(v),
 
 All methods accept an optional `message` parameter to override the default error string.
 
+### `app_logger.dart`
+
+Exports `AppLogger` — a debug-only logger gated behind `kDebugMode`. All output is automatically stripped in release and profile builds. **Never use `print()` directly** — always use `AppLogger`.
+
+```dart
+AppLogger.debug('User loaded', tag: 'HomeScreen');
+AppLogger.warn('Token is about to expire');
+AppLogger.error('Failed to fetch', error: e, stackTrace: st);
+```
+
+| Method | Level | When to use |
+|---|---|---|
+| `AppLogger.debug(message, {tag})` | `[D]` | General flow information |
+| `AppLogger.warn(message, {tag})` | `[W]` | Non-critical anomalies |
+| `AppLogger.error(message, {tag, error, stackTrace})` | `[E]` | Exceptions and failures |
+
+The optional `tag` parameter (e.g. `tag: 'AuthService'`) prefixes the output for easier filtering in the console.
+
 ---
 
 ## 10. AI Tooling — Prompts & Instructions
@@ -633,6 +652,7 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 | `init-project.prompt.md` | "Inizializziamo il progetto" · "Inizializza il progetto" · "Reset del progetto" | `#init-project.prompt.md` | Collects project name and context; renames the app across all config files; resets version to `1.0.0+1`; audits and updates instruction files |
 | `update-docs.prompt.md` | "Aggiorna la documentazione" | `#update-docs.prompt.md` | Compares README with the actual codebase and rewrites it as a structured documentation book |
 | `check-dependencies.prompt.md` | "Verifichiamo aggiornamenti del progetto" | `#check-dependencies.prompt.md` | Runs `flutter pub outdated`, auto-updates safe (minor/patch) packages, lists major bumps for review |
+| `check-lint.prompt.md` | "Check del progetto", "il progetto è pulito?" | `#check-lint.prompt.md` | Runs `dart fix`, `dart format` and `flutter analyze`; auto-fixes warnings, reports errors for manual review |
 | `bump-version.prompt.md` | "Aggiornami il progetto alla versione X.Y.Z" | `#bump-version.prompt.md` | Detects changes via git, shows a CHANGELOG draft for approval, then uses **cider** to bump the version and release |
 
 ### How to run a prompt

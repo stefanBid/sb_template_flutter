@@ -14,6 +14,7 @@ Fixed filenames — do not add new files without a real need:
 | `app_theme.dart` | MaterialApp theme configuration |
 | `app_router.dart` | Typed navigation layer |
 | `app_validation.dart` | Form field validators |
+| `app_logger.dart` | Debug-only logger (stripped in release) |
 
 ---
 
@@ -61,3 +62,34 @@ validator: (v) =>
     AppValidation.notEmpty(v) ??
     AppValidation.match(v, passwordController.text),
 ```
+
+---
+
+## AppLogger — `lib/helpers/app_logger.dart`
+
+Debug-only logger gated behind `kDebugMode`. All output is **automatically stripped in release and profile builds** — never use `print()` or bare `debugPrint()` directly.
+
+```dart
+import '../helpers/app_logger.dart';
+
+AppLogger.debug('User loaded', tag: 'HomeScreen');
+AppLogger.warn('Token is about to expire');
+AppLogger.error('Failed to fetch data', error: e, stackTrace: st);
+```
+
+### Methods
+
+| Method | Level | When to use |
+|---|---|---|
+| `AppLogger.debug(message, {tag})` | `[D]` | General flow information |
+| `AppLogger.warn(message, {tag})` | `[W]` | Non-critical anomalies |
+| `AppLogger.error(message, {tag, error, stackTrace})` | `[E]` | Exceptions and failures |
+
+- `tag` is optional — use it to identify the calling class or feature (e.g. `tag: 'AuthService'`).
+- `error` and `stackTrace` are optional extra fields on `AppLogger.error`.
+- Output format: `[D] Tag | message` or `[D] message` when tag is omitted.
+
+### Rules
+- **Never use `print()`** anywhere in the project. Always use `AppLogger`.
+- **Never use `debugPrint()` directly** — `AppLogger` calls it internally with the `kDebugMode` guard.
+- Do not wrap calls in manual `if (kDebugMode)` checks — `AppLogger` handles that internally.

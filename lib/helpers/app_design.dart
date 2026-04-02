@@ -1,3 +1,16 @@
+// * ════════════════════════════════════════════════════════════════════════════
+// *  APP DESIGN
+// * ════════════════════════════════════════════════════════════════════════════
+// *
+// *  Spacing, border radius and padding tokens for the design system.
+// *  All values are static const — use them directly without instantiation.
+// *
+// *  AppDesign.borderRadiusSm   →  border radius presets
+// *  AppDesign.paddingPage      →  standard page content padding
+// *  AppDesign.gapItemMd        →  gap between list / grid items
+// *
+// * ════════════════════════════════════════════════════════════════════════════
+
 import 'package:flutter/material.dart';
 
 class AppDesign {
