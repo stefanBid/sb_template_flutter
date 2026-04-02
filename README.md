@@ -31,7 +31,8 @@
 9. [Helpers & Validators](#9-helpers--validators)
 10. [AI Tooling — Prompts & Instructions](#10-ai-tooling--prompts--instructions)
 11. [Deployment](#11-deployment)
-12. [Dependencies](#12-dependencies)
+12. [Versioning & Git Tags](#12-versioning--git-tags)
+13. [Dependencies](#13-dependencies)
 
 ---
 
@@ -707,7 +708,68 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 
 ---
 
-## 12. Dependencies
+## 12. Versioning & Git Tags
+
+The project uses [**cider**](https://pub.dev/packages/cider) to manage the version in `pubspec.yaml` and maintains a `CHANGELOG.md` following the [Keep a Changelog](https://keepachangelog.com) convention. Every production release should be tagged in Git so that the history stays navigable and CI/CD pipelines can anchor artifacts to a precise commit.
+
+### Version format
+
+Versions follow **Semantic Versioning** (`MAJOR.MINOR.PATCH`) with a build number appended after `+` (e.g. `1.2.0+7`). The build number is incremented automatically by `cider bump` and is used by the app stores.
+
+### Workflow — from bump to tag
+
+```bash
+# 1. Update the version (choose the appropriate bump type)
+cider bump patch   # 1.0.0 → 1.0.1
+cider bump minor   # 1.0.0 → 1.1.0
+cider bump major   # 1.0.0 → 2.0.0
+# Or set an exact version:
+cider version 2.0.0
+
+# 2. Stage and commit the version change
+git add pubspec.yaml CHANGELOG.md
+git commit -m "chore: bump version to $(cider version)"
+
+# 3. Create an annotated tag on main
+git tag -a "v$(cider version)" -m "Release v$(cider version)"
+
+# 4. Push the commit and the tag
+git push origin main
+git push origin "v$(cider version)"
+```
+
+> **Always use annotated tags** (`-a` flag) rather than lightweight ones. Annotated tags store the tagger, date and message — they are first-class objects in Git and are picked up correctly by GitHub Releases and most CI/CD systems.
+
+### Tag naming convention
+
+| Pattern | Example | When to use |
+|---|---|---|
+| `vMAJOR.MINOR.PATCH` | `v1.2.0` | Every production release |
+| `vMAJOR.MINOR.PATCH-beta.N` | `v2.0.0-beta.1` | Pre-release / beta builds |
+
+### Listing and deleting tags
+
+```bash
+# List all tags (sorted by version)
+git tag --sort=-version:refname
+
+# Show details of a specific tag
+git show v1.2.0
+
+# Delete a tag locally (e.g. if created by mistake)
+git tag -d v1.2.0
+
+# Delete the tag from the remote as well
+git push origin --delete v1.2.0
+```
+
+### Using the `bump-version` prompt
+
+The `bump-version` Copilot Agent prompt automates steps 1–4: it detects changes via `git`, generates a CHANGELOG draft for your approval, bumps the version with `cider`, commits, tags and pushes. See [AI Tooling](#10-ai-tooling--prompts--instructions) for usage details.
+
+---
+
+## 13. Dependencies
 
 | Package | Version | Purpose |
 |---|---|---|
