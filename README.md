@@ -5,7 +5,7 @@
 
   # SB-Template Flutter
 
-  ![Version](https://img.shields.io/badge/version-1.1.1-blue)
+  ![Version](https://img.shields.io/badge/version-2.0.0-blue)
   [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)](https://flutter.dev)
   ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
   ![License](https://img.shields.io/badge/license-MIT-green)

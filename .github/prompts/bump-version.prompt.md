@@ -7,6 +7,10 @@ description: 'Bump the project to a new version: update pubspec.yaml, README bad
 
 > **Trigger phrase**: "aggiornami il progetto alla versione X.Y.Z" or any clearly equivalent phrase containing a version number.
 
+> **Build number guard**: if the user includes a build number in the request (e.g. `2.0.0+5`), **do not apply it**. Reply in Italian:
+> "Il numero di build (`+N`) è gestito automaticamente dal processo di CI/CD sincronizzato con gli store. Modificarlo manualmente potrebbe rompere la pubblicazione. Procederò ad aggiornare solo la versione `X.Y.Z`."
+> Then continue the workflow using only the `X.Y.Z` part.
+
 > **Required mode: Agent.**
 > If you do not have access to file system tools (you are in Ask Mode / Chat Mode), reply **only** with:
 > "To bump the version I need to be in **Agent** mode. Please re-send the request in Agent mode."
@@ -48,11 +52,20 @@ dart run cider version
 
 Parse the current version into its parts:
 - `SEMVER` = the part before `+` (e.g. `1.0.0`)
-- `BUILD` = the integer after `+` (e.g. `1`)
+- `BUILD` = the integer after `+` (e.g. `1`; if absent, treat as `0`)
 
 The **new version** is the one provided by the user in the trigger phrase (e.g. `1.0.6`).
-The **new build number** = `BUILD + 1`.
-The **full new version string** = `NEW_VERSION+NEW_BUILD` (e.g. `1.0.6+2`).
+
+**Ask the user the following question before proceeding** (use `vscode_askQuestions` if available, otherwise ask in plain text):
+
+> Will this version be published to the App Store / Google Play?
+> - **Yes** → the build number will be incremented (`BUILD + 1`)
+> - **No** → the build number stays unchanged
+
+Wait for the answer, then set:
+- `PUBLISH = true | false`
+- `NEW_BUILD` = `BUILD + 1` if `PUBLISH = true`, otherwise `BUILD` (unchanged)
+- The **full new version string** = `NEW_VERSION+NEW_BUILD`
 
 ---
 
@@ -132,10 +145,14 @@ dart run cider release X.Y.Z
 
 > This promotes the `[Unreleased]` section to `[X.Y.Z] — YYYY-MM-DD` in `CHANGELOG.md` and sets the version in `pubspec.yaml`.
 
-Finally, manually set the build number in `pubspec.yaml` by replacing the version line (cider does not manage the `+BUILD` suffix):
+Finally, manually update the version line in `pubspec.yaml` (cider does not manage the `+BUILD` suffix):
 ```
 version: X.Y.Z+NEW_BUILD
 ```
+
+> `NEW_BUILD` was determined in Step 1 based on the store-publish answer:
+> - `PUBLISH = true` → `BUILD + 1`
+> - `PUBLISH = false` → `BUILD` unchanged (keep the existing number)
 
 ### 4c. Update the version badge in `README.md`
 
