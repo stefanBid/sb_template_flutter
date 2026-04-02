@@ -67,6 +67,15 @@ version: 1.0.0+1
 
 Also reset the version badge in `README.md` to `1.0.0` if a badge is present.
 
+### 2e. Reset or create the CHANGELOG
+
+Check whether `CHANGELOG.md` exists:
+
+- **If it exists and has content**: delete all existing entries and replace the entire file content with a clean skeleton using `dart run cider release 1.0.0`. Before running the command, ensure the `[Unreleased]` section is empty (no leftover log entries from previous runs). The result must be a CHANGELOG that starts from `1.0.0` with today's date and no prior history.
+- **If it does not exist**: cider will create it automatically on first use — no manual action needed.
+
+> The CHANGELOG must always be in sync with the reset version (`1.0.0`). Never carry over entries from the template or from a previous project's history.
+
 ---
 
 ### 2e. Rename the project
