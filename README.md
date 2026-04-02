@@ -5,253 +5,53 @@
 
   # SB-Template Flutter
 
-  ### 🚀 Production-Ready Flutter Starter with Superpowers
-
-  ![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)
-  ![Dart](https://img.shields.io/badge/dart-%5E3.11.0-0175C2?logo=dart)
-  ![flutter_bloc](https://img.shields.io/badge/bloc-9.1.1-0175C2)
-  ![go_router](https://img.shields.io/badge/go__router-17.1.0-00D9FF)
-  ![Google Fonts](https://img.shields.io/badge/google__fonts-8.0.2-4285F4?logo=google)
-  ![Material Design](https://img.shields.io/badge/material__design-3-757575?logo=material-design)
+  ![Version](https://img.shields.io/badge/version-2.0.0-blue)
+  [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)](https://flutter.dev)
+  ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
+  ![License](https://img.shields.io/badge/license-MIT-green)
 
   **Stop wasting time on boilerplate. Start building features.**
 
-  A battle-tested, feature-rich Flutter template that includes everything you need: modern design system, reusable UI components, state management, routing, and production-ready services. Build beautiful, cross-platform apps in minutes, not weeks.
-
-  [Quick Start](#-quick-start) • [Features](#-core-features) • [Components](#-ready-to-use-components) • [Deploy](#-deployment)
+  A Flutter starter template with an opinionated design system, type-safe routing, reusable UI components, and pre-configured AI tooling. Clone it, initialise it for your project, and start building features on day one.
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Core Features](#-core-features)
-- [Ready-to-Use Components](#-ready-to-use-components)
-- [Quick Start](#-quick-start)
-- [Project Structure](#-project-structure)
-- [Customization](#-customization)
-  - [Theme & Styling](#-theme--styling)
-  - [State Management](#-state-management)
-  - [Routing](#-routing)
-  - [Components](#-using-built-in-components)
-  - [Services](#-services-reference)
-- [Deployment](#-deployment)
-- [Version Management](#-version-management)
-
----
-
-## ✨ Core Features
-
-### 🎨 Design System & Theming
-- **Adaptive Color System** - Light/Dark mode ready with semantic color palette
-- **AppColors** - Adaptive colors that respect system theme (primary, secondary, surface, background)
-- **AppDesign** - Consistent spacing scale (xs→xxl), border radius, shadows, and paddings
-- **AppTypography** - Mobile-optimized type scale (heading1→heading4, body, caption, small)
-- **Google Fonts 8.0.2** - 1000+ fonts ready to use
-- **Dark Mode Support** - Built-in theme switching infrastructure
-- **Responsive Design** - Mobile-first with tablet considerations
-
-### 🧭 Navigation & Routing
-- **go_router 17.1.0** - Declarative routing with deep linking support
-- **Named Routes** - Type-safe navigation with `AppRouter`
-- **Custom Transitions** - Smooth page transitions (fade, slide, scale)
-- **Router Extensions** - Helper methods for easy navigation (`context.goTo()`, `context.goBack()`)
-- **Route Guards** - Built-in structure for authentication flow
-
-### 🔄 State Management
-- **flutter_bloc 9.1.1** - Predictable state management
-- **Equatable 2.0.8** - Value equality for cleaner state comparison
-- **Provider 6.1.5** - Dependency injection ready
-- **BLoC Pattern** - Separation of business logic and UI
-- **Example BLoCs** - Pre-built fake loader bloc for splash screen
-
-### 🧩 Pre-Built Components
-- **AppButton** - Multi-variant button (solid, outline) with loading states
-- **AppBadge** - Status badges (primary, secondary, success, warning, error)
-- **AppCard** - Flexible card container for content
-- **AppSimpleInput** - Simple text input with validation
-- **AppFormFieldInput** - Form-ready input with labels and error states
-- **AppDatePicker** - Material date picker integration
-- **Showcase Screens** - Live examples of all components
-
-### 🛠️ Developer Experience
-- **Hot Reload** - Lightning-fast development with Flutter's hot reload
-- **flutter_lints 6.0.0** - Flutter team's recommended lints
-- **Type Safety** - Full Dart type safety with null safety
-- **Auto-imports** - No manual imports needed for project files
-- **Clean Architecture** - Separation of concerns (widgets, screens, services, helpers)
-- **Cider** - Automated version management from CLI
-
-### 📱 Mobile Features
-- **flutter_secure_storage 10.0.0** - Encrypted key-value storage (Keychain/Keystore)
-- **image_picker 1.2.1** - Camera and gallery access
-- **package_info_plus 9.0.0** - App version and build info
-- **intl 0.19.0** - Internationalization support ready
-- **UUID 4.5.2** - Unique ID generation
-
-### 🎯 Production-Ready Services
-- **AlertService** - SnackBars and dialogs with consistent styling
-- **LocalStorageService** - Secure data persistence
-- **Modular Services** - Clean separation of logic and UI services
+1. [Overview](#1-overview)
+2. [Getting Started](#2-getting-started)
+3. [Project Structure](#3-project-structure)
+4. [Design System](#4-design-system)
+5. [Routing](#5-routing)
+6. [Layouts](#6-layouts)
+7. [Screens](#7-screens)
+8. [Widgets](#8-widgets)
+9. [Helpers & Validators](#9-helpers--validators)
+10. [AI Tooling — Prompts & Instructions](#10-ai-tooling--prompts--instructions)
+11. [Deployment](#11-deployment)
+12. [Versioning & Git Tags](#12-versioning--git-tags)
+13. [Dependencies](#13-dependencies)
 
 ---
 
-## 🧩 Ready-to-Use Components
+## 1. Overview
 
-**Build modern interfaces in minutes.** This template includes a complete library of production-ready, reusable, and fully customizable UI components designed to accelerate your Flutter development workflow.
+SB-Template Flutter is designed to provide a solid and opinionated starting structure for building new mobile applications. It ships with a pre-configured design system, type-safe routing, reusable UI components, helpers, and layouts so that developers can focus on building features rather than scaffolding.
 
-### 🎨 Buttons
+The template is meant to be cloned and initialised for a specific project (via the `init-project` prompt), progressively replacing placeholder screens and components with real ones while keeping the underlying conventions and tooling intact.
 
-#### **AppButton**
-Full-featured button component with variants, loading states, and icons.
-
-**Variants:** `solid`, `outline`
-**States:** loading, disabled
-**Features:** Prefix/suffix icons, full width option, accessible
-
-```dart
-// Solid button with loading state
-AppButton(
-  text: 'Submit',
-  onPressed: _handleSubmit,
-  variant: AppButtonVariant.solid,
-  isLoading: _isLoading,
-  prefixIcon: Icons.send,
-  fullWidth: true,
-)
-
-// Outline button
-AppButton(
-  text: 'Cancel',
-  onPressed: () => context.goBack(),
-  variant: AppButtonVariant.outline,
-  suffixIcon: Icons.arrow_forward,
-)
-```
-
-### 🏷️ Badges & Labels
-
-#### **AppBadge**
-Status indicator component with multiple variants and icon support.
-
-**Variants:** `primary`, `secondary`, `success`, `warning`, `error`, `custom`
-**Features:** Icon support, custom colors, adaptive theming
-
-```dart
-// Status badges
-AppBadge(
-  text: 'Active',
-  variant: BadgeVariant.success,
-  icon: Icons.check_circle,
-)
-
-AppBadge(
-  text: 'Pending',
-  variant: BadgeVariant.warning,
-)
-
-// Custom color badge
-AppBadge(
-  text: 'Premium',
-  variant: BadgeVariant.custom,
-  customColor: Colors.purple,
-  icon: Icons.star,
-)
-```
-
-### 📝 Form Components
-
-#### **AppFormFieldInput**
-Form-ready text input with validation, labels, and error handling.
-
-**Types:** `text`, `email`, `password`, `number`, `phone`
-**Features:** Validation states, helper text, error messages, prefix/suffix icons
-
-```dart
-AppFormFieldInput(
-  label: 'Email',
-  hintText: 'Enter your email',
-  keyboardType: TextInputType.emailAddress,
-  prefixIcon: Icons.email,
-  validator: (value) {
-    if (value?.isEmpty ?? true) return 'Email is required';
-    return null;
-  },
-  onSaved: (value) => _email = value,
-)
-```
-
-#### **AppSimpleInput**
-Simple text input without form integration.
-
-**Features:** Clean design, optional icons, custom styling
-
-```dart
-AppSimpleInput(
-  placeholder: 'Search...',
-  prefixIcon: Icons.search,
-  onChanged: (value) => _performSearch(value),
-)
-```
-
-#### **AppDatePicker**
-Material design date picker integration.
-
-**Features:** Material date picker, formatted output, validation
-
-```dart
-AppDatePicker(
-  label: 'Birth Date',
-  selectedDate: _birthDate,
-  onDateSelected: (date) => setState(() => _birthDate = date),
-  firstDate: DateTime(1900),
-  lastDate: DateTime.now(),
-)
-```
-
-### 📦 Layout Components
-
-#### **AppCard**
-Flexible card container for organizing content.
-
-**Features:** Elevation, border radius, padding, tap interaction
-**Use cases:** Lists, dashboards, content containers
-
-```dart
-AppCard(
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text('Card Title', style: AppTypography.of(context).heading3),
-      SizedBox(height: AppDesign.sm),
-      Text('Card content goes here', style: AppTypography.of(context).body),
-    ],
-  ),
-  onTap: () => _handleCardTap(),
-)
-```
-
-### 🎯 Why These Components?
-
-✅ **Consistent** - All components follow the same design system
-✅ **Accessible** - Built with Material Design guidelines
-✅ **Responsive** - Optimized for mobile and tablet
-✅ **Type-Safe** - Full Dart type safety with null safety
-✅ **Production-Ready** - Battle-tested in real apps
-✅ **Theme-Aware** - Automatically adapt to light/dark mode
-✅ **Customizable** - Easy to extend and modify
-
-**See all components in action:** Run the app and navigate through the showcase screens (Typography, Inputs, Buttons, Forms, Components).
+**Target audience:** Flutter developers who want a clean, consistent foundation without bikeshedding on folder structure, naming conventions, or design tokens.
 
 ---
 
-## 🚀 Quick Start
+## 2. Getting Started
 
 ### Prerequisites
 
 - **Flutter SDK** ≥ 3.11.0
-- **Dart SDK** ≥ 3.11.0
+- **Dart SDK** ^3.11.3
 - **Xcode** (for iOS development)
 - **Android Studio** / **Android SDK** (for Android development)
 
@@ -261,899 +61,756 @@ AppCard(
 
 1. Click **"Use this template"** on GitHub
 2. Clone your new repository:
+
 ```bash
 git clone https://github.com/your-username/your-project.git
 cd your-project
 ```
 
-**Option 2: Clone Directly**
+**Option 2: Clone directly**
 
 ```bash
 git clone https://github.com/stefanoBid/sb-flutter-template.git my-project
 cd my-project
-rm -rf .git && git init  # Start fresh
+rm -rf .git && git init
 ```
 
-### Setup
+### Project Initialisation
+
+After cloning, run the `init-project` prompt in Copilot Agent mode (see [AI Tooling](#10-ai-tooling--prompts--instructions)) to rename the project, update all config files, and reset the version to `1.0.0+1`.
+
+Then install dependencies and run the app:
 
 ```bash
-# Install dependencies
 flutter pub get
-
-# (Optional) Reset version to 0.1.0
-cider version 0.1.0
-# OR manually edit pubspec.yaml and set version: 0.1.0
-
-# Check Flutter setup
-flutter doctor
-
-# Run the app on connected device
 flutter run
-
-# Or specify platform
-flutter run -d ios      # iOS (requires macOS)
-flutter run -d android  # Android
 ```
 
----
-
-## 📁 Project Structure
-
-```
-sb_template_flutter/
-├── lib/
-│   ├── helpers/
-│   │   ├── router/
-│   │   │   ├── app_router.dart           # Route definitions
-│   │   │   └── router_transitions.dart   # Custom page transitions
-│   │   └── theme/
-│   │       ├── app_colors.dart           # Adaptive color system
-│   │       ├── app_design.dart           # Spacing, borders, shadows
-│   │       ├── app_typography.dart       # Type scale & text styles
-│   │       └── app_theme.dart            # ThemeData configuration
-│   │
-│   ├── layouts/
-│   │   └── app/
-│   │       └── app_layout.dart           # Main app layout scaffold
-│   │
-│   ├── models/
-│   │   └── app_route.dart                # Route model
-│   │
-│   ├── router/
-│   │   ├── router.dart                   # GoRouter configuration
-│   │   ├── router_extensions.dart        # Navigation helpers
-│   │   └── router_transitions.dart       # Transition builders
-│   │
-│   ├── screens/
-│   │   ├── splash/                       # Splash screen with BLoC
-│   │   │   ├── bloc/                     # Fake loader BLoC
-│   │   │   ├── widgets/                  # VersionBadge widget
-│   │   │   └── splash_screen.dart
-│   │   ├── typography/                   # Typography showcase
-│   │   ├── inputs/                       # Input & date picker examples
-│   │   ├── buttons/                      # Button examples
-│   │   ├── forms/                        # Form examples
-│   │   └── components/                   # Component showcase
-│   │
-│   ├── services/
-│   │   ├── logic/
-│   │   │   └── local_storage_service.dart # Secure storage wrapper
-│   │   └── ui/
-│   │       └── alert_service.dart         # SnackBars & dialogs
-│   │
-│   ├── widgets/
-│   │   └── app/
-│   │       ├── badge/
-│   │       │   └── app_badge.dart         # AppBadge component
-│   │       ├── button/
-│   │       │   └── app_button.dart        # AppButton component
-│   │       ├── card/
-│   │       │   └── app_card.dart          # AppCard component
-│   │       ├── date-picker/
-│   │       │   └── app_date_picker.dart   # AppDatePicker component
-│   │       ├── form-field-input/
-│   │       │   └── app_form_field_input.dart # Form input
-│   │       └── simple-input/
-│   │           └── app_simple_input.dart  # Simple input
-│   │
-│   └── main.dart                          # App entry point
-│
-├── assets/
-│   └── sb-template-flutter-logo.png       # App logo
-│
-├── android/                                # Android native code
-├── ios/                                    # iOS native code
-│
-├── pubspec.yaml                            # Dependencies & assets
-├── analysis_options.yaml                   # Linting rules
-└── README.md
-```
-
----
-
-## 🛠️ Available Commands
+### Available Commands
 
 | Command | Description |
-|---------|-------------|
-| `flutter run` | Run app on connected device/emulator |
+|---|---|
+| `flutter run` | Run on connected device/emulator |
 | `flutter run -d ios` | Run on iOS simulator |
 | `flutter run -d android` | Run on Android emulator |
-| `flutter build apk` | Build Android APK |
-| `flutter build ipa` | Build iOS IPA (requires macOS) |
-| `flutter test` | Run unit tests |
-| `flutter analyze` | Analyze code for issues |
+| `flutter build ipa --release` | Build iOS IPA |
+| `flutter build appbundle --release` | Build Android App Bundle |
+| `flutter analyze` | Analyse code for issues |
 | `cider bump patch` | Bump patch version (1.0.0 → 1.0.1) |
 | `cider bump minor` | Bump minor version (1.0.0 → 1.1.0) |
 | `cider bump major` | Bump major version (1.0.0 → 2.0.0) |
+| `cider version X.Y.Z` | Set a specific version |
 
 ---
 
-## 🎨 Customization
+## 3. Project Structure
 
-### 🎨 Theme & Styling
+This section shows the annotated directory tree of `lib/`. The project follows a feature-agnostic structure where each top-level folder has a single responsibility.
 
-#### Customize Colors
-
-Edit [lib/helpers/theme/app_colors.dart](lib/helpers/theme/app_colors.dart) to change the color palette:
-
-```dart
-class AppColors {
-  // Change primary and secondary colors
-  static const Color primary = Color(0xFF60C9F8);      // Your brand color
-  static const Color secondary = Color(0xFF0A599C);    // Secondary brand color
-  
-  // Adaptive colors automatically adjust for light/dark mode
-  Color get appBarBackground => isDark 
-    ? const Color(0xFF0A599C)   // Dark mode app bar
-    : const Color(0xFF60C9F8);  // Light mode app bar
-    
-  Color get background => isDark 
-    ? const Color(0xFF0D1B2A)   // Dark background
-    : const Color(0xFFF5FBFF);  // Light background
-  
-  // Add your custom colors
-  static const Color accent = Color(0xFFFF6B6B);
-  static const Color highlight = Color(0xFFFFD93D);
-}
+```
+lib/
+├── main.dart                        # App entry point
+├── router.dart                      # GoRouter configuration (appRouter instance)
+│
+├── helpers/                         # Design system tokens and utilities
+│   ├── app_colors.dart              # Adaptive colour palette
+│   ├── app_design.dart              # Spacing, border radius, padding tokens
+│   ├── app_router.dart              # Type-safe navigation layer (AppRouter)
+│   ├── app_theme.dart               # ThemeData configuration
+│   ├── app_typography.dart          # Text style scale
+│   ├── app_validation.dart          # Static form validators
+│   └── app_logger.dart              # Debug-only logger (stripped in release)
+│
+├── layouts/                         # Reusable page-level layout scaffolds
+│   ├── app_layout.dart              # Shell with bottom navigation bar
+│   ├── app_bars/
+│   │   ├── classic_app_bar.dart     # Gradient app bar with title and actions
+│   │   └── transparent_app_bar.dart # Transparent overlay app bar
+│   └── body/
+│       ├── standard_page_layout.dart # Column layout: app bar + scrollable body
+│       └── hero_page_layout.dart    # Full-bleed hero image + slide-up card body
+│
+├── models/                          # Data models
+│   └── json_serializable.dart       # Base JSON serialization helpers
+│
+├── screens/                         # Feature screens
+│   ├── home/                        # Home screen (bottom nav tab)
+│   ├── form/                        # Form screen (bottom nav tab)
+│   ├── profile/                     # Profile screen (bottom nav tab)
+│   └── details/                     # Detail screen (pushed with path parameter)
+│
+├── services/                        # Business logic and API services
+│
+└── widgets/                         # Reusable UI components
+    ├── base_badge.dart              # Status badge
+    ├── base_button.dart             # Primary action button
+    ├── base_card.dart               # Image + text card
+    ├── base_form_field.dart         # Form-integrated text field
+    ├── base_icon_button.dart        # Icon-only button
+    ├── base_image_container.dart    # Network / asset image with fade
+    ├── base_input.dart              # Standalone text input
+    ├── base_scaffold_messenger.dart # Themed SnackBar utility
+    ├── base_value_card.dart         # Metric display card (value + label)
+    └── group-container/
+        ├── gc_list_view.dart        # Null-safe ListView.builder wrapper
+        └── gc_grid_view.dart        # GridView.count wrapper with dimensions
 ```
 
-#### Design Tokens
+---
 
-Edit [lib/helpers/theme/app_design.dart](lib/helpers/theme/app_design.dart) for spacing and design tokens:
+## 4. Design System
+
+The design system is entirely contained in `lib/helpers/` and provides a single source of truth for colours, typography, spacing and border radius. **Never use hardcoded values** — always reference these helpers.
+
+### Colours — `AppColors`
+
+`AppColors` is an adaptive class: instantiate it with `AppColors.of(context)` to get colours that automatically switch between light and dark mode.
 
 ```dart
-class AppDesign {
-  // Spacing scale
-  static const double xs = 4.0;    // Minimal gaps
-  static const double sm = 8.0;    // Small spacing
-  static const double md = 12.0;   // Medium spacing
-  static const double lg = 16.0;   // Standard component padding
-  static const double xl = 24.0;   // Section spacing
-  static const double xxl = 32.0;  // Major separations
-  
-  // Border radius
-  static BorderRadius get borderRadiusS => BorderRadius.circular(4);
-  static BorderRadius get borderRadiusM => BorderRadius.circular(6);
-  static BorderRadius get borderRadiusL => BorderRadius.circular(10);
-  static BorderRadius get borderRadiusXL => BorderRadius.circular(16);
-  
-  // Shadows
-  static List<BoxShadow> get shadowSmall => [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      blurRadius: 4,
-      offset: const Offset(0, 2),
-    ),
-  ];
-}
+final colors = AppColors.of(context);
+
+colors.background   // page background
+colors.surface      // card / input background
+colors.text         // primary text
+colors.muted        // secondary / disabled text
+colors.bottomBar    // bottom navigation bar background
 ```
 
-#### Typography System
+Static constants (non-adaptive, use directly):
 
-Pre-configured typography in [lib/helpers/theme/app_typography.dart](lib/helpers/theme/app_typography.dart):
+| Token | Value | Usage |
+|---|---|---|
+| `AppColors.primary` | `#60C9F8` | Brand colour, active states |
+| `AppColors.secondary` | `#0A599C` | Dark brand, dark-mode accents |
+| `AppColors.error` | `#B00020` | Validation errors |
+| `AppColors.success` | `#10B981` | Success states |
+| `AppColors.warning` | `#F59E0B` | Warning states |
+
+### Typography — `AppTypography`
+
+Instantiate with `AppTypography.of(context)`. All styles inherit the adaptive text colour from `AppColors`.
 
 | Style | Size | Weight | Usage |
-|-------|------|--------|-------|
+|---|---|---|---|
 | `heading1` | 28px | Bold | Main screen titles |
 | `heading2` | 22px | Bold | Section titles |
 | `heading3` | 18px | SemiBold | Subsection titles |
-| `heading4` | 16px | SemiBold | Card titles, list items |
+| `heading4` | 16px | SemiBold | Card titles, list item titles |
 | `body` | 16px | Regular | Body text, paragraphs |
-| `bodySecondary` | 16px | Regular | Secondary text (muted) |
-| `caption` | 14px | Medium | Labels, captions |
-| `small` | 12px | Regular | Small text, metadata |
-| `tiny` | 11px | Regular | Tiny labels |
+| `bodyMedium` | 14px | Regular | Inputs, dense UI |
+| `bodySecondary` | 16px | Regular | Secondary / muted text |
+| `caption` | 12px | Regular | Labels, captions |
+| `small` | 11px | Regular | Badges, tiny labels |
 
-**Example:**
 ```dart
-Text(
-  'Welcome to Flutter',
-  style: AppTypography.of(context).heading1,
-)
-
-Text(
-  'Your daily tasks',
-  style: AppTypography.of(context).heading2,
-)
-
-Text(
-  'This is body text with proper styling.',
-  style: AppTypography.of(context).body,
-)
+Text('Welcome', style: AppTypography.of(context).heading1)
+Text('Details', style: AppTypography.of(context).bodySecondary)
 ```
 
-#### Google Fonts Integration
+### Spacing & Radius — `AppDesign`
 
-Change the app font in [lib/helpers/theme/app_theme.dart](lib/helpers/theme/app_theme.dart):
+All tokens are `static const` — use them directly without instantiation.
 
-```dart
-import 'package:google_fonts/google_fonts.dart';
+**Border radius:**
 
-class AppTheme {
-  static ThemeData lightTheme = ThemeData(
-    // Use Google Fonts
-    textTheme: GoogleFonts.interTextTheme(),      // Inter
-    // OR
-    textTheme: GoogleFonts.robotoTextTheme(),     // Roboto
-    // OR
-    textTheme: GoogleFonts.poppinsTextTheme(),    // Poppins
-    
-    colorScheme: ColorScheme.light(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-    ),
-  );
-}
-```
+| Token | Radius | Usage |
+|---|---|---|
+| `AppDesign.borderRadiusXXs` | 6px | Small chips, tight UI |
+| `AppDesign.borderRadiusXs` | 10px | Inputs, buttons, small cards |
+| `AppDesign.borderRadiusSm` | 20px | Medium cards |
+| `AppDesign.borderRadiusMd` | 32px | Large cards, image containers |
+| `AppDesign.borderRadiusLg` | 48px | Full pill, bottom sheets |
 
----
+Top-only and bottom-only variants follow the same suffix pattern (e.g. `borderRadiusTopSm`, `borderRadiusBottomMd`).
 
-### 🔄 State Management
+**Padding presets:**
 
-#### Create a New BLoC
+| Token | Description |
+|---|---|
+| `AppDesign.paddingXs/Sm/Md/Lg/Xl` | Uniform padding on all sides |
+| `AppDesign.paddingSymmetricSm/Md/Lg` | Horizontal > vertical |
+| `AppDesign.paddingHorizontalSm/Md/Lg` | Horizontal only |
+| `AppDesign.paddingPage` | Standard page content padding |
 
-**1. Create the event:**
+### Icons — PhosphorIcons
 
-```dart
-// lib/bloc/counter/counter_event.dart
-import 'package:equatable/equatable.dart';
+This project uses [`phosphor_flutter`](https://pub.dev/packages/phosphor_flutter) for all icons. Never use Material `Icons.*`.
 
-abstract class CounterEvent extends Equatable {
-  const CounterEvent();
-  
-  @override
-  List<Object?> get props => [];
-}
-
-class IncrementCounter extends CounterEvent {}
-class DecrementCounter extends CounterEvent {}
-```
-
-**2. Create the state:**
+Available weight variants: `PhosphorIconsRegular`, `PhosphorIconsBold`, `PhosphorIconsFill`, `PhosphorIconsLight`, `PhosphorIconsThin`, `PhosphorIconsDuotone`.
 
 ```dart
-// lib/bloc/counter/counter_state.dart
-import 'package:equatable/equatable.dart';
-
-abstract class CounterState extends Equatable {
-  const CounterState();
-  
-  @override
-  List<Object?> get props => [];
-}
-
-class CounterInitial extends CounterState {
-  final int count;
-  const CounterInitial({this.count = 0});
-  
-  @override
-  List<Object?> get props => [count];
-}
-```
-
-**3. Create the BLoC:**
-
-```dart
-// lib/bloc/counter/counter_bloc.dart
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'counter_event.dart';
-import 'counter_state.dart';
-
-class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  CounterBloc() : super(const CounterInitial()) {
-    on<IncrementCounter>(_onIncrement);
-    on<DecrementCounter>(_onDecrement);
-  }
-  
-  void _onIncrement(IncrementCounter event, Emitter<CounterState> emit) {
-    final current = state as CounterInitial;
-    emit(CounterInitial(count: current.count + 1));
-  }
-  
-  void _onDecrement(DecrementCounter event, Emitter<CounterState> emit) {
-    final current = state as CounterInitial;
-    emit(CounterInitial(count: current.count - 1));
-  }
-}
-```
-
-**4. Use in your screen:**
-
-```dart
-class CounterScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterBloc(),
-      child: BlocBuilder<CounterBloc, CounterState>(
-        builder: (context, state) {
-          final count = (state as CounterInitial).count;
-          
-          return Scaffold(
-            body: Center(
-              child: Text('Count: $count'),
-            ),
-            floatingActionButton: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FloatingActionButton(
-                  onPressed: () => context.read<CounterBloc>().add(IncrementCounter()),
-                  child: Icon(Icons.add),
-                ),
-                SizedBox(height: 8),
-                FloatingActionButton(
-                  onPressed: () => context.read<CounterBloc>().add(DecrementCounter()),
-                  child: Icon(Icons.remove),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+Icon(PhosphorIconsBold.house)
+Icon(PhosphorIconsFill.magnifyingGlass)
+Icon(PhosphorIconsRegular.checkCircle)
 ```
 
 ---
 
-### 🧭 Routing
+## 5. Routing
 
-#### Add a New Route
+Routing is powered by `go_router`. The template adds a **type-safe navigation layer** on top that prevents passing wrong parameters at compile time.
 
-**1. Define the path in [lib/models/app_route.dart](lib/models/app_route.dart):**
+### Key files
+
+| File | Role |
+|---|---|
+| `lib/router.dart` | `GoRouter` instance (`appRouter`) with all route registrations |
+| `lib/helpers/app_router.dart` | Type-safe `AppRouter` class — the only place consuming code should touch |
+
+### `AppRouter` API
+
+Never call `context.go()` directly in your screens. Use `AppRouter` instead:
 
 ```dart
-enum AppRoutePath {
-  splash('/'),
-  typography('/typography'),
-  profile('/profile'),  // New route
-  ;
+// Navigate to a route with no parameters
+AppRouter.goTo(context, AppRouter.home);
+AppRouter.goTo(context, AppRouter.forms);
+AppRouter.goTo(context, AppRouter.profile);
 
-  final String value;
-  const AppRoutePath(this.value);
+// Push a detail route with a typed path parameter
+AppRouter.goDeep(context, AppRouter.details, params: DetailParams(detailId: '42'));
+
+// Go back (pops if possible, otherwise navigates home)
+AppRouter.goBack(context);
+```
+
+### Defined routes
+
+| Constant | Path | Parameters |
+|---|---|---|
+| `AppRouter.home` | `/home` | none |
+| `AppRouter.forms` | `/form` | none |
+| `AppRouter.profile` | `/profile` | none |
+| `AppRouter.details` | `/details/:detailId` | `DetailParams(detailId)` |
+
+### Adding a new route
+
+**Step 1 — Define the params class** (skip if no parameters are needed):
+
+```dart
+class RecipeParams extends GenericRouteParams {
+  final String recipeId;
+  const RecipeParams({required this.recipeId});
+
+  @override
+  Map<String, String> toPathParams() => {'recipeId': recipeId};
 }
 ```
 
-**2. Add route to [lib/helpers/router/app_router.dart](lib/helpers/router/app_router.dart):**
+**Step 2 — Add the constant in `AppRouter`** (`lib/helpers/app_router.dart`):
 
 ```dart
-static List<AppRoute> get routes => [
-  // ... existing routes
-  const AppRoute(
-    label: 'Profile',
-    path: AppRoutePath.profile,
-    screenTitle: 'User Profile',
-    icon: Icons.person,
-  ),
-];
-
-static String get profileRoute => AppRoutePath.profile.value;
+static const recipe = AppTypedRoute<RecipeParams>('/recipe/:recipeId');
 ```
 
-**3. Register in [lib/router/router.dart](lib/router/router.dart):**
+**Step 3 — Register the `GoRoute`** in `lib/router.dart`:
 
 ```dart
 GoRoute(
-  path: AppRoutePath.profile.value,
-  name: AppRoutePath.profile.name,
-  builder: (context, state) => const ProfileScreen(),
-  pageBuilder: (context, state) => buildPageWithFadeTransition(
-    context: context,
-    state: state,
-    child: const ProfileScreen(),
-  ),
+  path: '/recipe/:recipeId',
+  pageBuilder: (context, state) {
+    final recipeId = state.pathParameters['recipeId']!;
+    return CustomTransitionPage(
+      key: state.pageKey,
+      child: RecipeScreen(recipeId: recipeId),
+      transitionsBuilder: _customTransitionBuilder,
+      transitionDuration: const Duration(milliseconds: 150),
+    );
+  },
 ),
 ```
 
-**4. Navigate to the route:**
+### Transitions
 
-```dart
-// Using extension methods
-context.goTo(AppRouter.profileRoute);
-
-// Using go_router directly
-context.go(AppRouter.profileRoute);
-
-// With parameters
-context.goNamed(
-  AppRoutePath.profile.name,
-  queryParameters: {'userId': '123'},
-);
-```
-
-#### Custom Page Transitions
-
-Edit [lib/helpers/router/router_transitions.dart](lib/helpers/router/router_transitions.dart):
-
-```dart
-// Fade transition (default)
-CustomTransitionPage<void> buildPageWithFadeTransition({
-  required BuildContext context,
-  required GoRouterState state,
-  required Widget child,
-}) {
-  return CustomTransitionPage<void>(
-    key: state.pageKey,
-    child: child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return FadeTransition(opacity: animation, child: child);
-    },
-  );
-}
-
-// Slide transition
-CustomTransitionPage<void> buildPageWithSlideTransition({
-  required BuildContext context,
-  required GoRouterState state,
-  required Widget child,
-}) {
-  return CustomTransitionPage<void>(
-    key: state.pageKey,
-    child: child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      final tween = Tween(begin: begin, end: end);
-      final offsetAnimation = animation.drive(tween);
-      
-      return SlideTransition(position: offsetAnimation, child: child);
-    },
-  );
-}
-```
+The default transition is a fade (`FadeTransition`) defined by `_customTransitionBuilder` in `router.dart`. Bottom-nav tab routes use `NoTransitionPage` for an instant switch. Detail routes use the custom fade transition.
 
 ---
 
-### 🧩 Using Built-in Components
+## 6. Layouts
 
-#### Alert Service (SnackBars & Dialogs)
+Layouts are reusable page-level scaffolds in `lib/layouts/`. A screen should compose one layout rather than building its own `Scaffold` structure.
+
+### `AppLayout`
+
+The root shell used by `GoRouter`'s `ShellRoute`. Renders the bottom navigation bar with three tabs (Home, Forms, Profile). Pass `withBottomNav: false` for full-screen flows like detail screens.
+
+### `StandardPageLayout`
+
+A column layout with an optional app bar slot and a body that fills the remaining space.
+
+| Prop | Type | Description |
+|---|---|---|
+| `body` | `Widget` | Required. The main content area. |
+| `appBar` | `Widget?` | Optional app bar widget placed at the top. |
+| `hasPadding` | `bool` | Apply `AppDesign.paddingPage` to body. Defaults to `true`. |
+
+### `HeroPageLayout`
+
+Full-bleed hero image at the top with a rounded card that slides up over it. Suited for detail screens.
+
+| Prop | Type | Description |
+|---|---|---|
+| `imageUrl` | `String` | Required. URL of the hero image. |
+| `body` | `Widget` | Required. Content placed inside the scrollable card. |
+| `imageHeight` | `double` | Hero image height. Defaults to `280`. |
+| `onBack` | `VoidCallback?` | Custom back button handler. |
+
+### `ClassicAppBar`
+
+A gradient app bar (primary → background) with title, optional leading widget, optional actions and an optional `bottomContent` slot for search bars or tabs.
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `String?` | App bar title. |
+| `titleStyle` | `TextStyle?` | Override default heading2 style. |
+| `leading` | `Widget?` | Widget shown before the title. |
+| `actions` | `List<Widget>?` | Widgets shown after the title. |
+| `bottomContent` | `Widget?` | Content below the title row. |
+
+### `TransparentAppBar`
+
+An overlay app bar for use on top of hero images or full-bleed backgrounds. Fully transparent background.
+
+---
+
+## 7. Screens
+
+Screens live in `lib/screens/`, organised by feature folder. Each folder should contain the screen file and, optionally, feature-specific widgets.
+
+### Conventions
+
+- One screen per file. File name: `[feature]_screen.dart`, class name: `[Feature]Screen`.
+- Screens are `StatelessWidget` unless local state is strictly necessary.
+- All layout is delegated to a layout from `lib/layouts/` — screens do not build raw `Scaffold`s.
+- Navigation is always performed via `AppRouter`.
+
+### Available screens
+
+| Screen | Path | Description |
+|---|---|---|
+| `HomeScreen` | `/home` | Main landing tab |
+| `FormScreen` | `/form` | Form examples tab |
+| `ProfileScreen` | `/profile` | Profile tab |
+| `DetailsScreen` | `/details/:detailId` | Detail view pushed with a `detailId` parameter |
+
+---
+
+## 8. Widgets
+
+All reusable widgets live in `lib/widgets/`. Widget names must describe **what the widget is**, not where it is used. All widgets use the design system tokens — never hardcoded values.
+
+### `BaseButton`
+
+Full-featured action button with variants, loading state and optional icon.
+
+| Prop | Type | Description |
+|---|---|---|
+| `label` | `String?` | Button label text. |
+| `icon` | `IconData?` | Optional icon (at least one of `label`/`icon` is required). |
+| `onPressed` | `VoidCallback?` | Tap handler. `null` renders the button as disabled. |
+| `type` | `BaseButtonType` | `filled` (default) or `outlined`. |
+| `fullWidth` | `bool` | Expand to fill available width. Defaults to `false`. |
+| `isLoading` | `bool` | Show loading spinner instead of content. Defaults to `false`. |
+| `tooltip` | `String?` | Accessibility tooltip. |
 
 ```dart
-import 'package:sb_template_flutter/services/ui/alert_service.dart';
+BaseButton(label: 'Submit', onPressed: _submit, isLoading: _isLoading)
+BaseButton(icon: PhosphorIconsBold.plus, type: BaseButtonType.outlined, onPressed: _add)
+```
 
-// Show success snackbar
-AlertService.showAppSnackBar(
+### `BaseIconButton`
+
+Icon-only button with filled or outlined style.
+
+| Prop | Type | Description |
+|---|---|---|
+| `icon` | `IconData` | Required. Icon to display. |
+| `onPressed` | `VoidCallback?` | Tap handler. |
+| `type` | `IconButtonType` | `filled` (default) or `outlined`. |
+| `color` | `Color?` | Override icon and border colour. |
+| `tooltip` | `String?` | Accessibility tooltip. |
+
+### `BaseBadge`
+
+Status or label badge with optional icon.
+
+| Prop | Type | Description |
+|---|---|---|
+| `label` | `String?` | Badge text. |
+| `icon` | `IconData?` | Optional leading icon (at least one of `label`/`icon` is required). |
+| `style` | `BadgeStyle` | Styling configuration (see below). |
+
+**`BadgeStyle` props:**
+
+| Prop | Type | Description |
+|---|---|---|
+| `color` | `Color?` | Background (filled) or border (outlined) colour. |
+| `foregroundColor` | `Color?` | Icon and text colour. |
+| `size` | `BadgeSize` | `small` (default) or `normal`. |
+| `variant` | `BadgeVariant` | `filled` (default) or `outlined`. |
+| `borderRadius` | `BorderRadiusGeometry` | Defaults to `AppDesign.borderRadiusXXs`. |
+
+```dart
+BaseBadge(label: 'Active', style: BadgeStyle(color: AppColors.success))
+BaseBadge(icon: PhosphorIconsRegular.star, style: BadgeStyle(variant: BadgeVariant.outlined))
+```
+
+### `BaseCard`
+
+Image + text card for lists and grids.
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `String` | Required. Card title. |
+| `content` | `String` | Required. Card subtitle / description. |
+| `imageUrl` | `String` | Required. Network image URL. |
+| `width` | `double` | Card width. Defaults to `220`. |
+| `height` | `double` | Card height. Defaults to `220`. |
+| `padding` | `EdgeInsetsGeometry` | Outer padding. Defaults to `EdgeInsets.zero`. |
+| `onTap` | `VoidCallback?` | Tap handler. |
+
+### `BaseFormField`
+
+Form-integrated text field with label, validation and error display. Use inside a `Form` widget.
+
+| Prop | Type | Description |
+|---|---|---|
+| `controller` | `TextEditingController` | Required. |
+| `label` | `String?` | Label displayed above the field. |
+| `hint` | `String?` | Placeholder text. |
+| `prefixIcon` | `IconData?` | Leading icon. |
+| `suffixIcon` | `Widget?` | Trailing widget (e.g. visibility toggle). |
+| `obscureText` | `bool` | Mask text (password). Defaults to `false`. |
+| `keyboardType` | `TextInputType?` | Input type. |
+| `validator` | `String? Function(String?)?` | Validation function. |
+| `autovalidateMode` | `AutovalidateMode` | Defaults to `AutovalidateMode.onUnfocus`. |
+| `onChanged` | `ValueChanged<String>?` | Called on every keystroke. |
+| `onFieldSubmitted` | `ValueChanged<String>?` | Called on keyboard submit. |
+
+### `BaseInput`
+
+Standalone text field without form integration. Use for search bars or filters.
+
+| Prop | Type | Description |
+|---|---|---|
+| `controller` | `TextEditingController` | Required. |
+| `hint` | `String?` | Placeholder text. |
+| `prefixIcon` | `Widget?` | Leading widget. |
+| `suffixIcon` | `Widget?` | Trailing widget. |
+| `onChanged` | `ValueChanged<String>?` | Called on every keystroke. |
+| `fillColor` | `Color?` | Background colour override. |
+
+### `BaseImageContainer`
+
+Network or asset image with fade-in animation and optional darkening filter.
+
+| Prop | Type | Description |
+|---|---|---|
+| `imageUrl` | `String` | Required. URL or asset path. |
+| `type` | `ImageType` | `network` (default) or `asset`. |
+| `filter` | `ImageFilter` | `none` (default) or `darken`. |
+| `fit` | `ImageFit` | `cover` (default) or `contain`. |
+| `width` | `double?` | Container width. |
+| `height` | `double?` | Container height. |
+| `borderRadius` | `BorderRadius` | Defaults to `AppDesign.borderRadiusMd`. |
+| `fadeDuration` | `Duration` | Fade-in duration. Defaults to 300ms. |
+
+### `BaseValueCard`
+
+Compact metric display showing a value and a label.
+
+| Prop | Type | Description |
+|---|---|---|
+| `value` | `String` | Required. Main metric text (large). |
+| `label` | `String` | Required. Description below the value. |
+
+### `BaseScaffoldMessenger`
+
+Static utility that shows a themed SnackBar anchored to the bottom of the screen.
+
+```dart
+BaseScaffoldMessenger.show(
   context,
-  'Profile updated successfully!',
-  type: AlertType.success,
-  icon: Icons.check_circle,
-  duration: Duration(seconds: 3),
-);
-
-// Show error snackbar
-AlertService.showAppSnackBar(
-  context,
-  'Something went wrong',
-  type: AlertType.error,
-  icon: Icons.error,
-);
-
-// Show confirmation dialog
-await AlertService.showAppDialog(
-  context: context,
-  title: 'Delete Account',
-  message: 'Are you sure you want to delete your account? This action cannot be undone.',
-  confirmText: 'Delete',
-  cancelText: 'Cancel',
-  onConfirm: () {
-    // Handle deletion
-  },
+  message: 'Saved successfully',
+  type: SnackBarType.success,
 );
 ```
 
-**Alert Types:** `success`, `error`, `info`
+| Type | Colour |
+|---|---|
+| `SnackBarType.success` | `AppColors.success` |
+| `SnackBarType.error` | `AppColors.error` |
+| `SnackBarType.warning` | `AppColors.warning` |
+| `SnackBarType.info` | Primary (adaptive) |
+
+### `GcListView` (group-container)
+
+A null-safe `ListView.builder` wrapper. Items returned as `null` from `itemBuilder` are silently skipped.
+
+| Prop | Type | Description |
+|---|---|---|
+| `itemBuilder` | `Widget? Function(BuildContext, int)` | Required. |
+| `itemCount` | `int` | Required. Negative values are treated as 0. |
+| `scrollDirection` | `Axis` | Defaults to `Axis.vertical`. |
+| `padding` | `EdgeInsetsGeometry?` | Defaults to `EdgeInsets.zero`. |
+
+### `GcGridView` (group-container)
+
+A `GridView.count` wrapper with a `GridDimensions` configuration object.
+
+| Prop | Type | Description |
+|---|---|---|
+| `children` | `List<Widget>` | Required. Grid items. |
+| `dimensions` | `GridDimensions` | Grid configuration. Defaults to `GridDimensions()`. |
+
+**`GridDimensions` defaults:** `crossAxisCount: 2`, `childAspectRatio: 3/2`, `crossAxisSpacing` and `mainAxisSpacing` use `AppDesign.gapItemMd`.
 
 ---
 
-### 🔧 Services Reference
+## 9. Helpers & Validators
 
-#### LocalStorageService
+All helpers live in `lib/helpers/` as flat files. The set of files in this folder is fixed — do not rename or reorganise them.
 
-Secure key-value storage using `flutter_secure_storage`:
+### `app_colors.dart`
+
+Exports `AppColors`. See [Design System — Colours](#colours--appcolors).
+
+### `app_design.dart`
+
+Exports `AppDesign`. See [Design System — Spacing & Radius](#spacing--radius--appdesign).
+
+### `app_typography.dart`
+
+Exports `AppTypography`. See [Design System — Typography](#typography--apptypography).
+
+### `app_theme.dart`
+
+Exports the `ThemeData` used in `MaterialApp`. Edit this file to change the font family (uses `google_fonts`) or override Material component themes.
+
+### `app_router.dart`
+
+Exports `AppRouter`, `AppTypedRoute<P>`, `GenericRouteParams`, `NoParams`, and built-in params classes (`DetailParams`). See [Routing](#5-routing).
+
+### `app_validation.dart`
+
+Exports `AppValidation` — a collection of static validators for use inside `TextFormField` / `BaseFormField` validators.
+
+Chain validators with `??` — the first failure wins:
 
 ```dart
-import 'package:sb_template_flutter/services/logic/local_storage_service.dart';
-
-// Save data
-await LocalStorageService.write(key: 'auth_token', value: 'abc123');
-await LocalStorageService.write(key: 'user_id', value: '42');
-
-// Read data
-final token = await LocalStorageService.read(key: 'auth_token');
-print(token); // 'abc123'
-
-// Delete data
-await LocalStorageService.delete(key: 'auth_token');
-
-// Clear all data
-await LocalStorageService.deleteAll();
-
-// Check if key exists
-final hasToken = await LocalStorageService.containsKey(key: 'auth_token');
+validator: (v) => AppValidation.notEmpty(v) ?? AppValidation.email(v),
 ```
 
-> **💡 Tip:** Data is encrypted on iOS (Keychain) and Android (EncryptedSharedPreferences).
+| Method | Description |
+|---|---|
+| `notEmpty(v)` | Field must not be null or empty. |
+| `email(v)` | Must be a valid email address. |
+| `minLength(v, min)` | Minimum character length. |
+| `maxLength(v, max)` | Maximum character length. |
+| `match(v, other)` | Both values must be equal (e.g. confirm password). |
+| `numeric(v)` | Must contain only digits. |
+| `strongPassword(v)` | Must contain uppercase, lowercase and a digit. |
 
----
+All methods accept an optional `message` parameter to override the default error string.
 
-### 🌍 Internationalization (Ready to Use)
+### `app_logger.dart`
 
-This template includes `intl` package. Here's how to add multi-language support:
-
-**1. Add generated files to `.gitignore`:**
-```
-lib/l10n/
-```
-
-**2. Create ARB files:**
-
-```arb
-// lib/l10n/app_en.arb
-{
-  "@@locale": "en",
-  "appTitle": "My App",
-  "welcome": "Welcome",
-  "login": "Login",
-  "logout": "Logout"
-}
-```
-
-```arb
-// lib/l10n/app_it.arb
-{
-  "@@locale": "it",
-  "appTitle": "La Mia App",
-  "welcome": "Benvenuto",
-  "login": "Accedi",
-  "logout": "Esci"
-}
-```
-
-**3. Configure in `pubspec.yaml`:**
-
-```yaml
-flutter:
-  generate: true
-
-flutter_gen:
-  integrations:
-    flutter_localizations: true
-```
-
-**4. Create `l10n.yaml`:**
-
-```yaml
-arb-dir: lib/l10n
-template-arb-file: app_en.arb
-output-localization-file: app_localizations.dart
-```
-
-**5. Generate localizations:**
-
-```bash
-flutter gen-l10n
-```
-
-**6. Use in your app:**
+Exports `AppLogger` — a debug-only logger gated behind `kDebugMode`. All output is automatically stripped in release and profile builds. **Never use `print()` directly** — always use `AppLogger`.
 
 ```dart
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-MaterialApp(
-  localizationsDelegates: AppLocalizations.localizationsDelegates,
-  supportedLocales: AppLocalizations.supportedLocales,
-  locale: Locale('it'), // or Locale('en')
-  // ...
-);
-
-// In widgets
-Text(AppLocalizations.of(context)!.welcome);
+AppLogger.debug('User loaded', tag: 'HomeScreen');
+AppLogger.warn('Token is about to expire');
+AppLogger.error('Failed to fetch', error: e, stackTrace: st);
 ```
+
+| Method | Level | When to use |
+|---|---|---|
+| `AppLogger.debug(message, {tag})` | `[D]` | General flow information |
+| `AppLogger.warn(message, {tag})` | `[W]` | Non-critical anomalies |
+| `AppLogger.error(message, {tag, error, stackTrace})` | `[E]` | Exceptions and failures |
+
+The optional `tag` parameter (e.g. `tag: 'AuthService'`) prefixes the output for easier filtering in the console.
 
 ---
 
-## 📦 Deployment
+## 10. AI Tooling — Prompts & Instructions
 
-### iOS (App Store)
+This repository ships with pre-configured [GitHub Copilot](https://github.com/features/copilot) context that makes the AI assistant aware of the project's conventions, design system and domain. All configuration lives under `.github/` and is versioned alongside the code.
 
-**1. Configure app identity:**
+### How GitHub Copilot is configured
 
-Edit `ios/Runner/Info.plist`:
-- Set `CFBundleDisplayName` (app name)
-- Set `CFBundleIdentifier` (com.yourcompany.yourapp)
+| File / folder | Purpose |
+|---|---|
+| `.github/copilot-instructions.md` | Global rules: app context, response language, stack, naming conventions |
+| `.github/instructions/*.instructions.md` | Scoped rules loaded automatically per file type (e.g. only for `**/*.dart` files) |
+| `.github/prompts/*.prompt.md` | Reusable Agent-mode workflows triggered by a phrase or `#filename` syntax |
 
-**2. Add app icons:**
-- Use [appicon.co](https://appicon.co) to generate icons
-- Place in `ios/Runner/Assets.xcassets/AppIcon.appiconset/`
+### Available prompts
 
-**3. Build release:**
+| Prompt file | Trigger phrases | Direct invocation | What it does |
+|---|---|---|---|
+| `init-project.prompt.md` | "Inizializziamo il progetto" · "Inizializza il progetto" · "Reset del progetto" | `#init-project.prompt.md` | Collects project name and context; renames the app across all config files; resets version to `1.0.0+1`; audits and updates instruction files |
+| `update-docs.prompt.md` | "Aggiorna la documentazione" | `#update-docs.prompt.md` | Compares README with the actual codebase and rewrites it as a structured documentation book |
+| `check-dependencies.prompt.md` | "Verifichiamo aggiornamenti del progetto" | `#check-dependencies.prompt.md` | Runs `flutter pub outdated`, auto-updates safe (minor/patch) packages, lists major bumps for review |
+| `check-lint.prompt.md` | "Check del progetto", "il progetto è pulito?" | `#check-lint.prompt.md` | Runs `dart fix`, `dart format` and `flutter analyze`; auto-fixes warnings, reports errors for manual review |
+| `bump-version.prompt.md` | "Aggiornami il progetto alla versione X.Y.Z" | `#bump-version.prompt.md` | Detects changes via git, shows a CHANGELOG draft for approval, then uses **cider** to bump the version and release |
+
+### How to run a prompt
+
+**Option A — Trigger phrase**
+
+1. Open the **Copilot Chat** panel in VS Code (`⌃⌘I` / `Ctrl+Alt+I`)
+2. Switch to **Agent mode** using the mode selector at the bottom of the chat input
+3. Type one of the trigger phrases from the table above — the agent will load and follow the prompt automatically
+
+**Option B — Direct invocation**
+
+1. Open **Copilot Chat** in **Agent mode**
+2. In the chat input, type `#` followed by the prompt filename (e.g. `#check-dependencies.prompt.md`) and select it from the picker
+3. Send the message — the agent will execute the prompt immediately, regardless of the phrasing used
+
+> **Note:** All prompts require **Agent mode**. They will not work in Ask or Chat mode.
+
+### Instruction files
+
+| File | Applies to | Governs |
+|---|---|---|
+| `design-system.instructions.md` | `**/*.dart` | AppColors, AppTypography, AppDesign tokens, PhosphorIcons API, widget checklist |
+| `screens.instructions.md` | `**/screens/**` | Screen structure, layouts, app bars, code organisation rules |
+| `widgets.instructions.md` | `**/widgets/**` | Widget placement rules and widget API reference |
+| `routing.instructions.md` | `**/*router*` | AppRouter API, transitions, new-route workflow |
+| `helpers.instructions.md` | `**/helpers/**` | Fixed helper filenames, AppValidation validators and chaining patterns |
+
+---
+
+## 11. Deployment
+
+### iOS
+
+#### Test distribution (TestFlight)
+
+1. Bump version/build with the `bump-version` prompt
+2. Build the release IPA: `flutter build ipa --release`
+3. Open `build/ios/archive/Runner.xcarchive` in Xcode Organizer
+4. Product → Archive → Distribute App → App Store Connect → TestFlight
+5. Invite internal or external testers from [App Store Connect](https://appstoreconnect.apple.com)
+
+#### Production release (App Store)
+
+1. Ensure version and build number are correct
+2. `flutter build ipa --release`
+3. Open `build/ios/archive/Runner.xcarchive` in Xcode Organizer → Distribute → App Store Connect
+4. Complete metadata, screenshots and review information on App Store Connect
+5. Submit for review
+
+### Android
+
+#### Test distribution (Internal Testing / Firebase App Distribution)
+
+1. Bump version/build with the `bump-version` prompt
+2. `flutter build appbundle --release` (preferred) or `flutter build apk --release`
+3. **Google Play** → Internal Testing track → upload `.aab`
+4. **Firebase App Distribution** (alternative) → upload `.apk` and invite testers
+
+#### Production release (Google Play)
+
+1. Ensure `versionName` and `versionCode` are correct in `pubspec.yaml`
+2. Configure signing: create `android/key.properties` and add the keystore block to `android/app/build.gradle`
+3. `flutter build appbundle --release`
+4. Upload to [Google Play Console](https://play.google.com/console) → Production track
+5. Complete store listing, content rating and submit for review
+
+#### Signing & secrets
+
+- Never commit keystore files or `key.properties` to version control
+- Add them to `.gitignore` before the first commit
+- Store secrets in environment variables or a secrets manager (e.g. GitHub Secrets for CI)
+
+---
+
+## 12. Versioning & Git Tags
+
+The project uses [**cider**](https://pub.dev/packages/cider) to manage the version in `pubspec.yaml` and maintains a `CHANGELOG.md` following the [Keep a Changelog](https://keepachangelog.com) convention. Every production release should be tagged in Git so that the history stays navigable and CI/CD pipelines can anchor artifacts to a precise commit.
+
+### Version format
+
+Versions follow **Semantic Versioning** (`MAJOR.MINOR.PATCH`) with a build number appended after `+` (e.g. `1.2.0+7`). The build number is incremented automatically by `cider bump` and is used by the app stores.
+
+### Workflow — from bump to tag
 
 ```bash
-flutter build ipa --release
+# 1. Update the version (choose the appropriate bump type)
+cider bump patch   # 1.0.0 → 1.0.1
+cider bump minor   # 1.0.0 → 1.1.0
+cider bump major   # 1.0.0 → 2.0.0
+# Or set an exact version:
+cider version 2.0.0
+
+# 2. Stage and commit the version change
+git add pubspec.yaml CHANGELOG.md
+git commit -m "chore: bump version to $(cider version)"
+
+# 3. Create an annotated tag on main
+git tag -a "v$(cider version)" -m "Release v$(cider version)"
+
+# 4. Push the commit and the tag
+git push origin main
+git push origin "v$(cider version)"
 ```
 
-**4. Upload to App Store Connect:**
-- Open `build/ios/archive/Runner.xcarchive` in Xcode
-- Product → Archive → Distribute App
+> **Always use annotated tags** (`-a` flag) rather than lightweight ones. Annotated tags store the tagger, date and message — they are first-class objects in Git and are picked up correctly by GitHub Releases and most CI/CD systems.
 
----
+### Tag naming convention
 
-### Android (Google Play)
+| Pattern | Example | When to use |
+|---|---|---|
+| `vMAJOR.MINOR.PATCH` | `v1.2.0` | Every production release |
+| `vMAJOR.MINOR.PATCH-beta.N` | `v2.0.0-beta.1` | Pre-release / beta builds |
 
-**1. Configure app:**
-
-Edit `android/app/build.gradle`:
-```gradle
-android {
-    defaultConfig {
-        applicationId "com.yourcompany.yourapp"
-        minSdkVersion 21
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0.0"
-    }
-}
-```
-
-**2. Create keystore:**
+### Listing and deleting tags
 
 ```bash
-keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA \
-  -keysize 2048 -validity 10000 -alias upload
+# List all tags (sorted by version)
+git tag --sort=-version:refname
+
+# Show details of a specific tag
+git show v1.2.0
+
+# Delete a tag locally (e.g. if created by mistake)
+git tag -d v1.2.0
+
+# Delete the tag from the remote as well
+git push origin --delete v1.2.0
 ```
 
-**3. Configure signing:**
+### Using the `bump-version` prompt
 
-Create `android/key.properties`:
-```properties
-storePassword=<password>
-keyPassword=<password>
-keyAlias=upload
-storeFile=/Users/you/upload-keystore.jks
-```
-
-Add to `android/app/build.gradle`:
-```gradle
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
-android {
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
-        }
-    }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
-}
-```
-
-**4. Build release:**
-
-```bash
-flutter build appbundle --release
-```
-
-**5. Upload to Google Play Console:**
-- Go to [play.google.com/console](https://play.google.com/console)
-- Upload `build/app/outputs/bundle/release/app-release.aab`
+The `bump-version` Copilot Agent prompt automates steps 1–4: it detects changes via `git`, generates a CHANGELOG draft for your approval, bumps the version with `cider`, commits, tags and pushes. See [AI Tooling](#10-ai-tooling--prompts--instructions) for usage details.
 
 ---
 
-## 🔄 Version Management
+## 13. Dependencies
 
-This template uses **Cider** for automated version management.
-
-### Bump Version
-
-```bash
-# Patch version (1.0.0 → 1.0.1)
-cider bump patch
-
-# Minor version (1.0.0 → 1.1.0)
-cider bump minor
-
-# Major version (1.0.0 → 2.0.0)
-cider bump major
-
-# Set specific version
-cider version 2.5.0
-```
-
-### Build Number
-
-```bash
-# Increment build number
-cider bump build
-
-# Set specific build number
-cider build 42
-```
-
-### Release Notes
-
-```bash
-# Add to changelog
-cider log add "Added dark mode support" --type feat
-cider log add "Fixed login bug" --type fix
-
-# Tag release
-cider release
-```
-
----
-
-## 🧪 What You Can Build
-
-This template is perfect for:
-
-✅ **Mobile Apps** - iOS and Android with native performance
-✅ **Cross-Platform Apps** - Single codebase for iOS and Android
-✅ **SaaS Applications** - User authentication, dashboards, forms
-✅ **E-commerce Apps** - Product catalogs, shopping carts, checkout
-✅ **Social Apps** - Feeds, profiles, messaging
-✅ **Productivity Apps** - Task managers, note-taking, calendars
-✅ **Portfolio Apps** - Showcase your work with beautiful UI
-
----
-
-## 💡 Best Practices
-
-### File Organization
-
-- **Widgets:** Use `PascalCase` for widget files (e.g., `AppButton.dart`)
-- **Screens:** Group screens in folders with related widgets and BLoCs
-- **Services:** Separate logic services from UI services
-- **Models:** Use `snake_case` for model files (e.g., `app_route.dart`)
-
-### Code Style
-
-- Follow Flutter's style guide
-- Run `flutter analyze` before committing
-- Use `const` constructors wherever possible for performance
-- Prefer composition over inheritance
-- Keep widgets small and focused
-
-### State Management
-
-- Use BLoC for complex state management
-- Use Provider for simple dependency injection
-- Keep business logic out of widgets
-- Use Equatable for state comparison
-
-### Performance
-
-- Use `const` widgets to reduce rebuilds
-- Lazy load images with `CachedNetworkImage`
-- Implement pagination for long lists
-- Use `ListView.builder()` instead of `ListView()`
-- Profile performance with Flutter DevTools
-
----
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Issue:** `flutter_secure_storage` doesn't work on Android emulator
-**Solution:** Use a physical device or use SharedPreferences for development
-
-**Issue:** iOS build fails with code signing error
-**Solution:** Open `ios/Runner.xcworkspace` in Xcode and configure signing team
-
-**Issue:** Hot reload doesn't work after major changes
-**Solution:** Use hot restart (`R` in terminal) or full restart
-
-**Issue:** Google Fonts not loading
-**Solution:** Run `flutter pub get` and check internet connection
-
-**Issue:** Go router doesn't navigate
-**Solution:** Make sure routes are properly registered in `router.dart`
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. **Report bugs** - Open an issue with details and reproduction steps
-2. **Suggest features** - Share your ideas for improvements
-3. **Submit PRs** - Fork, create a branch, and submit a pull request
-
-**Development Setup:**
-```bash
-git clone https://github.com/stefanoBid/sb-flutter-template.git
-cd sb-flutter-template
-flutter pub get
-flutter run
-```
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-Feel free to use it for personal or commercial projects.
-
----
-
-## 👤 Author
-
-**Stefano Biddau**
-
-📧 Email: biddau.stefano99@gmail.com
-
-🐙 GitHub: [@stefanoBid](https://github.com/stefanoBid)
-
-🌐 Website: [stefanobiddau.com](https://stefanobiddau.com)
-
----
-
-## 🎨 More Templates
-
-Looking for more starter templates? Check out the **SB Templates Project** collection!
-
-👉 **[Browse All Templates](https://stefanobiddau.com/my-projects)**
-
-Visit the website and navigate to the **SB TEMPLATES PROJECT** section to discover more production-ready templates for different frameworks and use cases.
-
----
-
-## 🌟 Show Your Support
-
-If this template helped you build faster, give it a ⭐️ on GitHub!
-
-Your support motivates me to maintain and improve this project.
-
----
-
-## 📚 Resources
-
-- [Flutter Documentation](https://docs.flutter.dev/)
-- [Dart Language Tour](https://dart.dev/guides/language/language-tour)
-- [Flutter BLoC Documentation](https://bloclibrary.dev/)
-- [Go Router Documentation](https://pub.dev/packages/go_router)
-- [Google Fonts](https://fonts.google.com/)
-- [Material Design Guidelines](https://m3.material.io/)
+| Package | Version | Purpose |
+|---|---|---|
+| `go_router` | ^17.1.0 | Declarative routing with deep linking |
+| `google_fonts` | ^8.0.2 | Font loading (Lato used by default) |
+| `cached_network_image` | ^3.4.1 | Network image loading with cache and fade |
+| `phosphor_flutter` | ^2.1.0 | Icon library |
+| `image_picker` | ^1.2.1 | Camera and gallery access |
+| `package_info_plus` | ^9.0.1 | App version and build info at runtime |
+| `intl` | ^0.20.2 | Internationalisation utilities |
+| `uuid` | ^4.5.2 | Unique ID generation |
+| `cupertino_icons` | ^1.0.9 | iOS-style icon assets |
+| `cider` *(dev)* | ^0.2.10 | CLI version management |
+| `flutter_lints` *(dev)* | ^6.0.0 | Flutter team's recommended lints |
 
 ---
 
 <div align="center">
 
-**Happy coding! 🚀**
+Built with ❤️ by **Stefano Biddau**
 
-Built with ❤️ by developers, for developers.
+[stefanobiddau.com](https://stefanobiddau.com) · [@stefanoBid](https://github.com/stefanoBid)
 
 </div>
