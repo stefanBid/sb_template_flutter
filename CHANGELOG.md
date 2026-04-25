@@ -1,3 +1,10 @@
+## 2.0.1 - 2026-04-25
+### Added
+- Full project checkup workflow (full-checkup.prompt.md) that runs dependency check, documentation update and lint in sequence
+
+### Changed
+- Updated go\_router from 17.1.0 to 17.2.2
+
 ## 2.0.0 - 2026-04-02
 ### Added
 - Completely redesigned UI with a coherent and opinionated design system

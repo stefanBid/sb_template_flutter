@@ -117,6 +117,17 @@ When the user writes something like **"Inizializziamo il progetto"**, **"inizial
 
 ---
 
+## Full project checkup — trigger phrase
+
+When the user writes something like **"checkup completo"**, **"checkup del progetto"**, **"controllo completo"**, **"full checkup"**, or any clearly equivalent phrase:
+
+- **If in Agent mode**: follow the workflow defined in `.github/prompts/full-checkup.prompt.md` step by step.
+- **If in Ask / Chat mode** (no file-system tools available): reply **only** with:
+  > "Per eseguire il checkup completo devo essere in modalità **Agent**. Ri-lancia la richiesta in Agent mode."
+  Then stop. Do not attempt the workflow.
+
+---
+
 ## Context resolution — when to ask
 
 If no file is open in the editor and the request is ambiguous (it is not clear which area it concerns), **before answering or generating code** ask the user a single question using `vscode_askQuestions` with these options:

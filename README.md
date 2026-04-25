@@ -5,7 +5,7 @@
 
   # SB-Template Flutter
 
-  ![Version](https://img.shields.io/badge/version-2.0.0-blue)
+  ![Version](https://img.shields.io/badge/version-2.0.1-blue)
   [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)](https://flutter.dev)
   ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
   ![License](https://img.shields.io/badge/license-MIT-green)
@@ -654,6 +654,7 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 | `check-dependencies.prompt.md` | "Verifichiamo aggiornamenti del progetto" | `#check-dependencies.prompt.md` | Runs `flutter pub outdated`, auto-updates safe (minor/patch) packages, lists major bumps for review |
 | `check-lint.prompt.md` | "Check del progetto", "il progetto è pulito?" | `#check-lint.prompt.md` | Runs `dart fix`, `dart format` and `flutter analyze`; auto-fixes warnings, reports errors for manual review |
 | `bump-version.prompt.md` | "Aggiornami il progetto alla versione X.Y.Z" | `#bump-version.prompt.md` | Detects changes via git, shows a CHANGELOG draft for approval, then uses **cider** to bump the version and release |
+| `full-checkup.prompt.md` | "Checkup completo" · "Checkup del progetto" · "Controllo completo" | `#full-checkup.prompt.md` | Runs all three maintenance workflows in sequence: dependency check, documentation update, and lint check; produces a single summary report |
 
 ### How to run a prompt
 
@@ -793,7 +794,7 @@ The `bump-version` Copilot Agent prompt automates steps 1–4: it detects change
 
 | Package | Version | Purpose |
 |---|---|---|
-| `go_router` | ^17.1.0 | Declarative routing with deep linking |
+| `go_router` | ^17.2.2 | Declarative routing with deep linking |
 | `google_fonts` | ^8.0.2 | Font loading (Lato used by default) |
 | `cached_network_image` | ^3.4.1 | Network image loading with cache and fade |
 | `phosphor_flutter` | ^2.1.0 | Icon library |
