@@ -794,7 +794,7 @@ The `bump-version` Copilot Agent prompt automates steps 1–4: it detects change
 
 | Package | Version | Purpose |
 |---|---|---|
-| `go_router` | ^17.1.0 | Declarative routing with deep linking |
+| `go_router` | ^17.2.2 | Declarative routing with deep linking |
 | `google_fonts` | ^8.0.2 | Font loading (Lato used by default) |
 | `cached_network_image` | ^3.4.1 | Network image loading with cache and fade |
 | `phosphor_flutter` | ^2.1.0 | Icon library |
