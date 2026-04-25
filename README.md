@@ -654,6 +654,7 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 | `check-dependencies.prompt.md` | "Verifichiamo aggiornamenti del progetto" | `#check-dependencies.prompt.md` | Runs `flutter pub outdated`, auto-updates safe (minor/patch) packages, lists major bumps for review |
 | `check-lint.prompt.md` | "Check del progetto", "il progetto è pulito?" | `#check-lint.prompt.md` | Runs `dart fix`, `dart format` and `flutter analyze`; auto-fixes warnings, reports errors for manual review |
 | `bump-version.prompt.md` | "Aggiornami il progetto alla versione X.Y.Z" | `#bump-version.prompt.md` | Detects changes via git, shows a CHANGELOG draft for approval, then uses **cider** to bump the version and release |
+| `full-checkup.prompt.md` | "Checkup completo" · "Checkup del progetto" · "Controllo completo" | `#full-checkup.prompt.md` | Runs all three maintenance workflows in sequence: dependency check, documentation update, and lint check; produces a single summary report |
 
 ### How to run a prompt
 
