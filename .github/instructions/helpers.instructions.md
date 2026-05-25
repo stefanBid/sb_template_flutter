@@ -9,12 +9,65 @@ Fixed filenames — do not add new files without a real need:
 | File | Purpose |
 |---|---|
 | `app_colors.dart` | Colour tokens |
-| `app_typography.dart` | Text styles |
 | `app_design.dart` | Spacing, border radius, padding |
-| `app_theme.dart` | MaterialApp theme configuration |
-| `app_router.dart` | Typed navigation layer |
-| `app_validation.dart` | Form field validators |
+| `app_image.dart` | Image type resolver and widget builder |
 | `app_logger.dart` | Debug-only logger (stripped in release) |
+| `app_router.dart` | Typed navigation layer |
+| `app_storage.dart` | Encrypted key-value storage singleton |
+| `app_theme.dart` | MaterialApp theme configuration |
+| `app_typography.dart` | Text styles |
+| `app_validation.dart` | Form field validators |
+
+---
+
+## AppImage — `lib/helpers/app_image.dart`
+
+Static utility that resolves the source type of an image URL/path and builds the appropriate widget.
+
+```dart
+import '../helpers/app_image.dart';
+
+final type = AppImage.getType(url); // → ImageType.network | .asset | .file
+final widget = AppImage.buildImage(
+  context,
+  imageUrl: url,
+  type: type,
+  fit: BoxFit.cover,
+);
+```
+
+| `ImageType` | URL prefix | Widget rendered |
+|---|---|---|
+| `network` | `http://` or `https://` | `CachedNetworkImage` |
+| `asset` | starts with `assets/` | `Image.asset` |
+| `file` | any other path | `Image.file` |
+
+---
+
+## AppStorage — `lib/helpers/app_storage.dart`
+
+App-wide singleton for encrypted key-value storage backed by `flutter_secure_storage`. Uses Android EncryptedSharedPreferences and iOS Keychain.
+
+```dart
+import '../helpers/app_storage.dart';
+
+// String primitives
+await AppStorage.instance.write('token', value);
+final token = await AppStorage.instance.read('token');
+await AppStorage.instance.delete('token');
+
+// JSON objects
+await AppStorage.instance.writeObject('user', user, (u) => u.toJson());
+final user = await AppStorage.instance.readObject('user', User.fromJson);
+```
+
+| Method | Description |
+|---|---|
+| `read(key)` | Returns stored string or `null` |
+| `write(key, value)` | Stores a string value |
+| `delete(key)` | Removes the entry |
+| `readObject<T>(key, fromJson)` | Deserialises a JSON object or returns `null` |
+| `writeObject<T>(key, value, toJson)` | Serialises and stores a JSON object |
 
 ---
 

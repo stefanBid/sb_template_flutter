@@ -17,9 +17,11 @@ Use this context to give suggestions — UI, UX, architectural or otherwise — 
 ## Stack
 - **Flutter** (Dart) — mobile app (iOS + Android)
 - **go_router** for navigation
-- **phosphor_flutter** for icons
+- **Material Icons** (`Icons.*`) for icons — do not use PhosphorIcons or any external icon package
 - **google_fonts** (Lato) for typography
-- **transparent_image** for network images with fade
+- **cached_network_image** for network images with cache and fade
+- **flutter_secure_storage** for encrypted key-value storage (iOS Keychain / Android EncryptedSharedPreferences)
+- **image_picker** for camera and gallery access
 - **provider / riverpod** for state management (to be evaluated for future features)
 
 ---
@@ -28,7 +30,7 @@ Use this context to give suggestions — UI, UX, architectural or otherwise — 
 
 | File | `applyTo` | Content |
 |---|---|---|
-| `design-system.instructions.md` | `**/*.dart` | AppColors, AppTypography, AppDesign tokens, PhosphorIcons API, widget checklist |
+| `design-system.instructions.md` | `**/*.dart` | AppColors, AppTypography, AppDesign tokens, Material Icons, widget checklist |
 | `routing.instructions.md` | `**/*router*` | AppRouter API, transitions, new-route workflow (3 steps) |
 | `screens.instructions.md` | `**/screens/**` | Screen structure, layouts, app bars, code organisation rules |
 | `widgets.instructions.md` | `**/widgets/**` | Widget placement rules, BaseCard/BaseFormField/BaseButton/GcListView API |
@@ -74,7 +76,6 @@ lib/
 - Imports must be grouped by origin, each group preceded by a comment, with a blank line between groups. Always use relative paths. Order:
   ```dart
   import 'package:flutter/material.dart';
-  import 'package:phosphor_flutter/phosphor_flutter.dart';
   // ... other third-party packages
 
   // Project Helpers

@@ -67,7 +67,7 @@ Styled `TextFormField` for use inside a `Form`.
 BaseFormField(
   controller: controller,
   label: 'Email',
-  prefixIcon: PhosphorIconsRegular.envelope, // IconData? — rendered internally with muted colour
+  prefixIcon: Icons.mail_outline, // IconData? — rendered internally with muted colour
   suffixIcon: IconButton(...),               // Widget? — use for buttons (e.g. show-password)
   fillColor: AppColors.of(context).surface,
   keyboardType: TextInputType.emailAddress,
@@ -84,7 +84,7 @@ BaseFormField(
 ```dart
 BaseButton(
   label: 'Submit',
-  icon: PhosphorIconsRegular.arrowRight, // optional
+  icon: Icons.arrow_forward, // optional
   type: BaseButtonType.filled,           // filled | outlined
   fullWidth: true,
   isLoading: false,
@@ -100,7 +100,7 @@ Accent colour resolved automatically: `primary` in light mode, `secondary` in da
 
 ```dart
 BaseIconButton(
-  icon: PhosphorIconsRegular.plus,
+  icon: Icons.add,
   type: BaseButtonType.filled, // filled | outlined
   onPressed: () { ... },
 )
@@ -164,7 +164,7 @@ Inline label with semantic colour. Uses `borderRadiusXXs` and `small`/`caption` 
 ```dart
 BaseBadge(
   label: 'New',
-  icon: PhosphorIconsRegular.star, // optional
+  icon: Icons.star_border, // optional
   style: BadgeStyle(
     color: AppColors.success,
     foregroundColor: Colors.white,       // optional — text and icon colour
@@ -203,6 +203,43 @@ BaseScaffoldMessenger.show(
 | `info` | `primary` / `secondary` (adaptive) | `info` |
 
 Clears previous snack bars automatically before showing the new one. Uses `borderRadiusTopXs` (top corners only).
+
+---
+
+## BaseImagePicker
+
+Tappable image preview with placeholder that opens a bottom sheet to select or remove a photo. Stateless — the caller owns the image state.
+
+```dart
+BaseImagePicker(
+  imageUrl: _imageUrl,   // String? — null shows placeholder icon
+  height: 200,           // optional, default 200
+  onImageSelected: (XFile? file) => setState(
+    () => _imageUrl = file?.path,
+  ),
+)
+```
+
+- `onImageSelected` is called with the selected `XFile` on pick, or `null` when the user removes the image.
+- Internally uses `AppImage.buildImage()` to render local (file) images.
+- Opens `BaseImageSelectorBottomSheet` on tap.
+
+---
+
+## BaseImageSelectorBottomSheet
+
+Static utility that shows a bottom sheet with gallery / camera options, and optionally a remove action.
+
+```dart
+BaseImageSelectorBottomSheet.show(
+  context,
+  onImageSourceSelected: (ImageSource source) { ... },
+  hasImage: true,           // show Remove option
+  onRemove: () { ... },     // called when Remove is tapped
+);
+```
+
+Never call `BaseBottomSheet.show()` directly for image picking — always use this helper.
 
 ---
 
