@@ -31,7 +31,6 @@ class BaseBottomSheet {
       isScrollControlled: true,
       useRootNavigator: true,
       constraints: const BoxConstraints(maxWidth: double.infinity),
-      useSafeArea: true,
       builder: (_) => _BaseBottomSheetContent(
         title: title,
         subtitle: subtitle,
@@ -104,7 +103,9 @@ class _BaseBottomSheetContent extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+          bottom:
+              MediaQuery.of(context).viewInsets.bottom +
+              MediaQuery.viewPaddingOf(context).bottom,
         ),
         child: Container(
           width: double.infinity,
