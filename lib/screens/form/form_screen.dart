@@ -12,7 +12,10 @@ import '../../layouts/body/standard_page_layout.dart';
 
 // Project Widgets
 import '../../widgets/base_button.dart';
+import '../../widgets/base_checkbox.dart';
+import '../../widgets/base_dropdown.dart';
 import '../../widgets/base_form_field.dart';
+import '../../widgets/base_multiselect.dart';
 import '../../widgets/base_scaffold_messenger.dart';
 
 class FormSection extends StatefulWidget {
@@ -34,6 +37,24 @@ class _FormSectionState extends State<FormSection> {
   bool _isSubmitting = false;
   bool _showPassword = false;
   bool _showConfirmPassword = false;
+
+  String? _selectedRole;
+  List<String> _selectedInterests = [];
+  bool _acceptTerms = false;
+
+  static const _roleOptions = [
+    BaseDropdownOption(value: 'admin', label: 'Admin'),
+    BaseDropdownOption(value: 'editor', label: 'Editor'),
+    BaseDropdownOption(value: 'viewer', label: 'Viewer'),
+  ];
+
+  static const _interestOptions = [
+    BaseDropdownOption(value: 'design', label: 'Design'),
+    BaseDropdownOption(value: 'development', label: 'Development'),
+    BaseDropdownOption(value: 'marketing', label: 'Marketing'),
+    BaseDropdownOption(value: 'management', label: 'Management'),
+    BaseDropdownOption(value: 'data', label: 'Data & Analytics'),
+  ];
 
   @override
   void initState() {
@@ -62,11 +83,24 @@ class _FormSectionState extends State<FormSection> {
     passwordController.clear();
     confirmPasswordController.clear();
 
-    if (_showPassword) setState(() => _showPassword = false);
-    if (_showConfirmPassword) setState(() => _showConfirmPassword = false);
+    setState(() {
+      if (_showPassword) _showPassword = false;
+      if (_showConfirmPassword) _showConfirmPassword = false;
+      _selectedRole = null;
+      _selectedInterests = [];
+      _acceptTerms = false;
+    });
   }
 
   Future<void> _submit() async {
+    if (!_acceptTerms) {
+      BaseScaffoldMessenger.show(
+        context,
+        message: 'You must accept the terms and conditions',
+        type: SnackBarType.error,
+      );
+      return;
+    }
     if (_formKey.currentState!.validate()) {
       setState(() => _isSubmitting = true);
       await Future.delayed(const Duration(seconds: 2));
@@ -198,6 +232,44 @@ class _FormSectionState extends State<FormSection> {
                 passwordController.text,
                 message: 'Passwords do not match',
               ),
+            ),
+            const SizedBox(height: AppDesign.gapSectionMd),
+
+            // — Preferences
+            Text('Preferences', style: AppTypography.of(context).heading3),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseDropdown<String>(
+              initialValue: _selectedRole,
+              label: 'Role',
+              hint: 'Select a role',
+              fillColor: AppColors.of(context).surface,
+              prefixIcon: Icons.work_outline,
+              items: _roleOptions,
+              onChanged: (v) => setState(() => _selectedRole = v),
+              validator: (v) =>
+                  AppValidation.notEmpty(v, message: 'Role is required'),
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseMultiselect<String>(
+              initialValues: _selectedInterests,
+              label: 'Interests',
+              hint: 'Select your interests',
+              fillColor: AppColors.of(context).surface,
+              prefixIcon: Icons.star_border,
+              items: _interestOptions,
+              onChanged: (v) => setState(() => _selectedInterests = v),
+              validator: (v) => AppValidation.listNotEmpty(
+                v,
+                message: 'Select at least one interest',
+              ),
+            ),
+            const SizedBox(height: AppDesign.gapSectionMd),
+
+            // — Terms
+            BaseCheckbox(
+              value: _acceptTerms,
+              label: 'I accept the terms and conditions',
+              onChanged: (v) => setState(() => _acceptTerms = v),
             ),
             const SizedBox(height: AppDesign.gapSectionLg),
 
