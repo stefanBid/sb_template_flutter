@@ -107,28 +107,28 @@ class _BaseBottomSheetContent extends StatelessWidget {
               MediaQuery.of(context).viewInsets.bottom +
               MediaQuery.viewPaddingOf(context).bottom,
         ),
-        child: Container(
-          width: double.infinity,
-          height: resolvedHeight,
-          decoration: BoxDecoration(
-            color: AppColors.of(context).surface,
-            borderRadius: AppDesign.borderRadiusTopMd,
-          ),
-          child: Padding(
-            padding: AppDesign.paddingPage,
-            child: Column(
-              mainAxisSize: hasFixedHeight
-                  ? MainAxisSize.max
-                  : MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                header,
-                if (hasFixedHeight)
-                  Expanded(child: SingleChildScrollView(child: child))
-                else
-                  Flexible(child: SingleChildScrollView(child: child)),
-                const SizedBox(height: AppDesign.gapSectionSm),
-              ],
+        child: Material(
+          color: AppColors.of(context).surface,
+          borderRadius: AppDesign.borderRadiusTopMd,
+          child: SizedBox(
+            width: double.infinity,
+            height: resolvedHeight,
+            child: Padding(
+              padding: AppDesign.paddingPage,
+              child: Column(
+                mainAxisSize: hasFixedHeight
+                    ? MainAxisSize.max
+                    : MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  header,
+                  if (hasFixedHeight)
+                    Expanded(child: SingleChildScrollView(child: child))
+                  else
+                    Flexible(child: SingleChildScrollView(child: child)),
+                  const SizedBox(height: AppDesign.gapSectionSm),
+                ],
+              ),
             ),
           ),
         ),
