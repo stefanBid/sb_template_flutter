@@ -5,6 +5,7 @@ import 'router.dart';
 import 'helpers/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
