@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../../helpers/app_colors.dart';
@@ -123,7 +122,7 @@ class HomeScreen extends StatelessWidget {
     return StandardPageLayout(
       hasPadding: false,
       appBar: const ClassicAppBar(
-        leading: Icon(PhosphorIconsBold.house),
+        leading: Icon(Icons.home),
         title: 'This is a modern Home Page',
       ),
       body: Column(
@@ -147,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: SectionGroup(
                     groupTitle: 'Section 1',
-                    groupIcon: PhosphorIconsBold.star,
+                    groupIcon: Icons.star,
                     groupHeight: 220,
                     child: GcListView(
                       itemBuilder: (context, index) =>
@@ -164,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: SectionGroup(
                     groupTitle: 'Section 2',
-                    groupIcon: PhosphorIconsBold.heart,
+                    groupIcon: Icons.favorite,
                     groupHeight: 220,
                     child: GcListView(
                       itemBuilder: (context, index) =>
@@ -180,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: SectionGroup(
                     groupTitle: 'Section 3',
-                    groupIcon: PhosphorIconsBold.fire,
+                    groupIcon: Icons.local_fire_department,
                     groupHeight: 220,
                     child: GcListView(
                       itemBuilder: (context, index) =>

@@ -135,4 +135,10 @@ class AppDesign {
   static const double gapSectionMd = _spacingLg; // 20 — distinct sections
   static const double gapSectionLg =
       _spacingXl; // 24 — widely separated sections
+
+  // ─── Icon sizes ──────────────────────────────────────────────────────────────
+  static const double iconSizeSm = 16; // small inline icons
+  static const double iconSizeMd = 20; // standard button / list icons
+  static const double iconSizeLg = 24; // prominent / standalone icons
+  static const double iconSizeXl = 40; // large placeholder / empty state icons
 }

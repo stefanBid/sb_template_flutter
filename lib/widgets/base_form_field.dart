@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 // Project Helpers
+import '../helpers/app_colors.dart';
 import '../helpers/app_design.dart';
 import '../helpers/app_typography.dart';
-import '../helpers/app_colors.dart';
 
 class BaseFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -20,6 +20,8 @@ class BaseFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
+  final int? maxLines;
+  final int? maxLength;
 
   const BaseFormField({
     super.key,
@@ -37,6 +39,8 @@ class BaseFormField extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.onFieldSubmitted,
+    this.maxLines = 1,
+    this.maxLength,
   });
 
   @override
@@ -46,7 +50,7 @@ class BaseFormField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (label != null) ...[
-          Text(label!, style: AppTypography.of(context).caption),
+          Text(label!, style: AppTypography.of(context).bodyMedium),
           const SizedBox(height: AppDesign.gapInlineSm),
         ],
         TextFormField(
@@ -59,6 +63,8 @@ class BaseFormField extends StatelessWidget {
           validator: validator,
           onChanged: onChanged,
           onFieldSubmitted: onFieldSubmitted,
+          maxLines: obscureText ? 1 : maxLines,
+          maxLength: maxLength,
           style: AppTypography.of(context).body,
           decoration: InputDecoration(
             hintText: hint,
@@ -66,7 +72,11 @@ class BaseFormField extends StatelessWidget {
               context,
             ).body.copyWith(color: AppColors.of(context).muted),
             prefixIcon: prefixIcon != null
-                ? Icon(prefixIcon, color: AppColors.of(context).muted, size: 20)
+                ? Icon(
+                    prefixIcon,
+                    color: AppColors.of(context).muted,
+                    size: AppDesign.iconSizeMd,
+                  )
                 : null,
             suffixIcon: suffixIcon,
             filled: true,

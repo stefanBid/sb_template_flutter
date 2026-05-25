@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../../../helpers/app_colors.dart';
@@ -69,7 +68,7 @@ class HeroPageLayout extends StatelessWidget {
             leading: BaseIconButton(
               color: Colors.white,
               type: IconButtonType.outlined,
-              icon: PhosphorIconsRegular.arrowBendUpLeft,
+              icon: Icons.reply,
               onPressed: onBack ?? () => AppRouter.goBack(context),
               tooltip: 'Back',
             ),

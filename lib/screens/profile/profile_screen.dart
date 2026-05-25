@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../../helpers/app_colors.dart';
@@ -23,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StandardPageLayout(
       appBar: const ClassicAppBar(
-        leading: Icon(PhosphorIconsBold.user),
+        leading: Icon(Icons.person),
         title: 'Profile',
       ),
       body: SingleChildScrollView(
@@ -57,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       BaseBadge(
                         label: 'Admin',
-                        icon: PhosphorIconsRegular.shieldCheck,
+                        icon: Icons.verified_user_outlined,
                         style: BadgeStyle(
                           color: AppColors.primary.withAlpha(40),
                           foregroundColor: AppColors.primary,
@@ -65,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       BaseBadge(
                         label: 'Pro',
-                        icon: PhosphorIconsRegular.star,
+                        icon: Icons.star_outline,
                         style: BadgeStyle(
                           color: AppColors.warning.withAlpha(40),
                           foregroundColor: AppColors.warning,
@@ -113,22 +112,22 @@ class ProfileScreen extends StatelessWidget {
             Text('Settings', style: AppTypography.of(context).heading3),
             const SizedBox(height: AppDesign.gapItemSm),
             _SettingsRow(
-              icon: PhosphorIconsRegular.bell,
+              icon: Icons.notifications_outlined,
               label: 'Notifications',
               onTap: () {},
             ),
             _SettingsRow(
-              icon: PhosphorIconsRegular.lock,
+              icon: Icons.lock_outline,
               label: 'Privacy & Security',
               onTap: () {},
             ),
             _SettingsRow(
-              icon: PhosphorIconsRegular.palette,
+              icon: Icons.palette_outlined,
               label: 'Appearance',
               onTap: () {},
             ),
             _SettingsRow(
-              icon: PhosphorIconsRegular.question,
+              icon: Icons.help_outline,
               label: 'Help & Support',
               onTap: () {},
             ),
@@ -139,7 +138,7 @@ class ProfileScreen extends StatelessWidget {
               fullWidth: true,
               type: BaseButtonType.outlined,
               label: 'Log out',
-              icon: PhosphorIconsRegular.signOut,
+              icon: Icons.logout,
               onPressed: () {},
             ),
           ],
@@ -173,7 +172,7 @@ class _SettingsRow extends StatelessWidget {
             const SizedBox(width: AppDesign.gapInlineSm),
             Expanded(child: Text(label, style: AppTypography.of(context).body)),
             Icon(
-              PhosphorIconsRegular.caretRight,
+              Icons.chevron_right,
               size: 16,
               color: AppColors.of(context).muted,
             ),

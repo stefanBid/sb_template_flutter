@@ -5,7 +5,7 @@ import '../helpers/app_colors.dart';
 import '../helpers/app_design.dart';
 import '../helpers/app_typography.dart';
 
-enum BaseButtonType { filled, outlined }
+enum BaseButtonType { filled, outlined, ghost }
 
 class BaseButton extends StatelessWidget {
   final String? label;
@@ -16,6 +16,9 @@ class BaseButton extends StatelessWidget {
   final bool fullWidth;
   final bool isLoading;
 
+  final bool pill;
+  final Color? color;
+
   const BaseButton({
     super.key,
     this.label,
@@ -25,26 +28,44 @@ class BaseButton extends StatelessWidget {
     this.type = BaseButtonType.filled,
     this.fullWidth = false,
     this.isLoading = false,
+    this.pill = false,
+    this.color,
   }) : assert(label != null || icon != null);
 
   @override
   Widget build(BuildContext context) {
     final colors = AppColors.of(context);
-    final accentColor = colors.isDark ? AppColors.secondary : AppColors.primary;
+    final accent = color ?? AppColors.primary;
     final contentColor = AppTypography.of(context).body.color ?? colors.text;
 
-    final fillColor = type == BaseButtonType.filled
-        ? accentColor
-        : accentColor.withAlpha(20);
+    final tapColor = switch (type) {
+      BaseButtonType.filled => colors.text.withAlpha(20),
+      BaseButtonType.outlined => accent.withAlpha(30),
+      BaseButtonType.ghost => accent.withAlpha(20),
+    };
 
-    final resolvedContentColor = type == BaseButtonType.outlined
-        ? accentColor
-        : contentColor;
+    final fillColor = switch (type) {
+      BaseButtonType.filled => accent,
+      BaseButtonType.outlined => Colors.transparent,
+      BaseButtonType.ghost => Colors.transparent,
+    };
+
+    final resolvedContentColor = switch (type) {
+      BaseButtonType.filled => contentColor,
+      BaseButtonType.outlined => accent,
+      BaseButtonType.ghost => accent,
+    };
+
+    final border = type == BaseButtonType.outlined
+        ? Border.all(color: accent, width: 1.5)
+        : type == BaseButtonType.filled
+        ? Border.all(color: accent, width: 1.5)
+        : null;
 
     Widget content = isLoading
         ? SizedBox(
-            width: 20,
-            height: 20,
+            width: AppDesign.iconSizeMd,
+            height: AppDesign.iconSizeMd,
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(resolvedContentColor),
@@ -54,7 +75,11 @@ class BaseButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (icon != null)
-                Icon(icon, size: 20, color: resolvedContentColor),
+                Icon(
+                  icon,
+                  size: AppDesign.iconSizeMd,
+                  color: resolvedContentColor,
+                ),
               if (icon != null && label != null)
                 const SizedBox(width: AppDesign.gapInlineSm),
               if (label != null)
@@ -77,19 +102,21 @@ class BaseButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         borderRadius: AppDesign.borderRadiusXs,
-        child: InkWell(
-          onTap: isLoading ? null : onPressed,
-          borderRadius: AppDesign.borderRadiusXs,
-          splashColor: colors.text.withAlpha(60),
-          highlightColor: colors.text.withAlpha(30),
-          child: Ink(
-            decoration: BoxDecoration(
-              color: fillColor,
-              borderRadius: AppDesign.borderRadiusXs,
-              border: Border.all(color: accentColor, width: 1.5),
+        child: Ink(
+          decoration: BoxDecoration(
+            color: fillColor,
+            borderRadius: AppDesign.borderRadiusXs,
+            border: border,
+          ),
+          child: InkWell(
+            onTap: isLoading ? null : onPressed,
+            borderRadius: AppDesign.borderRadiusXs,
+            splashColor: tapColor,
+            highlightColor: tapColor,
+            child: Padding(
+              padding: AppDesign.paddingSymmetricMd,
+              child: content,
             ),
-            padding: AppDesign.paddingSymmetricLg,
-            child: content,
           ),
         ),
       ),

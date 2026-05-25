@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../helpers/app_colors.dart';
@@ -31,20 +30,20 @@ class AppLayout extends StatelessWidget {
     const _TabItem(
       route: AppRouter.home,
       label: 'Home',
-      icon: PhosphorIconsBold.house,
-      activeIcon: PhosphorIconsFill.house,
+      icon: Icons.home,
+      activeIcon: Icons.home,
     ),
     const _TabItem(
       route: AppRouter.forms,
       label: 'Forms',
-      icon: PhosphorIconsBold.fileText,
-      activeIcon: PhosphorIconsFill.fileText,
+      icon: Icons.description,
+      activeIcon: Icons.description,
     ),
     const _TabItem(
       route: AppRouter.profile,
       label: 'Profile',
-      icon: PhosphorIconsBold.user,
-      activeIcon: PhosphorIconsFill.user,
+      icon: Icons.person,
+      activeIcon: Icons.person,
     ),
   ];
 

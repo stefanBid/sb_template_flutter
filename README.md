@@ -5,7 +5,7 @@
 
   # SB-Template Flutter
 
-  ![Version](https://img.shields.io/badge/version-2.0.1-blue)
+  ![Version](https://img.shields.io/badge/version-3.0.0-blue)
   [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)](https://flutter.dev)
   ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
   ![License](https://img.shields.io/badge/license-MIT-green)
@@ -115,11 +115,13 @@ lib/
 ├── helpers/                         # Design system tokens and utilities
 │   ├── app_colors.dart              # Adaptive colour palette
 │   ├── app_design.dart              # Spacing, border radius, padding tokens
+│   ├── app_image.dart               # Image type resolver and widget builder
+│   ├── app_logger.dart              # Debug-only logger (stripped in release)
 │   ├── app_router.dart              # Type-safe navigation layer (AppRouter)
+│   ├── app_storage.dart             # Encrypted key-value storage singleton
 │   ├── app_theme.dart               # ThemeData configuration
 │   ├── app_typography.dart          # Text style scale
-│   ├── app_validation.dart          # Static form validators
-│   └── app_logger.dart              # Debug-only logger (stripped in release)
+│   └── app_validation.dart          # Static form validators
 │
 ├── layouts/                         # Reusable page-level layout scaffolds
 │   ├── app_layout.dart              # Shell with bottom navigation bar
@@ -143,12 +145,18 @@ lib/
 │
 └── widgets/                         # Reusable UI components
     ├── base_badge.dart              # Status badge
+    ├── base_bottom_sheet.dart       # Modal bottom sheet with drag handle
     ├── base_button.dart             # Primary action button
     ├── base_card.dart               # Image + text card
+    ├── base_checkbox.dart           # Styled checkbox with label
+    ├── base_dropdown.dart           # Single-select dropdown field
     ├── base_form_field.dart         # Form-integrated text field
     ├── base_icon_button.dart        # Icon-only button
     ├── base_image_container.dart    # Network / asset image with fade
+    ├── base_image_picker.dart       # Tappable image picker with preview
+    ├── base_image_selector_bottom_sheet.dart  # Bottom sheet: gallery / camera / remove
     ├── base_input.dart              # Standalone text input
+    ├── base_multiselect.dart        # Multi-select field with chips
     ├── base_scaffold_messenger.dart # Themed SnackBar utility
     ├── base_value_card.dart         # Metric display card (value + label)
     └── group-container/
@@ -232,16 +240,16 @@ Top-only and bottom-only variants follow the same suffix pattern (e.g. `borderRa
 | `AppDesign.paddingHorizontalSm/Md/Lg` | Horizontal only |
 | `AppDesign.paddingPage` | Standard page content padding |
 
-### Icons — PhosphorIcons
+### Icons — Material Icons
 
-This project uses [`phosphor_flutter`](https://pub.dev/packages/phosphor_flutter) for all icons. Never use Material `Icons.*`.
+This project uses Flutter's built-in **Material Icons** (`Icons.*`). Do not use PhosphorIcons or any other external icon library — no extra import is needed beyond `flutter/material.dart`.
 
-Available weight variants: `PhosphorIconsRegular`, `PhosphorIconsBold`, `PhosphorIconsFill`, `PhosphorIconsLight`, `PhosphorIconsThin`, `PhosphorIconsDuotone`.
+Prefer outlined variants for a lighter visual style (`Icons.home_outlined`, `Icons.mail_outline`). Use filled variants for active or selected states.
 
 ```dart
-Icon(PhosphorIconsBold.house)
-Icon(PhosphorIconsFill.magnifyingGlass)
-Icon(PhosphorIconsRegular.checkCircle)
+Icon(Icons.home)
+Icon(Icons.mail_outline)
+Icon(Icons.check_circle_outline)
 ```
 
 ---
@@ -408,14 +416,16 @@ Full-featured action button with variants, loading state and optional icon.
 | `label` | `String?` | Button label text. |
 | `icon` | `IconData?` | Optional icon (at least one of `label`/`icon` is required). |
 | `onPressed` | `VoidCallback?` | Tap handler. `null` renders the button as disabled. |
-| `type` | `BaseButtonType` | `filled` (default) or `outlined`. |
+| `type` | `BaseButtonType` | `filled` (default), `outlined`, or `ghost`. |
+| `color` | `Color?` | Overrides the accent colour. |
+| `pill` | `bool` | Rounded pill shape. Defaults to `false`. |
 | `fullWidth` | `bool` | Expand to fill available width. Defaults to `false`. |
 | `isLoading` | `bool` | Show loading spinner instead of content. Defaults to `false`. |
 | `tooltip` | `String?` | Accessibility tooltip. |
 
 ```dart
 BaseButton(label: 'Submit', onPressed: _submit, isLoading: _isLoading)
-BaseButton(icon: PhosphorIconsBold.plus, type: BaseButtonType.outlined, onPressed: _add)
+BaseButton(icon: Icons.add, type: BaseButtonType.outlined, onPressed: _add)
 ```
 
 ### `BaseIconButton`
@@ -427,7 +437,9 @@ Icon-only button with filled or outlined style.
 | `icon` | `IconData` | Required. Icon to display. |
 | `onPressed` | `VoidCallback?` | Tap handler. |
 | `type` | `IconButtonType` | `filled` (default) or `outlined`. |
-| `color` | `Color?` | Override icon and border colour. |
+| `color` | `Color?` | Background (filled) or border (outlined) colour. |
+| `iconColor` | `Color?` | Icon colour override. |
+| `badgeCount` | `int?` | Red notification badge with count. |
 | `tooltip` | `String?` | Accessibility tooltip. |
 
 ### `BaseBadge`
@@ -452,7 +464,7 @@ Status or label badge with optional icon.
 
 ```dart
 BaseBadge(label: 'Active', style: BadgeStyle(color: AppColors.success))
-BaseBadge(icon: PhosphorIconsRegular.star, style: BadgeStyle(variant: BadgeVariant.outlined))
+BaseBadge(icon: Icons.star_border, style: BadgeStyle(variant: BadgeVariant.outlined))
 ```
 
 ### `BaseCard`
@@ -500,6 +512,50 @@ Standalone text field without form integration. Use for search bars or filters.
 | `onChanged` | `ValueChanged<String>?` | Called on every keystroke. |
 | `fillColor` | `Color?` | Background colour override. |
 
+### `BaseCheckbox`
+
+Styled checkbox with optional label. Tapping the entire row toggles the value.
+
+| Prop | Type | Description |
+|---|---|---|
+| `value` | `bool` | Required. Current checked state. |
+| `onChanged` | `ValueChanged<bool>` | Required. Called when toggled. |
+| `label` | `String?` | Optional label shown beside the checkbox. |
+| `fullWidth` | `bool` | Expands the row to full width. Defaults to `false`. |
+
+### `BaseDropdown`
+
+Styled single-select `DropdownButtonFormField` for use inside a `Form`. For multi-select use `BaseMultiselect`.
+
+| Prop | Type | Description |
+|---|---|---|
+| `initialValue` | `T?` | Required. Currently selected value. |
+| `items` | `List<BaseDropdownOption<T>>` | Required. Available options. |
+| `label` | `String?` | Label displayed above the field. |
+| `hint` | `String?` | Placeholder text. |
+| `prefixIcon` | `IconData?` | Leading icon. |
+| `voidSelectionItemLabel` | `String?` | Adds a null option at the top of the list. |
+| `disabled` | `bool` | Disables interaction. Defaults to `false`. |
+| `isLoading` | `bool` | Shows loading spinner. Defaults to `false`. |
+| `validator` | `String? Function(T?)?` | Validation function. |
+| `onChanged` | `ValueChanged<T?>?` | Called when selection changes. |
+
+### `BaseMultiselect`
+
+Styled multi-select field for use inside a `Form`. Opens an `AlertDialog` with checkboxes; selected values are shown as deletable chips. Uses `BaseDropdownOption<T>` — the same data class as `BaseDropdown`.
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `List<BaseDropdownOption<T>>` | Required. Available options. |
+| `initialValues` | `List<T>` | Currently selected values. Defaults to `[]`. |
+| `label` | `String?` | Label displayed above the field. |
+| `hint` | `String?` | Placeholder text. |
+| `prefixIcon` | `IconData?` | Leading icon. |
+| `disabled` | `bool` | Disables interaction. Defaults to `false`. |
+| `isLoading` | `bool` | Shows loading spinner. Defaults to `false`. |
+| `validator` | `String? Function(List<T>?)?` | Validation function. |
+| `onChanged` | `ValueChanged<List<T>>?` | Called when selection changes. |
+
 ### `BaseImageContainer`
 
 Network or asset image with fade-in animation and optional darkening filter.
@@ -507,9 +563,8 @@ Network or asset image with fade-in animation and optional darkening filter.
 | Prop | Type | Description |
 |---|---|---|
 | `imageUrl` | `String` | Required. URL or asset path. |
-| `type` | `ImageType` | `network` (default) or `asset`. |
-| `filter` | `ImageFilter` | `none` (default) or `darken`. |
-| `fit` | `ImageFit` | `cover` (default) or `contain`. |
+| `filter` | `ImageFilter` | `ImageFilter.none` (default) or `.darken`. |
+| `fit` | `ImageFit` | `ImageFit.cover` (default) or `.contain`. |
 | `width` | `double?` | Container width. |
 | `height` | `double?` | Container height. |
 | `borderRadius` | `BorderRadius` | Defaults to `AppDesign.borderRadiusMd`. |
@@ -543,6 +598,22 @@ BaseScaffoldMessenger.show(
 | `SnackBarType.warning` | `AppColors.warning` |
 | `SnackBarType.info` | Primary (adaptive) |
 
+### `BaseBottomSheet`
+
+Static utility that shows a modal bottom sheet with an optional header. Never call `showModalBottomSheet` directly.
+
+```dart
+BaseBottomSheet.show(
+  context,
+  title: 'Title',        // optional
+  subtitle: 'Subtitle',  // optional
+  heightFactor: 0.5,     // optional — fraction of screen height (0, 1]
+  child: MyContent(),
+);
+
+BaseBottomSheet.hide(context); // programmatic close
+```
+
 ### `GcListView` (group-container)
 
 A null-safe `ListView.builder` wrapper. Items returned as `null` from `itemBuilder` are silently skipped.
@@ -565,6 +636,44 @@ A `GridView.count` wrapper with a `GridDimensions` configuration object.
 
 **`GridDimensions` defaults:** `crossAxisCount: 2`, `childAspectRatio: 3/2`, `crossAxisSpacing` and `mainAxisSpacing` use `AppDesign.gapItemMd`.
 
+### `BaseImagePicker`
+
+Tappable image preview with a placeholder icon. Opens `BaseImageSelectorBottomSheet` on tap. The caller owns the image state.
+
+| Prop | Type | Description |
+|---|---|---|
+| `imageUrl` | `String?` | Current image path or URL. `null` shows the placeholder. |
+| `height` | `double` | Container height. Defaults to `200`. |
+| `onImageSelected` | `ValueChanged<XFile?>` | Required. Called with the picked `XFile` or `null` on remove. |
+
+```dart
+BaseImagePicker(
+  imageUrl: _imageUrl,
+  onImageSelected: (XFile? file) => setState(
+    () => _imageUrl = file?.path,
+  ),
+)
+```
+
+### `BaseImageSelectorBottomSheet`
+
+Static utility that shows a bottom sheet with gallery / camera options and an optional remove action.
+
+| Prop | Type | Description |
+|---|---|---|
+| `onImageSourceSelected` | `void Function(ImageSource)` | Required. Called with the chosen source. |
+| `hasImage` | `bool` | Show the Remove option. Defaults to `false`. |
+| `onRemove` | `VoidCallback?` | Called when Remove is tapped. |
+
+```dart
+BaseImageSelectorBottomSheet.show(
+  context,
+  onImageSourceSelected: (source) => _pickImage(source),
+  hasImage: _imageUrl != null,
+  onRemove: () => setState(() => _imageUrl = null),
+);
+```
+
 ---
 
 ## 9. Helpers & Validators
@@ -579,6 +688,21 @@ Exports `AppColors`. See [Design System — Colours](#colours--appcolors).
 
 Exports `AppDesign`. See [Design System — Spacing & Radius](#spacing--radius--appdesign).
 
+### `app_image.dart`
+
+Exports `AppImage` — a static utility for resolving the source type of an image URL/path and building the appropriate widget.
+
+```dart
+final type = AppImage.getType(url); // → ImageType.network | .asset | .file
+final widget = AppImage.buildImage(context, imageUrl: url, type: type, fit: BoxFit.cover);
+```
+
+| `ImageType` | URL prefix | Widget rendered |
+|---|---|---|
+| `network` | `http://` or `https://` | `CachedNetworkImage` |
+| `asset` | starts with `assets/` | `Image.asset` |
+| `file` | any other path | `Image.file` |
+
 ### `app_typography.dart`
 
 Exports `AppTypography`. See [Design System — Typography](#typography--apptypography).
@@ -590,6 +714,28 @@ Exports the `ThemeData` used in `MaterialApp`. Edit this file to change the font
 ### `app_router.dart`
 
 Exports `AppRouter`, `AppTypedRoute<P>`, `GenericRouteParams`, `NoParams`, and built-in params classes (`DetailParams`). See [Routing](#5-routing).
+
+### `app_storage.dart`
+
+Exports `AppStorage` — an app-wide singleton for encrypted key-value storage backed by `flutter_secure_storage`. Uses Android EncryptedSharedPreferences and iOS Keychain.
+
+```dart
+await AppStorage.instance.write('token', value);
+final token = await AppStorage.instance.read('token');
+await AppStorage.instance.delete('token');
+
+// JSON objects
+await AppStorage.instance.writeObject('user', user, (u) => u.toJson());
+final user = await AppStorage.instance.readObject('user', User.fromJson);
+```
+
+| Method | Description |
+|---|---|
+| `read(key)` | Returns stored string or `null` |
+| `write(key, value)` | Stores a string value |
+| `delete(key)` | Removes the entry |
+| `readObject<T>(key, fromJson)` | Deserialises a JSON object or returns `null` |
+| `writeObject<T>(key, value, toJson)` | Serialises and stores a JSON object |
 
 ### `app_validation.dart`
 
@@ -676,7 +822,7 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 
 | File | Applies to | Governs |
 |---|---|---|
-| `design-system.instructions.md` | `**/*.dart` | AppColors, AppTypography, AppDesign tokens, PhosphorIcons API, widget checklist |
+| `design-system.instructions.md` | `**/*.dart` | AppColors, AppTypography, AppDesign tokens, Material Icons, widget checklist |
 | `screens.instructions.md` | `**/screens/**` | Screen structure, layouts, app bars, code organisation rules |
 | `widgets.instructions.md` | `**/widgets/**` | Widget placement rules and widget API reference |
 | `routing.instructions.md` | `**/*router*` | AppRouter API, transitions, new-route workflow |
@@ -794,12 +940,11 @@ The `bump-version` Copilot Agent prompt automates steps 1–4: it detects change
 
 | Package | Version | Purpose |
 |---|---|---|
-| `go_router` | ^17.2.2 | Declarative routing with deep linking |
-| `google_fonts` | ^8.0.2 | Font loading (Lato used by default) |
+| `go_router` | ^17.2.3 | Declarative routing with deep linking |
+| `google_fonts` | ^8.1.0 | Font loading (Lato used by default) |
 | `cached_network_image` | ^3.4.1 | Network image loading with cache and fade |
-| `phosphor_flutter` | ^2.1.0 | Icon library |
-| `image_picker` | ^1.2.1 | Camera and gallery access |
-| `package_info_plus` | ^9.0.1 | App version and build info at runtime |
+| `flutter_secure_storage` | ^10.3.0 | Encrypted key-value storage (Keychain / EncryptedSharedPreferences) |
+| `image_picker` | ^1.2.2 | Camera and gallery access |
 | `intl` | ^0.20.2 | Internationalisation utilities |
 | `uuid` | ^4.5.2 | Unique ID generation |
 | `cupertino_icons` | ^1.0.9 | iOS-style icon assets |

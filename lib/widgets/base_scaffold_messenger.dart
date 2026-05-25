@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../helpers/app_colors.dart';
@@ -20,18 +19,12 @@ class BaseScaffoldMessenger {
     final colors = AppColors.of(context);
 
     final (bgColor, iconData) = switch (type) {
-      SnackBarType.success => (
-        AppColors.success,
-        PhosphorIconsRegular.checkCircle,
-      ),
-      SnackBarType.error => (AppColors.error, PhosphorIconsRegular.xCircle),
-      SnackBarType.warning => (
-        AppColors.warning,
-        PhosphorIconsRegular.warningCircle,
-      ),
+      SnackBarType.success => (AppColors.success, Icons.check_circle_outline),
+      SnackBarType.error => (AppColors.error, Icons.cancel_outlined),
+      SnackBarType.warning => (AppColors.warning, Icons.error_outline),
       SnackBarType.info => (
         colors.isDark ? AppColors.secondary : AppColors.primary,
-        PhosphorIconsRegular.info,
+        Icons.info_outline,
       ),
     };
 

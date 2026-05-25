@@ -126,23 +126,21 @@ Access: `AppDesign.{token}` (all static).
 
 ---
 
-## Icons — `phosphor_flutter`
+## Icons — Material Icons
 
-The default icon style is **`regular`**. Use other styles only when explicitly requested.
+This project uses Flutter's built-in **Material Icons** (`Icons.*`). **Do not import or use `phosphor_flutter` or any other external icon package.**
 
 ```dart
-import 'package:phosphor_flutter/phosphor_flutter.dart';
-
 // With Icon wrapper:
-Icon(PhosphorIconsRegular.fileText)
-Icon(PhosphorIconsFill.heart)
-Icon(PhosphorIconsBold.arrowLeft)
+Icon(Icons.home)
+Icon(Icons.mail_outline)
+Icon(Icons.arrow_forward)
 
 // As IconData directly (e.g. prefixIcon parameter):
-PhosphorIconsRegular.fileText
+Icons.mail_outline
 ```
 
-Available classes: `PhosphorIconsRegular`, `PhosphorIconsBold`, `PhosphorIconsFill`, `PhosphorIconsDuotone`, `PhosphorIconsLight`, `PhosphorIconsThin`.
+Prefer outlined variants (`_outline`, `_outlined`) for a lighter visual style. Use filled variants for active/selected states only.
 
 ---
 
@@ -155,3 +153,4 @@ Available classes: `PhosphorIconsRegular`, `PhosphorIconsBold`, `PhosphorIconsFi
 - [ ] Network images use `BaseImageContainer`
 - [ ] Buttons use `BaseButton` / `BaseIconButton`
 - [ ] Inputs use `BaseInput` / `BaseFormField`
+- [ ] Icons use `Icons.*` from Material — do not use external icon packages

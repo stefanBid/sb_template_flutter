@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 // Project Helpers
 import '../../helpers/app_colors.dart';
@@ -13,7 +13,11 @@ import '../../layouts/body/standard_page_layout.dart';
 
 // Project Widgets
 import '../../widgets/base_button.dart';
+import '../../widgets/base_checkbox.dart';
+import '../../widgets/base_dropdown.dart';
 import '../../widgets/base_form_field.dart';
+import '../../widgets/base_multiselect.dart';
+import '../../widgets/base_image_picker.dart';
 import '../../widgets/base_scaffold_messenger.dart';
 
 class FormSection extends StatefulWidget {
@@ -35,6 +39,25 @@ class _FormSectionState extends State<FormSection> {
   bool _isSubmitting = false;
   bool _showPassword = false;
   bool _showConfirmPassword = false;
+
+  String? _selectedRole;
+  List<String> _selectedInterests = [];
+  bool _acceptTerms = false;
+  String? _profileImageUrl;
+
+  static const _roleOptions = [
+    BaseDropdownOption(value: 'admin', label: 'Admin'),
+    BaseDropdownOption(value: 'editor', label: 'Editor'),
+    BaseDropdownOption(value: 'viewer', label: 'Viewer'),
+  ];
+
+  static const _interestOptions = [
+    BaseDropdownOption(value: 'design', label: 'Design'),
+    BaseDropdownOption(value: 'development', label: 'Development'),
+    BaseDropdownOption(value: 'marketing', label: 'Marketing'),
+    BaseDropdownOption(value: 'management', label: 'Management'),
+    BaseDropdownOption(value: 'data', label: 'Data & Analytics'),
+  ];
 
   @override
   void initState() {
@@ -63,11 +86,25 @@ class _FormSectionState extends State<FormSection> {
     passwordController.clear();
     confirmPasswordController.clear();
 
-    if (_showPassword) setState(() => _showPassword = false);
-    if (_showConfirmPassword) setState(() => _showConfirmPassword = false);
+    setState(() {
+      if (_showPassword) _showPassword = false;
+      if (_showConfirmPassword) _showConfirmPassword = false;
+      _selectedRole = null;
+      _selectedInterests = [];
+      _acceptTerms = false;
+      _profileImageUrl = null;
+    });
   }
 
   Future<void> _submit() async {
+    if (!_acceptTerms) {
+      BaseScaffoldMessenger.show(
+        context,
+        message: 'You must accept the terms and conditions',
+        type: SnackBarType.error,
+      );
+      return;
+    }
     if (_formKey.currentState!.validate()) {
       setState(() => _isSubmitting = true);
       await Future.delayed(const Duration(seconds: 2));
@@ -97,6 +134,12 @@ class _FormSectionState extends State<FormSection> {
               style: AppTypography.of(context).heading3,
             ),
             const SizedBox(height: AppDesign.gapItemSm),
+            BaseImagePicker(
+              imageUrl: _profileImageUrl,
+              onImageSelected: (XFile? file) =>
+                  setState(() => _profileImageUrl = file?.path),
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -105,7 +148,7 @@ class _FormSectionState extends State<FormSection> {
                     fillColor: AppColors.of(context).surface,
                     controller: nameController,
                     label: 'Name',
-                    prefixIcon: PhosphorIconsRegular.user,
+                    prefixIcon: Icons.person_outline,
                     validator: (value) => AppValidation.notEmpty(
                       value,
                       message: 'Name is required',
@@ -118,7 +161,7 @@ class _FormSectionState extends State<FormSection> {
                     controller: surnameController,
                     fillColor: AppColors.of(context).surface,
                     label: 'Surname',
-                    prefixIcon: PhosphorIconsRegular.user,
+                    prefixIcon: Icons.person_outline,
                     validator: (value) => AppValidation.notEmpty(
                       value,
                       message: 'Surname is required',
@@ -139,7 +182,7 @@ class _FormSectionState extends State<FormSection> {
               controller: emailController,
               fillColor: AppColors.of(context).surface,
               label: 'Email',
-              prefixIcon: PhosphorIconsRegular.envelope,
+              prefixIcon: Icons.mail_outline,
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               validator: (value) =>
@@ -151,12 +194,12 @@ class _FormSectionState extends State<FormSection> {
               controller: passwordController,
               fillColor: AppColors.of(context).surface,
               label: 'Password',
-              prefixIcon: PhosphorIconsRegular.lock,
+              prefixIcon: Icons.lock_outline,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showPassword
-                      ? PhosphorIconsRegular.eye
-                      : PhosphorIconsRegular.eyeSlash,
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
                   size: 20,
                 ),
                 onPressed: () => setState(() => _showPassword = !_showPassword),
@@ -180,12 +223,12 @@ class _FormSectionState extends State<FormSection> {
               controller: confirmPasswordController,
               fillColor: AppColors.of(context).surface,
               label: 'Confirm Password',
-              prefixIcon: PhosphorIconsRegular.lockKey,
+              prefixIcon: Icons.key,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showConfirmPassword
-                      ? PhosphorIconsRegular.eye
-                      : PhosphorIconsRegular.eyeSlash,
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
                   size: 20,
                 ),
                 onPressed: () => setState(
@@ -200,6 +243,44 @@ class _FormSectionState extends State<FormSection> {
                 message: 'Passwords do not match',
               ),
             ),
+            const SizedBox(height: AppDesign.gapSectionMd),
+
+            // — Preferences
+            Text('Preferences', style: AppTypography.of(context).heading3),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseDropdown<String>(
+              initialValue: _selectedRole,
+              label: 'Role',
+              hint: 'Select a role',
+              fillColor: AppColors.of(context).surface,
+              prefixIcon: Icons.work_outline,
+              items: _roleOptions,
+              onChanged: (v) => setState(() => _selectedRole = v),
+              validator: (v) =>
+                  AppValidation.notEmpty(v, message: 'Role is required'),
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseMultiselect<String>(
+              initialValues: _selectedInterests,
+              label: 'Interests',
+              hint: 'Select your interests',
+              fillColor: AppColors.of(context).surface,
+              prefixIcon: Icons.star_border,
+              items: _interestOptions,
+              onChanged: (v) => setState(() => _selectedInterests = v),
+              validator: (v) => AppValidation.listNotEmpty(
+                v,
+                message: 'Select at least one interest',
+              ),
+            ),
+            const SizedBox(height: AppDesign.gapSectionMd),
+
+            // — Terms
+            BaseCheckbox(
+              value: _acceptTerms,
+              label: 'I accept the terms and conditions',
+              onChanged: (v) => setState(() => _acceptTerms = v),
+            ),
             const SizedBox(height: AppDesign.gapSectionLg),
 
             // — Submit
@@ -207,7 +288,7 @@ class _FormSectionState extends State<FormSection> {
               fullWidth: true,
               onPressed: _isSubmitting ? null : _submit,
               label: 'Submit',
-              icon: PhosphorIconsBold.paperPlaneRight,
+              icon: Icons.send,
               isLoading: _isSubmitting,
             ),
           ],
@@ -224,7 +305,7 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const StandardPageLayout(
       appBar: ClassicAppBar(
-        leading: Icon(PhosphorIconsBold.fileText),
+        leading: Icon(Icons.description),
         title: 'Build Professional Forms',
       ),
       body: FormSection(),

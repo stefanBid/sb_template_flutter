@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../../helpers/app_colors.dart';
@@ -42,7 +41,7 @@ class DetailsScreen extends StatelessWidget {
             children: [
               BaseBadge(
                 label: 'Template',
-                icon: PhosphorIconsRegular.blueprint,
+                icon: Icons.architecture_outlined,
                 style: BadgeStyle(
                   color: AppColors.primary.withAlpha(40),
                   foregroundColor: AppColors.primary,
@@ -50,7 +49,7 @@ class DetailsScreen extends StatelessWidget {
               ),
               BaseBadge(
                 label: 'Detail',
-                icon: PhosphorIconsRegular.listMagnifyingGlass,
+                icon: Icons.manage_search,
                 style: BadgeStyle(
                   color: AppColors.secondary.withAlpha(40),
                   foregroundColor: AppColors.secondary,
@@ -58,7 +57,7 @@ class DetailsScreen extends StatelessWidget {
               ),
               BaseBadge(
                 label: 'Hero Layout',
-                icon: PhosphorIconsRegular.image,
+                icon: Icons.image_outlined,
                 style: BadgeStyle(
                   color: AppColors.success.withAlpha(40),
                   foregroundColor: AppColors.success,
@@ -66,7 +65,7 @@ class DetailsScreen extends StatelessWidget {
               ),
               BaseBadge(
                 label: 'Outlined',
-                icon: PhosphorIconsRegular.tag,
+                icon: Icons.label_outline,
                 style: BadgeStyle(
                   color: AppColors.of(context).muted,
                   variant: BadgeVariant.outlined,
