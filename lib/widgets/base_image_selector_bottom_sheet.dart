@@ -31,10 +31,7 @@ class BaseImageSelectorBottomSheet {
                 size: AppDesign.iconSizeLg,
                 color: AppColors.of(context).text,
               ),
-              title: Text(
-                'Gallery',
-                style: AppTypography.of(context).body,
-              ),
+              title: Text('Gallery', style: AppTypography.of(context).body),
               onTap: () {
                 BaseBottomSheet.hide(sheetContext);
                 onImageSourceSelected(ImageSource.gallery);
@@ -46,10 +43,7 @@ class BaseImageSelectorBottomSheet {
                 size: AppDesign.iconSizeLg,
                 color: AppColors.of(context).text,
               ),
-              title: Text(
-                'Camera',
-                style: AppTypography.of(context).body,
-              ),
+              title: Text('Camera', style: AppTypography.of(context).body),
               onTap: () {
                 BaseBottomSheet.hide(sheetContext);
                 onImageSourceSelected(ImageSource.camera);
@@ -64,9 +58,9 @@ class BaseImageSelectorBottomSheet {
                 ),
                 title: Text(
                   'Remove image',
-                  style: AppTypography.of(context).body.copyWith(
-                    color: AppColors.error,
-                  ),
+                  style: AppTypography.of(
+                    context,
+                  ).body.copyWith(color: AppColors.error),
                 ),
                 onTap: () {
                   BaseBottomSheet.hide(sheetContext);

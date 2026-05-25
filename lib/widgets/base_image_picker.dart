@@ -8,7 +8,7 @@ import '../helpers/app_image.dart';
 import '../helpers/app_typography.dart';
 
 // Project Widgets
-import 'base_image_selector_button.dart';
+import 'base_image_selector_bottom_sheet.dart';
 
 /// Tappable image preview that opens a bottom sheet to pick a photo from the
 /// gallery or take one with the camera.

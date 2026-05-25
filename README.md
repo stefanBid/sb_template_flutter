@@ -416,7 +416,9 @@ Full-featured action button with variants, loading state and optional icon.
 | `label` | `String?` | Button label text. |
 | `icon` | `IconData?` | Optional icon (at least one of `label`/`icon` is required). |
 | `onPressed` | `VoidCallback?` | Tap handler. `null` renders the button as disabled. |
-| `type` | `BaseButtonType` | `filled` (default) or `outlined`. |
+| `type` | `BaseButtonType` | `filled` (default), `outlined`, or `ghost`. |
+| `color` | `Color?` | Overrides the accent colour. |
+| `pill` | `bool` | Rounded pill shape. Defaults to `false`. |
 | `fullWidth` | `bool` | Expand to fill available width. Defaults to `false`. |
 | `isLoading` | `bool` | Show loading spinner instead of content. Defaults to `false`. |
 | `tooltip` | `String?` | Accessibility tooltip. |
@@ -435,7 +437,9 @@ Icon-only button with filled or outlined style.
 | `icon` | `IconData` | Required. Icon to display. |
 | `onPressed` | `VoidCallback?` | Tap handler. |
 | `type` | `IconButtonType` | `filled` (default) or `outlined`. |
-| `color` | `Color?` | Override icon and border colour. |
+| `color` | `Color?` | Background (filled) or border (outlined) colour. |
+| `iconColor` | `Color?` | Icon colour override. |
+| `badgeCount` | `int?` | Red notification badge with count. |
 | `tooltip` | `String?` | Accessibility tooltip. |
 
 ### `BaseBadge`
@@ -508,6 +512,50 @@ Standalone text field without form integration. Use for search bars or filters.
 | `onChanged` | `ValueChanged<String>?` | Called on every keystroke. |
 | `fillColor` | `Color?` | Background colour override. |
 
+### `BaseCheckbox`
+
+Styled checkbox with optional label. Tapping the entire row toggles the value.
+
+| Prop | Type | Description |
+|---|---|---|
+| `value` | `bool` | Required. Current checked state. |
+| `onChanged` | `ValueChanged<bool>` | Required. Called when toggled. |
+| `label` | `String?` | Optional label shown beside the checkbox. |
+| `fullWidth` | `bool` | Expands the row to full width. Defaults to `false`. |
+
+### `BaseDropdown`
+
+Styled single-select `DropdownButtonFormField` for use inside a `Form`. For multi-select use `BaseMultiselect`.
+
+| Prop | Type | Description |
+|---|---|---|
+| `initialValue` | `T?` | Required. Currently selected value. |
+| `items` | `List<BaseDropdownOption<T>>` | Required. Available options. |
+| `label` | `String?` | Label displayed above the field. |
+| `hint` | `String?` | Placeholder text. |
+| `prefixIcon` | `IconData?` | Leading icon. |
+| `voidSelectionItemLabel` | `String?` | Adds a null option at the top of the list. |
+| `disabled` | `bool` | Disables interaction. Defaults to `false`. |
+| `isLoading` | `bool` | Shows loading spinner. Defaults to `false`. |
+| `validator` | `String? Function(T?)?` | Validation function. |
+| `onChanged` | `ValueChanged<T?>?` | Called when selection changes. |
+
+### `BaseMultiselect`
+
+Styled multi-select field for use inside a `Form`. Opens an `AlertDialog` with checkboxes; selected values are shown as deletable chips. Uses `BaseDropdownOption<T>` — the same data class as `BaseDropdown`.
+
+| Prop | Type | Description |
+|---|---|---|
+| `items` | `List<BaseDropdownOption<T>>` | Required. Available options. |
+| `initialValues` | `List<T>` | Currently selected values. Defaults to `[]`. |
+| `label` | `String?` | Label displayed above the field. |
+| `hint` | `String?` | Placeholder text. |
+| `prefixIcon` | `IconData?` | Leading icon. |
+| `disabled` | `bool` | Disables interaction. Defaults to `false`. |
+| `isLoading` | `bool` | Shows loading spinner. Defaults to `false`. |
+| `validator` | `String? Function(List<T>?)?` | Validation function. |
+| `onChanged` | `ValueChanged<List<T>>?` | Called when selection changes. |
+
 ### `BaseImageContainer`
 
 Network or asset image with fade-in animation and optional darkening filter.
@@ -515,9 +563,8 @@ Network or asset image with fade-in animation and optional darkening filter.
 | Prop | Type | Description |
 |---|---|---|
 | `imageUrl` | `String` | Required. URL or asset path. |
-| `type` | `ImageType` | `network` (default) or `asset`. |
-| `filter` | `ImageFilter` | `none` (default) or `darken`. |
-| `fit` | `ImageFit` | `cover` (default) or `contain`. |
+| `filter` | `ImageFilter` | `ImageFilter.none` (default) or `.darken`. |
+| `fit` | `ImageFit` | `ImageFit.cover` (default) or `.contain`. |
 | `width` | `double?` | Container width. |
 | `height` | `double?` | Container height. |
 | `borderRadius` | `BorderRadius` | Defaults to `AppDesign.borderRadiusMd`. |
@@ -550,6 +597,22 @@ BaseScaffoldMessenger.show(
 | `SnackBarType.error` | `AppColors.error` |
 | `SnackBarType.warning` | `AppColors.warning` |
 | `SnackBarType.info` | Primary (adaptive) |
+
+### `BaseBottomSheet`
+
+Static utility that shows a modal bottom sheet with an optional header. Never call `showModalBottomSheet` directly.
+
+```dart
+BaseBottomSheet.show(
+  context,
+  title: 'Title',        // optional
+  subtitle: 'Subtitle',  // optional
+  heightFactor: 0.5,     // optional — fraction of screen height (0, 1]
+  child: MyContent(),
+);
+
+BaseBottomSheet.hide(context); // programmatic close
+```
 
 ### `GcListView` (group-container)
 

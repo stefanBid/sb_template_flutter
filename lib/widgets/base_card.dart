@@ -60,7 +60,9 @@ class BaseCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: AppDesign.paddingSm.copyWith(top: AppDesign.gapItemSm),
+                        padding: AppDesign.paddingSm.copyWith(
+                          top: AppDesign.gapItemSm,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

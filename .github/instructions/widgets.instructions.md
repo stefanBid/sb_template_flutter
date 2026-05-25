@@ -38,8 +38,8 @@ BaseImageContainer(
   imageUrl: 'https://...',
   width: 200,
   height: 200,
-  fit: BoxFit.cover,        // cover | contain
-  filter: ImageFilter.none, // none | darken
+  fit: ImageFit.cover,      // ImageFit.cover | .contain
+  filter: ImageFilter.none, // ImageFilter.none | .darken
 )
 ```
 
@@ -79,13 +79,77 @@ BaseFormField(
 
 ---
 
+## BaseCheckbox
+
+Styled checkbox with optional label. Tapping the entire row toggles the value.
+
+```dart
+BaseCheckbox(
+  value: _checked,
+  onChanged: (val) => setState(() => _checked = val),
+  label: 'Agree to terms', // optional
+  fullWidth: false,         // optional — expands row to full width
+)
+```
+
+---
+
+## BaseDropdown
+
+Styled single-select `DropdownButtonFormField` for use inside a `Form`. For multi-select use `BaseMultiselect`.
+
+```dart
+BaseDropdown<String>(
+  initialValue: _value,
+  items: const [
+    BaseDropdownOption(value: 'a', label: 'Option A'),
+    BaseDropdownOption(value: 'b', label: 'Option B'),
+  ],
+  label: 'Category',
+  hint: 'Select one',
+  prefixIcon: Icons.category_outlined,  // optional
+  voidSelectionItemLabel: '— None —',    // optional — adds a null option at the top
+  disabled: false,
+  isLoading: false,
+  validator: (v) => AppValidation.notEmpty(v),
+  onChanged: (value) { ... },
+)
+```
+
+---
+
+## BaseMultiselect
+
+Styled multi-select field for use inside a `Form`. Opens an `AlertDialog` with checkboxes; selected values are shown as deletable chips. Uses `BaseDropdownOption<T>` — the same data class as `BaseDropdown`.
+
+```dart
+BaseMultiselect<String>(
+  items: const [
+    BaseDropdownOption(value: 'a', label: 'Option A'),
+    BaseDropdownOption(value: 'b', label: 'Option B'),
+  ],
+  initialValues: _selectedValues,
+  label: 'Tags',
+  hint: 'Select items',
+  prefixIcon: Icons.label_outline, // optional
+  disabled: false,
+  isLoading: false,
+  validator: (v) => v == null || v!.isEmpty ? 'Required' : null,
+  onChanged: (values) { ... },
+)
+```
+
+---
+
 ## BaseButton
 
 ```dart
 BaseButton(
   label: 'Submit',
   icon: Icons.arrow_forward, // optional
-  type: BaseButtonType.filled,           // filled | outlined
+  type: BaseButtonType.filled, // filled | outlined | ghost
+  color: AppColors.primary,    // optional — overrides accent colour
+  pill: false,                 // optional — rounded pill shape
   fullWidth: true,
   isLoading: false,
   onPressed: () { ... },
@@ -101,7 +165,10 @@ Accent colour resolved automatically: `primary` in light mode, `secondary` in da
 ```dart
 BaseIconButton(
   icon: Icons.add,
-  type: BaseButtonType.filled, // filled | outlined
+  type: IconButtonType.filled,  // filled | outlined
+  color: AppColors.primary,     // optional — background (filled) or border (outlined) colour
+  iconColor: Colors.white,      // optional — icon colour override
+  badgeCount: 3,                // optional — red notification badge
   onPressed: () { ... },
 )
 ```
@@ -137,8 +204,7 @@ SizedBox(
 ```dart
 GcGridView(
   dimensions: const GridDimensions(crossAxisCount: 2),
-  itemCount: items.length,
-  itemBuilder: (context, index) => ...,
+  children: items.map((item) => ItemWidget(item)).toList(),
 )
 ```
 
@@ -203,6 +269,24 @@ BaseScaffoldMessenger.show(
 | `info` | `primary` / `secondary` (adaptive) | `info` |
 
 Clears previous snack bars automatically before showing the new one. Uses `borderRadiusTopXs` (top corners only).
+
+---
+
+## BaseBottomSheet
+
+Static utility that shows a modal bottom sheet with an optional header. Never call `showModalBottomSheet` directly.
+
+```dart
+BaseBottomSheet.show(
+  context,
+  title: 'Title',        // optional
+  subtitle: 'Subtitle',  // optional
+  heightFactor: 0.5,     // optional — fraction of screen height (0, 1]
+  child: MyContent(),
+);
+
+BaseBottomSheet.hide(context); // programmatic close
+```
 
 ---
 

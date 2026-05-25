@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-// Layouts
+// Project Layouts
 import 'layouts/app_layout.dart';
 
-// Screens
+// Project Screens
 import 'screens/details/details_screen.dart';
 import 'screens/form/form_screen.dart';
 import 'screens/home/home_screen.dart';

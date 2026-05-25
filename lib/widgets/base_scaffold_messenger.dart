@@ -19,15 +19,9 @@ class BaseScaffoldMessenger {
     final colors = AppColors.of(context);
 
     final (bgColor, iconData) = switch (type) {
-      SnackBarType.success => (
-        AppColors.success,
-        Icons.check_circle_outline,
-      ),
+      SnackBarType.success => (AppColors.success, Icons.check_circle_outline),
       SnackBarType.error => (AppColors.error, Icons.cancel_outlined),
-      SnackBarType.warning => (
-        AppColors.warning,
-        Icons.error_outline,
-      ),
+      SnackBarType.warning => (AppColors.warning, Icons.error_outline),
       SnackBarType.info => (
         colors.isDark ? AppColors.secondary : AppColors.primary,
         Icons.info_outline,
