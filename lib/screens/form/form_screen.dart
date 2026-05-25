@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 // Project Helpers
 import '../../helpers/app_colors.dart';
@@ -16,6 +17,7 @@ import '../../widgets/base_checkbox.dart';
 import '../../widgets/base_dropdown.dart';
 import '../../widgets/base_form_field.dart';
 import '../../widgets/base_multiselect.dart';
+import '../../widgets/base_image_picker.dart';
 import '../../widgets/base_scaffold_messenger.dart';
 
 class FormSection extends StatefulWidget {
@@ -41,6 +43,7 @@ class _FormSectionState extends State<FormSection> {
   String? _selectedRole;
   List<String> _selectedInterests = [];
   bool _acceptTerms = false;
+  String? _profileImageUrl;
 
   static const _roleOptions = [
     BaseDropdownOption(value: 'admin', label: 'Admin'),
@@ -89,6 +92,7 @@ class _FormSectionState extends State<FormSection> {
       _selectedRole = null;
       _selectedInterests = [];
       _acceptTerms = false;
+      _profileImageUrl = null;
     });
   }
 
@@ -128,6 +132,12 @@ class _FormSectionState extends State<FormSection> {
             Text(
               'Personal Information',
               style: AppTypography.of(context).heading3,
+            ),
+            const SizedBox(height: AppDesign.gapItemSm),
+            BaseImagePicker(
+              imageUrl: _profileImageUrl,
+              onImageSelected: (XFile? file) =>
+                  setState(() => _profileImageUrl = file?.path),
             ),
             const SizedBox(height: AppDesign.gapItemSm),
             Row(
