@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 // Project Helpers
 import '../../helpers/app_colors.dart';
@@ -105,7 +104,7 @@ class _FormSectionState extends State<FormSection> {
                     fillColor: AppColors.of(context).surface,
                     controller: nameController,
                     label: 'Name',
-                    prefixIcon: PhosphorIconsRegular.user,
+                    prefixIcon: Icons.person_outline,
                     validator: (value) => AppValidation.notEmpty(
                       value,
                       message: 'Name is required',
@@ -118,7 +117,7 @@ class _FormSectionState extends State<FormSection> {
                     controller: surnameController,
                     fillColor: AppColors.of(context).surface,
                     label: 'Surname',
-                    prefixIcon: PhosphorIconsRegular.user,
+                    prefixIcon: Icons.person_outline,
                     validator: (value) => AppValidation.notEmpty(
                       value,
                       message: 'Surname is required',
@@ -139,7 +138,7 @@ class _FormSectionState extends State<FormSection> {
               controller: emailController,
               fillColor: AppColors.of(context).surface,
               label: 'Email',
-              prefixIcon: PhosphorIconsRegular.envelope,
+              prefixIcon: Icons.mail_outline,
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               validator: (value) =>
@@ -151,12 +150,12 @@ class _FormSectionState extends State<FormSection> {
               controller: passwordController,
               fillColor: AppColors.of(context).surface,
               label: 'Password',
-              prefixIcon: PhosphorIconsRegular.lock,
+              prefixIcon: Icons.lock_outline,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showPassword
-                      ? PhosphorIconsRegular.eye
-                      : PhosphorIconsRegular.eyeSlash,
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
                   size: 20,
                 ),
                 onPressed: () => setState(() => _showPassword = !_showPassword),
@@ -180,12 +179,12 @@ class _FormSectionState extends State<FormSection> {
               controller: confirmPasswordController,
               fillColor: AppColors.of(context).surface,
               label: 'Confirm Password',
-              prefixIcon: PhosphorIconsRegular.lockKey,
+              prefixIcon: Icons.key,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showConfirmPassword
-                      ? PhosphorIconsRegular.eye
-                      : PhosphorIconsRegular.eyeSlash,
+                      ? Icons.visibility_outlined
+                      : Icons.visibility_off_outlined,
                   size: 20,
                 ),
                 onPressed: () => setState(
@@ -207,7 +206,7 @@ class _FormSectionState extends State<FormSection> {
               fullWidth: true,
               onPressed: _isSubmitting ? null : _submit,
               label: 'Submit',
-              icon: PhosphorIconsBold.paperPlaneRight,
+              icon: Icons.send,
               isLoading: _isSubmitting,
             ),
           ],
@@ -224,7 +223,7 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const StandardPageLayout(
       appBar: ClassicAppBar(
-        leading: Icon(PhosphorIconsBold.fileText),
+        leading: Icon(Icons.description),
         title: 'Build Professional Forms',
       ),
       body: FormSection(),
