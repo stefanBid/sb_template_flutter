@@ -850,6 +850,24 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 4. Complete metadata, screenshots and review information on App Store Connect
 5. Submit for review
 
+```bash
+# 1. Clean Flutter build artifacts
+flutter clean
+
+# 2. Reinstall packages respecting the certified lockfile (master branch only)
+flutter pub get --enforce-lockfile
+
+# 3. Clean Xcode DerivedData cache
+rm -rf ~/Library/Developer/Xcode/DerivedData
+
+# 4. Clean and reinstall CocoaPods
+cd ios
+pod deintegrate
+pod cache clean --all
+pod install
+cd ..
+```
+
 ### Android
 
 #### Test distribution (Internal Testing / Firebase App Distribution)
