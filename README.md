@@ -1,3 +1,5 @@
+> **iOS dependency manager:** this project has been migrated from CocoaPods to **Swift Package Manager (SPM)**. No `pod install` is required. All iOS plugins are resolved automatically via SPM on build.
+
 <div align="center">
   <div style="background: white; padding: 20px; border-radius: 12px; display: inline-block;">
     <img src="https://stunning-confidence-0ce6b255c4.media.strapiapp.com/sb_template_flutter_logo_2c81964a6e.webp" alt="SB-Template Flutter Logo" width="200">
