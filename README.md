@@ -1,3 +1,5 @@
+> **iOS dependency manager:** this project has been migrated from CocoaPods to **Swift Package Manager (SPM)**. No `pod install` is required. All iOS plugins are resolved automatically via SPM on build.
+
 <div align="center">
   <div style="background: white; padding: 20px; border-radius: 12px; display: inline-block;">
     <img src="https://stunning-confidence-0ce6b255c4.media.strapiapp.com/sb_template_flutter_logo_2c81964a6e.webp" alt="SB-Template Flutter Logo" width="200">
@@ -5,7 +7,7 @@
 
   # SB-Template Flutter
 
-  ![Version](https://img.shields.io/badge/version-3.0.0-blue)
+  ![Version](https://img.shields.io/badge/version-3.1.0-blue)
   [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)](https://flutter.dev)
   ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
   ![License](https://img.shields.io/badge/license-MIT-green)
@@ -849,6 +851,24 @@ This repository ships with pre-configured [GitHub Copilot](https://github.com/fe
 3. Open `build/ios/archive/Runner.xcarchive` in Xcode Organizer → Distribute → App Store Connect
 4. Complete metadata, screenshots and review information on App Store Connect
 5. Submit for review
+
+```bash
+# 1. Clean Flutter build artifacts
+flutter clean
+
+# 2. Reinstall packages respecting the certified lockfile (master branch only)
+flutter pub get --enforce-lockfile
+
+# 3. Clean Xcode DerivedData cache
+rm -rf ~/Library/Developer/Xcode/DerivedData
+
+# 4. Clean and reinstall CocoaPods
+cd ios
+pod deintegrate
+pod cache clean --all
+pod install
+cd ..
+```
 
 ### Android
 

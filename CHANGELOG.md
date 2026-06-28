@@ -1,3 +1,8 @@
+## 3.1.0 - 2026-06-28
+### Changed
+- Dependencies updated: `go_router` ^17.3.0, `uuid` ^4.5.3, `intl` ^0.20.3, `flutter_secure_storage` ^10.3.1, `actions/checkout` CI action v5
+- iOS dependency manager fully migrated from CocoaPods to **Swift Package Manager** — `Podfile`, `Podfile.lock`, and all Pods references removed from `project.pbxproj`, `xcconfig`, and workspace
+
 ## 3.0.0 - 2026-05-25
 ### Added
 - `AppStorage` helper (`app_storage.dart`): app-wide singleton for encrypted key-value storage via `flutter_secure_storage` ^10.3.0, with JSON object serialisation helpers
