@@ -2,7 +2,7 @@
 
 <div align="center">
   <div style="background: white; padding: 20px; border-radius: 12px; display: inline-block;">
-    <img src="https://i.ibb.co/VcD0Y0cX/SB-Template-Flutter-logo.jpg" alt="SB-Template Flutter Logo" width="200">
+    <img src="https://i.ibb.co/VcD0Y0cX/SB-Template-Flutter-logo.jpg" alt="SB-Template Flutter Logo" width="300" height="240" style="border-radius: 12px;">
   </div>
 
   # SB-Template Flutter
