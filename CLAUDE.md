@@ -398,6 +398,37 @@ AppLogger.error('Failed to fetch data', error: e, stackTrace: st);
 
 ---
 
+# Models — `lib/models/`
+
+## JsonSerializable — `lib/models/json_serializable.dart`
+
+Abstract base class for data models that need JSON serialisation.
+
+```dart
+abstract class JsonSerializable {
+  Map<String, dynamic> toJson();
+}
+```
+
+Every model that needs to be persisted (e.g. via `AppStorage.writeObject`) or sent over the network should implement it:
+
+```dart
+class User implements JsonSerializable {
+  final String id;
+  final String name;
+
+  const User({required this.id, required this.name});
+
+  factory User.fromJson(Map<String, dynamic> json) =>
+      User(id: json['id'] as String, name: json['name'] as String);
+
+  @override
+  Map<String, dynamic> toJson() => {'id': id, 'name': name};
+}
+```
+
+---
+
 # Navigation — AppRouter / go_router
 
 **Never** call `context.go('/path')` directly. Always use typed navigation:
@@ -554,6 +585,21 @@ StandardPageLayout(
 ### `AppLayout`
 
 Shell layout with bottom navigation bar. Used via `ShellRoute` — do not instantiate directly.
+
+### `HeroPageLayout`
+
+Full-bleed hero-image page: image fills the top ~35% of the screen, body content sits in a rounded sheet overlapping it, with a `TransparentAppBar` + back button on top. Import from `layouts/body/hero_page_layout.dart`.
+
+```dart
+HeroPageLayout(
+  imageUrl: 'https://...',
+  imageHeight: 280,   // optional, default 280
+  onBack: () { ... },  // optional — defaults to AppRouter.goBack(context)
+  body: ...,
+)
+```
+
+Use for detail screens with a prominent header image (e.g. recipe detail, profile detail) instead of `StandardPageLayout`.
 
 ### App bars
 
