@@ -1,3 +1,11 @@
+## 3.1.1 - 2026-07-23
+### Changed
+- Documentation consolidated: removed copilot-instructions.md, .github/instructions/*, .github/prompts/* — everything integrated into CLAUDE.md (design system, workflows, persona)
+- Dependencies updated: google\_fonts ^8.2.0, image\_picker ^1.2.3, uuid ^4.6.0
+
+### Fixed
+- Spacing between elements in details, form, profile screens
+
 ## 3.1.0 - 2026-06-28
 ### Changed
 - Dependencies updated: `go_router` ^17.3.0, `uuid` ^4.5.3, `intl` ^0.20.3, `flutter_secure_storage` ^10.3.1, `actions/checkout` CI action v5
