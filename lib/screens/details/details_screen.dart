@@ -94,6 +94,7 @@ class DetailsScreen extends StatelessWidget {
             ' allowing you to customize and expand it according to your needs.',
             style: AppTypography.of(context).body,
           ),
+          const SizedBox(height: AppDesign.gapSectionLg),
         ],
       ),
     );
