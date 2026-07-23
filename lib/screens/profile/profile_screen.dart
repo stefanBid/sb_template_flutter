@@ -141,6 +141,7 @@ class ProfileScreen extends StatelessWidget {
               icon: Icons.logout,
               onPressed: () {},
             ),
+            const SizedBox(height: AppDesign.gapSectionLg),
           ],
         ),
       ),

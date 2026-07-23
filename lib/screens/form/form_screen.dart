@@ -291,6 +291,7 @@ class _FormSectionState extends State<FormSection> {
               icon: Icons.send,
               isLoading: _isSubmitting,
             ),
+            const SizedBox(height: AppDesign.gapSectionLg),
           ],
         ),
       ),
