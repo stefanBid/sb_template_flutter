@@ -8,7 +8,7 @@
   # SB-Template Flutter
 
   ![Version](https://img.shields.io/badge/version-3.1.1-blue)
-  [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.11.0-02569B?logo=flutter)](https://flutter.dev)
+  [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.44.0-02569B?logo=flutter)](https://flutter.dev)
   ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
   ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -31,10 +31,11 @@
 7. [Screens](#7-screens)
 8. [Widgets](#8-widgets)
 9. [Helpers & Validators](#9-helpers--validators)
-10. [AI Tooling — Prompts & Instructions](#10-ai-tooling--prompts--instructions)
+10. [AI Tooling — CLAUDE.md & Workflows](#10-ai-tooling--claudemd--workflows)
 11. [Deployment](#11-deployment)
 12. [Versioning & Git Tags](#12-versioning--git-tags)
 13. [Dependencies](#13-dependencies)
+14. [De-templating Checklist — Using This as a Template](#14-de-templating-checklist--using-this-as-a-template)
 
 ---
 
@@ -52,7 +53,7 @@ The template is meant to be cloned and initialised for a specific project (via t
 
 ### Prerequisites
 
-- **Flutter SDK** ≥ 3.11.0
+- **Flutter SDK** ≥ 3.44.0
 - **Dart SDK** ^3.11.3
 - **Xcode** (for iOS development)
 - **Android Studio** / **Android SDK** (for Android development)
@@ -79,7 +80,9 @@ rm -rf .git && git init
 
 ### Project Initialisation
 
-After cloning, run the `init-project` prompt in Copilot Agent mode (see [AI Tooling](#10-ai-tooling--prompts--instructions)) to rename the project, update all config files, and reset the version to `1.0.0+1`.
+After cloning, trigger the **Project Initialisation** skill (e.g. say "inizializza il progetto" — see [AI Tooling](#10-ai-tooling--claudemd--workflows)) to rename the project, update all config files, and reset the version to `1.0.0+1`.
+
+That skill covers app name, version and `CLAUDE.md` context. It does **not** touch the Android package id, iOS bundle id, app icons or store metadata — see [De-templating Checklist](#14-de-templating-checklist--using-this-as-a-template) for everything else to change before shipping under a new identity.
 
 Then install dependencies and run the app:
 
@@ -781,54 +784,22 @@ The optional `tag` parameter (e.g. `tag: 'AuthService'`) prefixes the output for
 
 ---
 
-## 10. AI Tooling — Prompts & Instructions
+## 10. AI Tooling — CLAUDE.md & Workflows
 
-This repository ships with pre-configured [GitHub Copilot](https://github.com/features/copilot) context that makes the AI assistant aware of the project's conventions, design system and domain. All configuration lives under `.github/` and is versioned alongside the code.
+This repository is built to be worked on with [Claude Code](https://claude.com/claude-code). A single `CLAUDE.md` file at the project root gives the assistant full context: app description, assistant persona and response language, naming rules, the entire design system reference (colours, typography, spacing), navigation conventions, and screen/widget placement rules. It is versioned alongside the code and is the source of truth the AI follows on every task.
 
-### How GitHub Copilot is configured
+On top of that, a set of recurring maintenance tasks are packaged as on-demand **skills** under `.claude/skills/`. Each skill loads automatically when its trigger phrase is used in chat — no manual invocation needed.
 
-| File / folder | Purpose |
-|---|---|
-| `.github/copilot-instructions.md` | Global rules: app context, response language, stack, naming conventions |
-| `.github/instructions/*.instructions.md` | Scoped rules loaded automatically per file type (e.g. only for `**/*.dart` files) |
-| `.github/prompts/*.prompt.md` | Reusable Agent-mode workflows triggered by a phrase or `#filename` syntax |
-
-### Available prompts
-
-| Prompt file | Trigger phrases | Direct invocation | What it does |
-|---|---|---|---|
-| `init-project.prompt.md` | "Inizializziamo il progetto" · "Inizializza il progetto" · "Reset del progetto" | `#init-project.prompt.md` | Collects project name and context; renames the app across all config files; resets version to `1.0.0+1`; audits and updates instruction files |
-| `update-docs.prompt.md` | "Aggiorna la documentazione" | `#update-docs.prompt.md` | Compares README with the actual codebase and rewrites it as a structured documentation book |
-| `check-dependencies.prompt.md` | "Verifichiamo aggiornamenti del progetto" | `#check-dependencies.prompt.md` | Runs `flutter pub outdated`, auto-updates safe (minor/patch) packages, lists major bumps for review |
-| `check-lint.prompt.md` | "Check del progetto", "il progetto è pulito?" | `#check-lint.prompt.md` | Runs `dart fix`, `dart format` and `flutter analyze`; auto-fixes warnings, reports errors for manual review |
-| `bump-version.prompt.md` | "Aggiornami il progetto alla versione X.Y.Z" | `#bump-version.prompt.md` | Detects changes via git, shows a CHANGELOG draft for approval, then uses **cider** to bump the version and release |
-| `full-checkup.prompt.md` | "Checkup completo" · "Checkup del progetto" · "Controllo completo" | `#full-checkup.prompt.md` | Runs all three maintenance workflows in sequence: dependency check, documentation update, and lint check; produces a single summary report |
-
-### How to run a prompt
-
-**Option A — Trigger phrase**
-
-1. Open the **Copilot Chat** panel in VS Code (`⌃⌘I` / `Ctrl+Alt+I`)
-2. Switch to **Agent mode** using the mode selector at the bottom of the chat input
-3. Type one of the trigger phrases from the table above — the agent will load and follow the prompt automatically
-
-**Option B — Direct invocation**
-
-1. Open **Copilot Chat** in **Agent mode**
-2. In the chat input, type `#` followed by the prompt filename (e.g. `#check-dependencies.prompt.md`) and select it from the picker
-3. Send the message — the agent will execute the prompt immediately, regardless of the phrasing used
-
-> **Note:** All prompts require **Agent mode**. They will not work in Ask or Chat mode.
-
-### Instruction files
-
-| File | Applies to | Governs |
+| Workflow | Trigger phrase | What it does |
 |---|---|---|
-| `design-system.instructions.md` | `**/*.dart` | AppColors, AppTypography, AppDesign tokens, Material Icons, widget checklist |
-| `screens.instructions.md` | `**/screens/**` | Screen structure, layouts, app bars, code organisation rules |
-| `widgets.instructions.md` | `**/widgets/**` | Widget placement rules and widget API reference |
-| `routing.instructions.md` | `**/*router*` | AppRouter API, transitions, new-route workflow |
-| `helpers.instructions.md` | `**/helpers/**` | Fixed helper filenames, AppValidation validators and chaining patterns |
+| Project Initialisation | "Inizializziamo il progetto" · "inizializza il progetto" · "reset del progetto" | Collects username, project name and app context; renames the app across `pubspec.yaml`/`main.dart`/Android/iOS; resets version to `1.0.0+1`; refreshes `CLAUDE.md` against the actual `lib/` state |
+| Full Project Checkup | "checkup completo" · "checkup del progetto" · "controllo completo" | Runs the three maintenance workflows below in sequence and produces one combined summary |
+| Dependency Check & Update | "controlla le dipendenze" · "check dependencies" | Runs `flutter pub outdated`, auto-applies safe same-major bumps, lists breaking changes for manual review |
+| Documentation Update | "aggiorna la documentazione" · "update docs" | Compares `README.md` against the actual codebase and rewrites it |
+| Lint / Code Quality Check | "check del progetto" · "il progetto è pulito?" · "fai un lint check" | Runs `dart fix`, `dart format` and `flutter analyze`; auto-fixes what's safe, reports blocking errors |
+| Version Bump | "aggiornami il progetto alla versione X.Y.Z" | Bumps the version with **cider**, proposes a CHANGELOG entry for approval, then applies it |
+
+Just type the trigger phrase (Italian or English both work) in a Claude Code chat inside this repository — the matching skill loads its instructions into the conversation automatically.
 
 ---
 
@@ -895,7 +866,9 @@ When you need to build and install an APK without running the full development s
 flutter build apk --debug
 
 # 2. Install on connected device/emulator using Flutter
-flutter install
+# --debug is required: flutter install defaults to --release and will
+# fail with "app-release.apk does not exist" if you only built debug
+flutter install --debug
 
 # 3. Launch the app manually from the device home screen or app drawer
 ```
@@ -928,7 +901,7 @@ flutter install --uninstall-only -d <device-id>
 ```
 
 **Notes:**
-- `flutter install` automatically detects connected devices/emulators and installs the most recent build
+- `flutter install` defaults to `--release` mode — always pass `--debug` explicitly if that's the build you have, otherwise it looks for `app-release.apk` and fails
 - `flutter install --uninstall-only` removes the app from the device without needing adb directly
 - For release builds, you need signing configuration in `android/app/build.gradle` (see [Signing & secrets](#signing--secrets))
 - Use `flutter run` instead of `flutter install` when you want to keep the logs attached and enable hot reload
@@ -1011,9 +984,9 @@ git tag -d v1.2.0
 git push origin --delete v1.2.0
 ```
 
-### Using the `bump-version` prompt
+### Using the Version Bump skill
 
-The `bump-version` Copilot Agent prompt automates steps 1–4: it detects changes via `git`, generates a CHANGELOG draft for your approval, bumps the version with `cider`, commits, tags and pushes. See [AI Tooling](#10-ai-tooling--prompts--instructions) for usage details.
+Triggered with "aggiornami il progetto alla versione X.Y.Z", it automates steps 1–4: it detects changes via `git`, generates a CHANGELOG draft for your approval, bumps the version with `cider`, commits, tags and pushes. See [AI Tooling](#10-ai-tooling--claudemd--workflows) for usage details.
 
 ---
 
@@ -1021,16 +994,74 @@ The `bump-version` Copilot Agent prompt automates steps 1–4: it detects change
 
 | Package | Version | Purpose |
 |---|---|---|
-| `go_router` | ^17.2.3 | Declarative routing with deep linking |
-| `google_fonts` | ^8.1.0 | Font loading (Lato used by default) |
+| `go_router` | ^17.5.0 | Declarative routing with deep linking |
+| `google_fonts` | ^8.2.1 | Font loading (Lato used by default) |
 | `cached_network_image` | ^3.4.1 | Network image loading with cache and fade |
-| `flutter_secure_storage` | ^10.3.0 | Encrypted key-value storage (Keychain / EncryptedSharedPreferences) |
-| `image_picker` | ^1.2.2 | Camera and gallery access |
-| `intl` | ^0.20.2 | Internationalisation utilities |
-| `uuid` | ^4.5.2 | Unique ID generation |
+| `flutter_secure_storage` | ^10.3.1 | Encrypted key-value storage (Keychain / EncryptedSharedPreferences) |
+| `image_picker` | ^1.2.3 | Camera and gallery access |
+| `intl` | ^0.20.3 | Internationalisation utilities |
+| `uuid` | ^4.6.0 | Unique ID generation |
 | `cupertino_icons` | ^1.0.9 | iOS-style icon assets |
 | `cider` *(dev)* | ^0.2.10 | CLI version management |
 | `flutter_lints` *(dev)* | ^6.0.0 | Flutter team's recommended lints |
+
+---
+
+## 14. De-templating Checklist — Using This as a Template
+
+When you clone this repo to start a real project, going through the [Project Initialisation](#project-initialisation) skill only handles part of the job (app name, version, `CLAUDE.md` context). Everything below is **not** touched automatically and must be done by hand before you ship under a new identity.
+
+### Automated by the Project Initialisation skill
+
+Trigger it with "inizializza il progetto" (see [AI Tooling](#10-ai-tooling--claudemd--workflows)). It updates:
+
+| File | Field |
+|---|---|
+| `pubspec.yaml` | `name:` |
+| `lib/main.dart` | `title:` inside `MaterialApp.router` |
+| `android/app/src/main/AndroidManifest.xml` | `android:label` |
+| `ios/Runner/Info.plist` | `CFBundleName`, `CFBundleDisplayName` |
+| `pubspec.yaml` | `version:` reset to `1.0.0+1` |
+| `CHANGELOG.md` | cleared and restarted from `1.0.0` |
+| `CLAUDE.md` | assistant identity/persona and app context |
+
+### Manual — Android application ID
+
+The package id still reads `com.example.sb_template_flutter` after init. Change it in:
+
+| File | What to change |
+|---|---|
+| `android/app/build.gradle.kts` | `namespace` and `defaultConfig.applicationId` |
+| `android/app/src/main/kotlin/com/example/sb_template_flutter/MainActivity.kt` | move the file to a new path matching the new package (e.g. `android/app/src/main/kotlin/com/yourcompany/yourapp/MainActivity.kt`) and update its `package` declaration |
+
+### Manual — iOS bundle identifier
+
+`ios/Runner.xcodeproj/project.pbxproj` still has `PRODUCT_BUNDLE_IDENTIFIER = com.example.sbTemplateFlutter` (and the `.RunnerTests` variant) across all build configurations (Debug/Profile/Release). Easiest path: open `ios/Runner.xcworkspace` in Xcode → Runner target → Signing & Capabilities → set the new Bundle Identifier, then repeat for the `RunnerTests` target.
+
+### Manual — App icon
+
+No icon-generation package is configured yet. Recommended: add [`flutter_launcher_icons`](https://pub.dev/packages/flutter_launcher_icons) as a dev dependency, point it at your new 1024×1024 source image, then run `dart run flutter_launcher_icons` to regenerate:
+
+- `android/app/src/main/res/mipmap-*/ic_launcher*.png` (adaptive icon — background/foreground/monochrome variants included)
+- `ios/Runner/Assets.xcassets/AppIcon.appiconset/*.png`
+
+Without this, the app ships with the template's default icon.
+
+### Manual — Splash screen
+
+No splash-screen package is configured. If the app needs a branded launch screen, add [`flutter_native_splash`](https://pub.dev/packages/flutter_native_splash) and configure/generate it — otherwise Android/iOS fall back to their platform default blank splash.
+
+### Manual — Branding assets & README
+
+- `assets/sb-template-flutter-logo.png` — replace or remove; update the `assets:` entry in `pubspec.yaml` if the filename changes
+- README logo image (top of this file) and the footer credit/links — replace with your own
+- `LICENSE` — update author/copyright if you don't want MIT-as-Stefano-Biddau to carry over
+
+### Manual — Repository & store metadata
+
+- `git remote set-url origin <your-new-repo-url>` (or re-init if you cloned without a template flow)
+- Signing keys: Android keystore (`android/key.properties`, never committed) and iOS signing certificate/provisioning are per-bundle-id — you'll need new ones once the application id / bundle id changes
+- Google Play Console / App Store Connect app listings must be created fresh under the new application id / bundle id — they cannot be renamed from the template's placeholder
 
 ---
 

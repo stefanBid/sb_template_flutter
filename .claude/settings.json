@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Edit(/.claude/skills/lint-check/**)",
-      "Edit(/.claude/skills/version-bump/**)"
+      "Edit(/.claude/skills/version-bump/**)",
+      "Bash(awk '/^dependencies:/,/^dev_dependencies:/' pubspec.yaml)",
+      "Bash(awk '/^environment:/,/^dependencies:/' pubspec.yaml)"
     ]
   }
 }
