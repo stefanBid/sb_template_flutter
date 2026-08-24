@@ -1,3 +1,15 @@
+## 3.1.2 - 2026-08-24
+### Added
+- Android local development section in README: detailed instructions for flutter build apk, flutter install, flutter install --uninstall-only
+
+### Changed
+- Android minimum SDK updated to 24
+- iOS deployment target updated to 13.0
+- Analysis options: excluded build/ directory from linting
+
+### Fixed
+- Project structure analyzer exclusions for improved analysis performance
+
 ## 3.1.1 - 2026-07-23
 ### Changed
 - Documentation consolidated: removed copilot-instructions.md, .github/instructions/*, .github/prompts/* — everything integrated into CLAUDE.md (design system, workflows, persona)
