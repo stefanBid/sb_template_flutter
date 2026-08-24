@@ -872,6 +872,67 @@ cd ..
 
 ### Android
 
+#### Local Development & Testing
+
+**Running on emulator (development mode):**
+
+```bash
+# Start an Android emulator first (from Android Studio or command line)
+# Then run the app directly — Flutter handles build + install + launch automatically
+flutter run
+
+# Or target a specific device
+flutter devices  # list available devices
+flutter run -d <device-id>
+```
+
+**Building and installing an APK manually:**
+
+When you need to build and install an APK without running the full development session:
+
+```bash
+# 1. Build debug APK (faster, includes debugging symbols)
+flutter build apk --debug
+
+# 2. Install on connected device/emulator using Flutter
+flutter install
+
+# 3. Launch the app manually from the device home screen or app drawer
+```
+
+The APK is saved at: `build/app/outputs/flutter-apk/app-debug.apk`
+
+**Building a release APK for testing:**
+
+```bash
+# 1. Build release APK (optimised, no debugging symbols)
+flutter build apk --release
+
+# 2. Install on connected device/emulator
+flutter install --release
+
+# Or combine both steps using flutter run
+flutter run --release
+```
+
+The release APK is saved at: `build/app/outputs/flutter-apk/app-release.apk`
+
+**Uninstalling the app:**
+
+```bash
+# Uninstall from connected device/emulator
+flutter install --uninstall-only
+
+# Or target a specific device
+flutter install --uninstall-only -d <device-id>
+```
+
+**Notes:**
+- `flutter install` automatically detects connected devices/emulators and installs the most recent build
+- `flutter install --uninstall-only` removes the app from the device without needing adb directly
+- For release builds, you need signing configuration in `android/app/build.gradle` (see [Signing & secrets](#signing--secrets))
+- Use `flutter run` instead of `flutter install` when you want to keep the logs attached and enable hot reload
+
 #### Test distribution (Internal Testing / Firebase App Distribution)
 
 1. Bump version/build with the `bump-version` prompt
