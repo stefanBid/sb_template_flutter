@@ -25,7 +25,14 @@ Do not proceed until all four are answered.
 - **Username**: if changed, replace the "Assistant identity & response language" section in CLAUDE.md — the identifier line and every occurrence of "Signore della UI" / "Signore delle UI".
 - **Global rules**: add any new rules to the appropriate section of CLAUDE.md, without deleting existing ones unless explicitly requested.
 - **App context**: replace the `## App context` section content at the top of CLAUDE.md with the text provided.
-- **Version reset**: set `pubspec.yaml` `version:` to `1.0.0+1`. Reset the version badge in `README.md` to `1.0.0` if present.
+- **Version reset**: set `pubspec.yaml` `version:` to `1.0.0+1`.
+- **README replacement**: read `TEMPLATE.md` and copy it over `README.md`, substituting its placeholders:
+  - `{{PROJECT_NAME}}` → the project name as-is
+  - `{{PROJECT_TAGLINE}}` → a short one-line tagline derived from the app context (write one — don't leave it blank)
+  - `{{APP_CONTEXT}}` → the app context text provided in Step 1 (used both in the header blurb and in `## 1. Overview`)
+  - `{{TARGET_AUDIENCE}}` → inferred from the app context, one short phrase
+  - `{{REPOSITORY_URL}}` / `{{PROJECT_DIRECTORY}}` → leave as literal placeholder text (e.g. `<your-repo-url>`) if not known; do not guess a URL
+  - Leave `TEMPLATE.md` itself untouched — it stays in the repo as the reusable skeleton for future re-templating.
 - **CHANGELOG reset**: if `CHANGELOG.md` exists with content, clear the `[Unreleased]` section first, then run `dart run cider release 1.0.0` so the file starts clean from `1.0.0` with today's date — no history carried over. If it doesn't exist, cider creates it automatically on first use.
 - **Rename the project** — read each file first to find the exact string to replace:
 
@@ -50,4 +57,4 @@ Update CLAUDE.md to add/remove sections based on the actual state of `lib/`. Do 
 
 ## Step 4 — Final report
 
-Concise report in Italian: username set, project name set, renamed/updated files, CLAUDE.md sections changed, any inconsistency needing user intervention.
+Concise report in Italian: username set, project name set, renamed/updated files, README.md replaced from TEMPLATE.md (note any placeholder left unresolved), CLAUDE.md sections changed, any inconsistency needing user intervention.

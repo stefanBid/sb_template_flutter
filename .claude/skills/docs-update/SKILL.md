@@ -37,6 +37,7 @@ Required structure:
 9. AI Tooling — CLAUDE.md & Workflows
 10. Deployment
 11. Dependencies
+12. Migration Notes & Known Toolchain Transitions
 
 ## 1. Overview
 [Expanded app context, purpose, audience, visual tone]
@@ -120,9 +121,16 @@ Explain that this repo ships with a single `CLAUDE.md` at the project root conta
 
 ## 11. Dependencies
 [Table: package | version | purpose]
+
+## 12. Migration Notes & Known Toolchain Transitions
+[Carry forward verbatim from the current README — see below, do not regenerate]
 ```
 
-Rules: every chapter has a short intro paragraph; props tables use `Prop`/`Type`/`Description`; version badge reflects `pubspec.yaml`; ToC anchors must work on GitHub Markdown; never invent unverifiable info (mark TBD instead); sections 9 and 10 are always mandatory.
+Rules: every chapter has a short intro paragraph; props tables use `Prop`/`Type`/`Description`; version badge reflects `pubspec.yaml`; ToC anchors must work on GitHub Markdown; never invent unverifiable info (mark TBD instead); sections 9, 10 and 12 are always mandatory.
+
+### Section 12 — Migration Notes & Known Toolchain Transitions
+
+This section is a living log, not generated content — **copy its existing entries verbatim** from the current `README.md` into the rewritten one, unless the user explicitly asks to add, update, or remove an entry in the same request. Each entry documents a toolchain/dependency transition the project hit and how it was handled (e.g. an AGP/Gradle/Kotlin version wall, a breaking dependency major bump requiring a workaround) — useful both as project history and as a heads-up for template users who hit the same wall later. Never invent entries; never silently drop one during a rewrite.
 
 ## Step 4 — Write the file
 
