@@ -1074,20 +1074,22 @@ No splash-screen package is configured. If the app needs a branded launch screen
 
 A living log of toolchain transitions this template has hit or is watching — useful both to understand where the project currently stands and, if you're using this template and run into the same wall, to know it's a known issue rather than something you broke. Each entry stays until the transition is fully resolved and merged into the main docs above; new entries go on top.
 
-### Android — AGP 9 / Kotlin built-in DSL migration — **blocked, opted out**
+### Android — AGP 9 / Kotlin built-in DSL migration — **blocked, reverted to pre-AGP-9**
 
-- **Status**: not migrated. Project pinned to the pre-AGP-9 DSL via explicit opt-out flags.
+- **Status**: not migrated. Project reverted to Gradle 8.14 / AGP 8.11.1 / Kotlin 2.2.20 — the last combination confirmed to build cleanly. AGP 9 is not usable on this project yet, in any configuration tried so far.
 - **What happened**: Android Gradle Plugin 9.0 made the new DSL (`ApplicationExtension`) the default and deprecated the old `android {}` accessor plus the `kotlinOptions {}` block (replaced by `kotlin { compilerOptions {} }`), and dropped support for applying the separate `org.jetbrains.kotlin.android` (KGP) plugin in favour of AGP's own built-in Kotlin compiler. Full details: [AGP 9.0 release notes](https://developer.android.com/build/releases/agp-9-0-0-release-notes).
-- **Why we didn't migrate**: with `android.newDsl=true` / `android.builtInKotlin=true`, applying `dev.flutter.flutter-gradle-plugin` itself fails:
-  ```
-  class com.android.build.gradle.internal.dsl.ApplicationExtensionImpl$AgpDecorated_Decorated
-  cannot be cast to class com.android.build.gradle.AbstractAppExtension
-  ```
-  This is a Flutter stable tooling limitation (`flutter_tools/gradle`), not something fixable from this project's `android/` files.
-- **Current setup**: `android/gradle.properties` has `android.newDsl=false` and `android.builtInKotlin=false` (opt-out — Flutter's own migrator adds these automatically the first time it detects the conflict). `android/app/build.gradle.kts` still applies `id("kotlin-android")` and uses the legacy `kotlinOptions {}` block. Gradle wrapper, AGP and Kotlin plugin versions are otherwise kept current (Gradle 9.1.0, AGP 9.0.1, Kotlin 2.3.20) to satisfy Flutter's minimum-version warnings — only the DSL switch is deferred.
-- **Revisit when**: a stable Flutter release changelog mentions AGP 9 `newDsl`/built-in-Kotlin support (`flutter upgrade` + check `flutter --version` release notes), or `flutter build apk --debug` stops failing with the cast error above after flipping both flags to `true`.
-- **Migration steps once unblocked** (kept here so it doesn't have to be re-researched):
-  1. `android/gradle.properties`: flip `android.newDsl` and `android.builtInKotlin` to `true`.
+- **Two approaches tried, both failed**:
+  1. **Full migration** (`android.newDsl=true` / `android.builtInKotlin=true`, code updated to `kotlin { compilerOptions {} }`, `kotlin-android` plugin removed): applying `dev.flutter.flutter-gradle-plugin` itself fails —
+     ```
+     class com.android.build.gradle.internal.dsl.ApplicationExtensionImpl$AgpDecorated_Decorated
+     cannot be cast to class com.android.build.gradle.AbstractAppExtension
+     ```
+     Flutter stable's own Gradle plugin (`flutter_tools/gradle`) is not yet compatible with AGP 9's new DSL.
+  2. **Opt-out** (`android.newDsl=false` / `android.builtInKotlin=false`, kept the legacy `kotlin-android` plugin + `kotlinOptions {}` block — as documented as a supported fallback in the AGP 9.0 release notes): build still fails with the **exact same** deprecation-as-error on `android {}` and `kotlinOptions {}` as with no flags at all. On AGP 9.0.1, these are hard `@Deprecated(level = ERROR)` annotations baked into the plugin's own compiled classes — the Kotlin script compiler enforces them regardless of the `newDsl`/`builtInKotlin` runtime flags. **The documented opt-out did not work in practice on this setup** — treat it as unverified until seen working, not as a reliable escape hatch.
+- **Current setup**: `android/gradle/wrapper/gradle-wrapper.properties`, `android/settings.gradle.kts` and `android/app/build.gradle.kts` are back to the pre-migration state (Gradle 8.14, AGP 8.11.1, Kotlin 2.2.20, `kotlin-android` plugin, `kotlinOptions {}` block). No `android.newDsl` / `android.builtInKotlin` flags in `gradle.properties` — irrelevant below AGP 9.
+- **Revisit when**: a stable Flutter release changelog explicitly confirms AGP 9 support (check `flutter upgrade` release notes), then retry approach 1 (full migration) first — it's the one Google intends to be permanent, since the AGP 10.0 removal of the opt-out flags makes approach 2 a dead end regardless.
+- **Migration steps for approach 1, once Flutter's tooling supports it** (kept here so it doesn't have to be re-researched):
+  1. Bump `android/gradle/wrapper/gradle-wrapper.properties` to Gradle ≥9.1.0, `android/settings.gradle.kts` AGP to ≥9.0.1.
   2. `android/settings.gradle.kts`: remove the `id("org.jetbrains.kotlin.android") version "..." apply false` plugin declaration.
   3. `android/app/build.gradle.kts`: remove `id("kotlin-android")` from `plugins {}`, remove the `kotlinOptions {}` block from `android {}`, add:
      ```kotlin
@@ -1097,8 +1099,9 @@ A living log of toolchain transitions this template has hit or is watching — u
          }
      }
      ```
-  4. Before flipping the flags, confirm every native Android plugin dependency (check each package's `android/build.gradle*` in `~/.pub-cache`) no longer applies `kotlin-android`/`org.jetbrains.kotlin.android` itself — an unmigrated third-party plugin will conflict with built-in Kotlin the same way the Flutter Gradle plugin currently does.
-  5. Run `flutter build apk --debug` to confirm before removing this entry.
+  4. `android/gradle.properties`: add `android.newDsl=true` and `android.builtInKotlin=true`.
+  5. Before flipping the flags, confirm every native Android plugin dependency (check each package's `android/build.gradle*` in `~/.pub-cache`) no longer applies `kotlin-android`/`org.jetbrains.kotlin.android` itself — an unmigrated third-party plugin will conflict with built-in Kotlin the same way the Flutter Gradle plugin currently does. As of this entry, `flutter_secure_storage` 11.0.0 (Java-only, no Kotlin plugin) and `image_picker_android` 0.8.13+19 (already on `compilerOptions`) are both fine.
+  6. Run `flutter build apk --debug` to confirm before removing this entry.
 
 ---
 
