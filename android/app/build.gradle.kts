@@ -7,7 +7,9 @@ plugins {
 
 android {
     namespace = "com.example.sb_template_flutter"
-    compileSdk = flutter.compileSdkVersion
+    // flutter_secure_storage 11.0.0 requires compileSdk 37; flutter.compileSdkVersion (36)
+    // is not high enough yet. Safe to bump — compileSdk is backward compatible.
+    compileSdk = maxOf(flutter.compileSdkVersion, 37)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -24,7 +26,7 @@ android {
         applicationId = "com.example.sb_template_flutter"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName

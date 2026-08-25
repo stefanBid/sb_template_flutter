@@ -1,20 +1,18 @@
-> **iOS dependency manager:** this project has been migrated from CocoaPods to **Swift Package Manager (SPM)**. No `pod install` is required. All iOS plugins are resolved automatically via SPM on build.
-
 <div align="center">
-  <div style="background: white; padding: 20px; border-radius: 12px; display: inline-block;">
-    <img src="https://i.ibb.co/VcD0Y0cX/SB-Template-Flutter-logo.jpg" alt="SB-Template Flutter Logo" width="300" style="border-radius: 12px;">
-  </div>
 
-  # SB-Template Flutter
+  <!-- Replace this logo with your own app icon/wordmark, or remove the block entirely. -->
+  <!-- <img src="assets/your-logo.png" alt="{{PROJECT_NAME}} Logo" width="200"> -->
 
-  ![Version](https://img.shields.io/badge/version-3.1.2-blue)
+  # {{PROJECT_NAME}}
+
+  ![Version](https://img.shields.io/badge/version-1.0.0-blue)
   [![Flutter](https://img.shields.io/badge/flutter-%3E%3D3.44.0-02569B?logo=flutter)](https://flutter.dev)
   ![Dart](https://img.shields.io/badge/dart-%5E3.11.3-0175C2?logo=dart)
-  ![License](https://img.shields.io/badge/license-MIT-green)
+  ![License](https://img.shields.io/badge/license-UNLICENSED-lightgrey)
 
-  **Stop wasting time on boilerplate. Start building features.**
+  **{{PROJECT_TAGLINE}}**
 
-  A Flutter starter template with an opinionated design system, type-safe routing, reusable UI components, and pre-configured AI tooling. Clone it, initialise it for your project, and start building features on day one.
+  {{APP_CONTEXT}}
 
 </div>
 
@@ -35,20 +33,17 @@
 11. [Deployment](#11-deployment)
 12. [Versioning & Git Tags](#12-versioning--git-tags)
 13. [Dependencies](#13-dependencies)
-14. [De-templating Checklist — Using This as a Template](#14-de-templating-checklist--using-this-as-a-template)
-15. [Migration Notes & Known Toolchain Transitions](#15-migration-notes--known-toolchain-transitions)
+14. [Migration Notes & Known Toolchain Transitions](#14-migration-notes--known-toolchain-transitions)
 
 ---
 
 ## 1. Overview
 
-SB-Template Flutter is designed to provide a solid and opinionated starting structure for building new mobile applications. It ships with a pre-configured design system, type-safe routing, reusable UI components, helpers, and layouts so that developers can focus on building features rather than scaffolding.
+{{APP_CONTEXT}}
 
-The template is meant to be cloned and initialised for a specific project (via the [Project Initialisation](#10-ai-tooling--claudemd--workflows) skill), progressively replacing placeholder screens and components with real ones while keeping the underlying conventions and tooling intact.
+**Target audience:** {{TARGET_AUDIENCE}}
 
-**Target audience:** Flutter developers who want a clean, consistent foundation without bikeshedding on folder structure, naming conventions, or design tokens.
-
-This file (`README.md`) documents the template itself — its structure, conventions and tooling — for anyone studying or contributing to it. When you initialise a real project from this template, [`TEMPLATE.md`](TEMPLATE.md) is copied over `README.md` in its place: a ready-to-fill skeleton for documenting *your* app, minus the template-only sections (this Overview, [De-templating Checklist](#14-de-templating-checklist--using-this-as-a-template), [Migration Notes](#15-migration-notes--known-toolchain-transitions)).
+This project was scaffolded from [SB-Template Flutter](https://github.com/stefanoBid/sb-flutter-template), which provides the design system, routing layer, reusable widgets, helpers and AI tooling described in the sections below. As the app grows, replace this section with your own product overview and keep the infrastructure sections (3–9) in sync with the code.
 
 ---
 
@@ -63,33 +58,9 @@ This file (`README.md`) documents the template itself — its structure, convent
 
 ### Installation
 
-**Option 1: Use as GitHub Template** (Recommended)
-
-1. Click **"Use this template"** on GitHub
-2. Clone your new repository:
-
 ```bash
-git clone https://github.com/your-username/your-project.git
-cd your-project
-```
-
-**Option 2: Clone directly**
-
-```bash
-git clone https://github.com/stefanoBid/sb-flutter-template.git my-project
-cd my-project
-rm -rf .git && git init
-```
-
-### Project Initialisation
-
-After cloning, trigger the **Project Initialisation** skill (e.g. say "inizializza il progetto" — see [AI Tooling](#10-ai-tooling--claudemd--workflows)) to rename the project, update all config files, and reset the version to `1.0.0+1`.
-
-That skill covers app name, version and `CLAUDE.md` context. It does **not** touch the Android package id, iOS bundle id, app icons or store metadata — see [De-templating Checklist](#14-de-templating-checklist--using-this-as-a-template) for everything else to change before shipping under a new identity.
-
-Then install dependencies and run the app:
-
-```bash
+git clone {{REPOSITORY_URL}}
+cd {{PROJECT_DIRECTORY}}
 flutter pub get
 flutter run
 ```
@@ -113,7 +84,7 @@ flutter run
 
 ## 3. Project Structure
 
-This section shows the annotated directory tree of `lib/`. The project follows a feature-agnostic structure where each top-level folder has a single responsibility.
+This section shows the annotated directory tree of `lib/`. The project follows a feature-agnostic structure where each top-level folder has a single responsibility. Keep this tree in sync as you add features — the Documentation Update skill (see [AI Tooling](#10-ai-tooling--claudemd--workflows)) does this automatically on request.
 
 ```
 lib/
@@ -143,7 +114,7 @@ lib/
 ├── models/                          # Data models
 │   └── json_serializable.dart       # Base JSON serialization helpers
 │
-├── screens/                         # Feature screens
+├── screens/                         # Feature screens — replace the demo screens below with real ones
 │   ├── home/                        # Home screen (bottom nav tab)
 │   ├── form/                        # Form screen (bottom nav tab)
 │   ├── profile/                     # Profile screen (bottom nav tab)
@@ -202,6 +173,8 @@ Static constants (non-adaptive, use directly):
 | `AppColors.success` | `#10B981` | Success states |
 | `AppColors.warning` | `#F59E0B` | Warning states |
 
+> Swap these hex values for your brand palette early — every widget in the template reads from `AppColors`, so a palette change here propagates everywhere.
+
 ### Typography — `AppTypography`
 
 Instantiate with `AppTypography.of(context)`. All styles inherit the adaptive text colour from `AppColors`.
@@ -250,7 +223,7 @@ Top-only and bottom-only variants follow the same suffix pattern (e.g. `borderRa
 
 ### Icons — Material Icons
 
-This project uses Flutter's built-in **Material Icons** (`Icons.*`). Do not use PhosphorIcons or any other external icon library — no extra import is needed beyond `flutter/material.dart`.
+This project uses Flutter's built-in **Material Icons** (`Icons.*`). Do not use external icon libraries — no extra import is needed beyond `flutter/material.dart`.
 
 Prefer outlined variants for a lighter visual style (`Icons.home_outlined`, `Icons.mail_outline`). Use filled variants for active or selected states.
 
@@ -298,6 +271,8 @@ AppRouter.goBack(context);
 | `AppRouter.forms` | `/form` | none |
 | `AppRouter.profile` | `/profile` | none |
 | `AppRouter.details` | `/details/:detailId` | `DetailParams(detailId)` |
+
+> This is the demo route set. Add/remove routes as you replace the demo screens — see the 3-step workflow below.
 
 ### Adding a new route
 
@@ -404,10 +379,12 @@ Screens live in `lib/screens/`, organised by feature folder. Each folder should 
 
 | Screen | Path | Description |
 |---|---|---|
-| `HomeScreen` | `/home` | Main landing tab |
-| `FormScreen` | `/form` | Form examples tab |
-| `ProfileScreen` | `/profile` | Profile tab |
-| `DetailsScreen` | `/details/:detailId` | Detail view pushed with a `detailId` parameter |
+| `HomeScreen` | `/home` | Demo landing tab — replace with your app's home |
+| `FormScreen` | `/form` | Demo form examples tab — replace or remove |
+| `ProfileScreen` | `/profile` | Demo profile tab — replace with your app's profile |
+| `DetailsScreen` | `/details/:detailId` | Demo detail view pushed with a `detailId` parameter |
+
+> Replace this table as you swap demo screens for real ones — keep one row per screen with its route and a one-line purpose.
 
 ---
 
@@ -725,7 +702,7 @@ Exports `AppRouter`, `AppTypedRoute<P>`, `GenericRouteParams`, `NoParams`, and b
 
 ### `app_storage.dart`
 
-Exports `AppStorage` — an app-wide singleton for encrypted key-value storage backed by `flutter_secure_storage`. Uses Android EncryptedSharedPreferences and iOS Keychain.
+Exports `AppStorage` — an app-wide singleton for encrypted key-value storage backed by `flutter_secure_storage`. Uses the Android Keystore and iOS Keychain.
 
 ```dart
 await AppStorage.instance.write('token', value);
@@ -789,13 +766,13 @@ The optional `tag` parameter (e.g. `tag: 'AuthService'`) prefixes the output for
 
 ## 10. AI Tooling — CLAUDE.md & Workflows
 
-This repository is built to be worked on with [Claude Code](https://claude.com/claude-code). A single `CLAUDE.md` file at the project root gives the assistant full context: app description, assistant persona and response language, naming rules, the entire design system reference (colours, typography, spacing), navigation conventions, and screen/widget placement rules. It is versioned alongside the code and is the source of truth the AI follows on every task.
+This repository is built to be worked on with [Claude Code](https://claude.com/claude-code). A single `CLAUDE.md` file at the project root gives the assistant full context: app description, assistant persona and response language, naming rules, the entire design system reference (colours, typography, spacing), navigation conventions, and screen/widget placement rules. It is versioned alongside the code and is the source of truth the AI follows on every task. Keep it accurate as the app evolves — it directly shapes how the assistant writes code for this project.
 
 On top of that, a set of recurring maintenance tasks are packaged as on-demand **skills** under `.claude/skills/`. Each skill loads automatically when its trigger phrase is used in chat — no manual invocation needed.
 
 | Workflow | Trigger phrase | What it does |
 |---|---|---|
-| Project Initialisation | "Inizializziamo il progetto" · "inizializza il progetto" · "reset del progetto" | Collects username, project name and app context; renames the app across `pubspec.yaml`/`main.dart`/Android/iOS; resets version to `1.0.0+1`; refreshes `CLAUDE.md` against the actual `lib/` state |
+| Project Initialisation | "Inizializziamo il progetto" · "inizializza il progetto" · "reset del progetto" | Already run once to produce this project from the template — re-running it resets identity, so use with care |
 | Full Project Checkup | "checkup completo" · "checkup del progetto" · "controllo completo" | Runs the three maintenance workflows below in sequence and produces one combined summary |
 | Dependency Check & Update | "controlla le dipendenze" · "check dependencies" | Runs `flutter pub outdated`, auto-applies safe same-major bumps, lists breaking changes for manual review |
 | Documentation Update | "aggiorna la documentazione" · "update docs" | Compares `README.md` against the actual codebase and rewrites it |
@@ -830,13 +807,13 @@ Just type the trigger phrase (Italian or English both work) in a Claude Code cha
 # 1. Clean Flutter build artifacts
 flutter clean
 
-# 2. Reinstall packages respecting the certified lockfile (master branch only)
+# 2. Reinstall packages respecting the certified lockfile (main branch only)
 flutter pub get --enforce-lockfile
 
 # 3. Clean Xcode DerivedData cache
 rm -rf ~/Library/Developer/Xcode/DerivedData
 
-# 4. Clean and reinstall CocoaPods
+# 4. Clean and reinstall CocoaPods (only if this project still uses CocoaPods)
 cd ios
 pod deintegrate
 pod cache clean --all
@@ -861,8 +838,6 @@ flutter run -d <device-id>
 ```
 
 **Building and installing an APK manually:**
-
-When you need to build and install an APK without running the full development session:
 
 ```bash
 # 1. Build debug APK (faster, includes debugging symbols)
@@ -906,7 +881,7 @@ flutter install --uninstall-only -d <device-id>
 **Notes:**
 - `flutter install` defaults to `--release` mode — always pass `--debug` explicitly if that's the build you have, otherwise it looks for `app-release.apk` and fails
 - `flutter install --uninstall-only` removes the app from the device without needing adb directly
-- For release builds, you need signing configuration in `android/app/build.gradle` (see [Signing & secrets](#signing--secrets))
+- For release builds, you need signing configuration in `android/app/build.gradle.kts` (see [Signing & secrets](#signing--secrets))
 - Use `flutter run` instead of `flutter install` when you want to keep the logs attached and enable hot reload
 
 #### Test distribution (Internal Testing / Firebase App Distribution)
@@ -919,7 +894,7 @@ flutter install --uninstall-only -d <device-id>
 #### Production release (Google Play)
 
 1. Ensure `versionName` and `versionCode` are correct in `pubspec.yaml`
-2. Configure signing: create `android/key.properties` and add the keystore block to `android/app/build.gradle`
+2. Configure signing: create `android/key.properties` and add the keystore block to `android/app/build.gradle.kts`
 3. `flutter build appbundle --release`
 4. Upload to [Google Play Console](https://play.google.com/console) → Production track
 5. Complete store listing, content rating and submit for review
@@ -1008,107 +983,20 @@ Triggered with "aggiornami il progetto alla versione X.Y.Z", it automates steps 
 | `cider` *(dev)* | ^0.2.10 | CLI version management |
 | `flutter_lints` *(dev)* | ^6.0.0 | Flutter team's recommended lints |
 
----
-
-## 14. De-templating Checklist — Using This as a Template
-
-When you clone this repo to start a real project, going through the [Project Initialisation](#project-initialisation) skill only handles part of the job (app name, version, `CLAUDE.md` context). Everything below is **not** touched automatically and must be done by hand before you ship under a new identity.
-
-### Automated by the Project Initialisation skill
-
-Trigger it with "inizializza il progetto" (see [AI Tooling](#10-ai-tooling--claudemd--workflows)). It updates:
-
-Also included: `README.md` is overwritten with [`TEMPLATE.md`](TEMPLATE.md)'s content, with the project name/tagline/app-context placeholders filled in from what you provided in Step 1 of that skill.
-
-| File | Field |
-|---|---|
-| `pubspec.yaml` | `name:` |
-| `lib/main.dart` | `title:` inside `MaterialApp.router` |
-| `android/app/src/main/AndroidManifest.xml` | `android:label` |
-| `ios/Runner/Info.plist` | `CFBundleName`, `CFBundleDisplayName` |
-| `pubspec.yaml` | `version:` reset to `1.0.0+1` |
-| `CHANGELOG.md` | cleared and restarted from `1.0.0` |
-| `CLAUDE.md` | assistant identity/persona and app context |
-
-### Manual — Android application ID
-
-The package id still reads `com.example.sb_template_flutter` after init. Change it in:
-
-| File | What to change |
-|---|---|
-| `android/app/build.gradle.kts` | `namespace` and `defaultConfig.applicationId` |
-| `android/app/src/main/kotlin/com/example/sb_template_flutter/MainActivity.kt` | move the file to a new path matching the new package (e.g. `android/app/src/main/kotlin/com/yourcompany/yourapp/MainActivity.kt`) and update its `package` declaration |
-
-### Manual — iOS bundle identifier
-
-`ios/Runner.xcodeproj/project.pbxproj` still has `PRODUCT_BUNDLE_IDENTIFIER = com.example.sbTemplateFlutter` (and the `.RunnerTests` variant) across all build configurations (Debug/Profile/Release). Easiest path: open `ios/Runner.xcworkspace` in Xcode → Runner target → Signing & Capabilities → set the new Bundle Identifier, then repeat for the `RunnerTests` target.
-
-### Manual — App icon
-
-No icon-generation package is configured yet. Recommended: add [`flutter_launcher_icons`](https://pub.dev/packages/flutter_launcher_icons) as a dev dependency, point it at your new 1024×1024 source image, then run `dart run flutter_launcher_icons` to regenerate:
-
-- `android/app/src/main/res/mipmap-*/ic_launcher*.png` (adaptive icon — background/foreground/monochrome variants included)
-- `ios/Runner/Assets.xcassets/AppIcon.appiconset/*.png`
-
-Without this, the app ships with the template's default icon.
-
-### Manual — Splash screen
-
-No splash-screen package is configured. If the app needs a branded launch screen, add [`flutter_native_splash`](https://pub.dev/packages/flutter_native_splash) and configure/generate it — otherwise Android/iOS fall back to their platform default blank splash.
-
-### Manual — Branding assets & README
-
-- `assets/sb-template-flutter-logo.png` — replace or remove; update the `assets:` entry in `pubspec.yaml` if the filename changes
-- README logo image (top of this file) and the footer credit/links — replace with your own
-- `LICENSE` — update author/copyright if you don't want MIT-as-Stefano-Biddau to carry over
-
-### Manual — Repository & store metadata
-
-- `git remote set-url origin <your-new-repo-url>` (or re-init if you cloned without a template flow)
-- Signing keys: Android keystore (`android/key.properties`, never committed) and iOS signing certificate/provisioning are per-bundle-id — you'll need new ones once the application id / bundle id changes
-- Google Play Console / App Store Connect app listings must be created fresh under the new application id / bundle id — they cannot be renamed from the template's placeholder
+> Run the Dependency Check & Update skill periodically (see [AI Tooling](#10-ai-tooling--claudemd--workflows)) to keep this table and `pubspec.yaml` in sync.
 
 ---
 
-## 15. Migration Notes & Known Toolchain Transitions
+## 14. Migration Notes & Known Toolchain Transitions
 
-A living log of toolchain transitions this template has hit or is watching — useful both to understand where the project currently stands and, if you're using this template and run into the same wall, to know it's a known issue rather than something you broke. Each entry stays until the transition is fully resolved and merged into the main docs above; new entries go on top.
+A living log of toolchain transitions this project hits over its lifetime — a version wall it got stuck on, a breaking dependency bump that needed a workaround, a platform requirement change. Useful as project history and as a heads-up for whoever touches the build next. Add an entry whenever you hit and resolve (or work around) one of these; keep entries until fully resolved, then fold the outcome into the relevant section above and remove the entry. New entries go on top.
 
-### Android — AGP 9 / Kotlin built-in DSL migration — **blocked, reverted to pre-AGP-9**
-
-- **Status**: not migrated. Project reverted to Gradle 8.14 / AGP 8.11.1 / Kotlin 2.2.20 — the last combination confirmed to build cleanly. AGP 9 is not usable on this project yet, in any configuration tried so far.
-- **What happened**: Android Gradle Plugin 9.0 made the new DSL (`ApplicationExtension`) the default and deprecated the old `android {}` accessor plus the `kotlinOptions {}` block (replaced by `kotlin { compilerOptions {} }`), and dropped support for applying the separate `org.jetbrains.kotlin.android` (KGP) plugin in favour of AGP's own built-in Kotlin compiler. Full details: [AGP 9.0 release notes](https://developer.android.com/build/releases/agp-9-0-0-release-notes).
-- **Two approaches tried, both failed**:
-  1. **Full migration** (`android.newDsl=true` / `android.builtInKotlin=true`, code updated to `kotlin { compilerOptions {} }`, `kotlin-android` plugin removed): applying `dev.flutter.flutter-gradle-plugin` itself fails —
-     ```
-     class com.android.build.gradle.internal.dsl.ApplicationExtensionImpl$AgpDecorated_Decorated
-     cannot be cast to class com.android.build.gradle.AbstractAppExtension
-     ```
-     Flutter stable's own Gradle plugin (`flutter_tools/gradle`) is not yet compatible with AGP 9's new DSL.
-  2. **Opt-out** (`android.newDsl=false` / `android.builtInKotlin=false`, kept the legacy `kotlin-android` plugin + `kotlinOptions {}` block — as documented as a supported fallback in the AGP 9.0 release notes): build still fails with the **exact same** deprecation-as-error on `android {}` and `kotlinOptions {}` as with no flags at all. On AGP 9.0.1, these are hard `@Deprecated(level = ERROR)` annotations baked into the plugin's own compiled classes — the Kotlin script compiler enforces them regardless of the `newDsl`/`builtInKotlin` runtime flags. **The documented opt-out did not work in practice on this setup** — treat it as unverified until seen working, not as a reliable escape hatch.
-- **Current setup**: `android/gradle/wrapper/gradle-wrapper.properties`, `android/settings.gradle.kts` and `android/app/build.gradle.kts` are back to the pre-migration state (Gradle 8.14, AGP 8.11.1, Kotlin 2.2.20, `kotlin-android` plugin, `kotlinOptions {}` block). No `android.newDsl` / `android.builtInKotlin` flags in `gradle.properties` — irrelevant below AGP 9.
-- **Revisit when**: a stable Flutter release changelog explicitly confirms AGP 9 support (check `flutter upgrade` release notes), then retry approach 1 (full migration) first — it's the one Google intends to be permanent, since the AGP 10.0 removal of the opt-out flags makes approach 2 a dead end regardless.
-- **Migration steps for approach 1, once Flutter's tooling supports it** (kept here so it doesn't have to be re-researched):
-  1. Bump `android/gradle/wrapper/gradle-wrapper.properties` to Gradle ≥9.1.0, `android/settings.gradle.kts` AGP to ≥9.0.1.
-  2. `android/settings.gradle.kts`: remove the `id("org.jetbrains.kotlin.android") version "..." apply false` plugin declaration.
-  3. `android/app/build.gradle.kts`: remove `id("kotlin-android")` from `plugins {}`, remove the `kotlinOptions {}` block from `android {}`, add:
-     ```kotlin
-     kotlin {
-         compilerOptions {
-             jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-         }
-     }
-     ```
-  4. `android/gradle.properties`: add `android.newDsl=true` and `android.builtInKotlin=true`.
-  5. Before flipping the flags, confirm every native Android plugin dependency (check each package's `android/build.gradle*` in `~/.pub-cache`) no longer applies `kotlin-android`/`org.jetbrains.kotlin.android` itself — an unmigrated third-party plugin will conflict with built-in Kotlin the same way the Flutter Gradle plugin currently does. As of this entry, `flutter_secure_storage` 11.0.0 (Java-only, no Kotlin plugin) and `image_picker_android` 0.8.13+19 (already on `compilerOptions`) are both fine.
-  6. Run `flutter build apk --debug` to confirm before removing this entry.
+_No entries yet._
 
 ---
 
 <div align="center">
 
-Built with ❤️ by **Stefano Biddau**
-
-[stefanobiddau.com](https://stefanobiddau.com) · [@stefanoBid](https://github.com/stefanoBid)
+Scaffolded with [SB-Template Flutter](https://github.com/stefanoBid/sb-flutter-template)
 
 </div>
